@@ -8,7 +8,7 @@
 
     //convert genome to body using decoder! In case you forget
     //   INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);
-    cppnToBody.CPPNToBody = function(cppn, weightRange)
+    cppnToBody.CPPNToBody = function(cppn, useLeo, weightRange, testing)
     {
 
         var isEmpty = false;
@@ -55,16 +55,31 @@
             fY = -1;
         }
 
-        var useLeo = true;
-
         var counter = 0;
         var conSourcePoints = {};//new Dictionary<long, PointF>();
         var conTargetPoints = {};//new Dictionary<long, PointF>();
 
+        var accessDoubleArray = function(obj, xyPoint)
+        {
+            return obj[xyPoint.x][xyPoint.y];
+        };
+        var ensureDoubleArray = function(obj, x, y)
+        {
+            if (!obj[x]){
+                obj[x] = {};
+            }
+
+            if(!obj[x][y]){
+                obj[x][y] = obj.count;
+                obj.count++;
+            }
+        };
 
         //Dictionary<string, List<PointF>> pointsChecked = new Dictionary<string, List<PointF>>();
         //List<PointF> pList;
         var src, tgt;
+        var cnt =0;
+        var allBodyOutputs = [];
         //for each points we have
         for(var p1=0; p1 < queryPoints.length; p1++)
         {
@@ -80,25 +95,23 @@
                     var outs = cppnToBody.queryCPPNOutputs(cppn, xyPoint.x, xyPoint.y, otherPoint.x, otherPoint.y);//, maxXDistanceCenter(xyPoint, otherPoint),  minYDistanceGround(xyPoint, otherPoint));
                     var weight = outs[0];
 
+                    if(testing)
+                        allBodyOutputs.push(outs);
+
                     if (useLeo)
                     {
-
                         if (outs[1] > 0)
                         {
+//                            console.log(outs);
+//                            console.log('XYPoint: ');console.log( xyPoint);
+//                            console.log('otherPoint: ');console.log( otherPoint);
                             //add to hidden neurons
-                            if (!hiddenNeurons[xyPoint]){
-                                hiddenNeurons[xyPoint] = hiddenNeurons.count;
-                                hiddenNeurons.count++;
 
-                            }
-                            src = hiddenNeurons[xyPoint];
+                            ensureDoubleArray(hiddenNeurons, xyPoint.x, xyPoint.y);
+                            src = accessDoubleArray(hiddenNeurons, xyPoint);
 
-                            if (!hiddenNeurons[otherPoint]){
-                                hiddenNeurons[otherPoint] = hiddenNeurons.count;
-                                hiddenNeurons.count++;
-                            }
-
-                            tgt =  hiddenNeurons[otherPoint];
+                            ensureDoubleArray(hiddenNeurons, otherPoint.x, otherPoint.y);
+                            tgt =  accessDoubleArray(hiddenNeurons, otherPoint);
 
                             conSourcePoints[counter] = xyPoint;
                             conTargetPoints[counter] = otherPoint;
@@ -114,19 +127,11 @@
                     else
                     {
                         //add to hidden neurons
-                        if (!hiddenNeurons[xyPoint]){
-                            hiddenNeurons[xyPoint] = hiddenNeurons.count;
-                            hiddenNeurons.count++;
+                        ensureDoubleArray(hiddenNeurons, xyPoint.x, xyPoint.y);
+                        src = accessDoubleArray(hiddenNeurons, xyPoint);
 
-                        }
-                        src = hiddenNeurons[xyPoint];
-
-                        if (!hiddenNeurons[otherPoint]){
-                            hiddenNeurons[otherPoint] = hiddenNeurons.count;
-                            hiddenNeurons.count++;
-                        }
-
-                        tgt =  hiddenNeurons[otherPoint];
+                        ensureDoubleArray(hiddenNeurons, otherPoint.x, otherPoint.y);
+                        tgt =  accessDoubleArray(hiddenNeurons, otherPoint);
 
                         conSourcePoints[counter] = xyPoint;
                         conTargetPoints[counter] = otherPoint;
@@ -142,6 +147,10 @@
             }
         }
 
+        console.log('Counter: ' + counter);
+
+        var connBefore = connections.length;
+        var neuronBefore = hiddenNeurons.count;
 
         cppnToBody.ensureSingleConnectedStructure(connections, hiddenNeurons, conSourcePoints, conTargetPoints);
 
@@ -156,6 +165,9 @@
             isEmpty = true;
 
         var esBody = {
+            allBodyOutputs : allBodyOutputs,
+            beforeNeuron: neuronBefore,
+            beforeConnection: connBefore,
             connections : connections,
             hiddenLocations : hiddenNeurons,
             inputLocations : inputs,
@@ -188,7 +200,7 @@
 
         var outs = [];
         for (var i = 0; i < cppn.outputNeuronCount; i++)
-            outs[i] = cppn.getOutputSignal(i);
+            outs.push(cppn.getOutputSignal(i));
 
         return outs;
 
@@ -301,6 +313,8 @@
                     repConns.push(connections[c]);
             }
             connections = repConns;
+//            console.log('Connections: ');
+//            console.log(repConns);
 //                markDelete.ForEach(x => connections.Remove(x));
         }
 
