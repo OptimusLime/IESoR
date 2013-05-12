@@ -26,6 +26,18 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                 throw err;
             }
             //we need to parse the data, and create some cppns!
+            var ensureDoubleArray = function(obj, x, y)
+            {
+                if (obj[x] === undefined){
+                    obj[x] = {};
+                }
+
+                if(obj[x][y] === undefined){
+                    obj[x][y] = obj.count;
+                    obj.count++;
+//                console.log('x: ' + x + ' y: ' + y + ' obj: ' + obj[x][y]);
+                }
+            };
 
             var dataObject = JSON.parse(data);
 
@@ -119,7 +131,7 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                     var cConn = cppn.connections[c];
                     var noConn = networkObject.connections[c];
 
-                    parseFloat(cConn.weight.toFixed(4)).should.equal(parseFloat(noConn.weight.toFixed(4)));
+                    parseFloat(cConn.weight.toFixed(3)).should.equal(parseFloat(noConn.weight.toFixed(3)));
                     cConn.sourceIdx.should.equal(noConn.sourceNeuronIdx);
                     cConn.targetIdx.should.equal(noConn.targetNeuronIdx);
                     cConn.a.should.equal(noConn.A);
@@ -140,40 +152,35 @@ describe('Testing cppnToBody functions against the known working C# version',fun
 
                 var creature = cppnToBody.CPPNToBody(cppn, bodyObject.useLEO, weightRange, true);
 
+                creature.beforeConnection.should.equal(bodyObject.BeforeConnection);
+                creature.beforeNeuron.should.equal(bodyObject.BeforeNeuron);
+//                console.log(' before conn: ' + creature.beforeConnection + ' before neur: ' + creature.beforeNeuron);
+//                console.log(' want after conn: ' + creature.connections.length + ' want after neur: ' + creature.hiddenLocations.count);
+//                console.log(' actual after conn: ' + bodyObject.Connections.length + ' actual after neur: ' + bodyObject.HiddenLocations.length);
+                creature.connections.length.should.equal(bodyObject.Connections.length);
+
                 //if we get no errors, we proceed to check bodies against bodies!
 //                Things to check
 //                connections : connections,
-//                    hiddenLocations : hiddenNeurons,
+//                hiddenLocations : hiddenNeurons,
 //                inputLocations : inputs,
 //                useLEO : useLeo,
 //                isEmpty: isEmpty
 
-                creature.allBodyOutputs.length.should.equal(bodyObject.AllBodyOutputs.length);
-                for(var b=0; b< creature.allBodyOutputs.length; b++)
-                {
-                    var outs = creature.allBodyOutputs[b];
 
-                    outs[1].should.equal(bodyObject.AllBodyOutputs[b][1]);
-
-//                    console.log('outs: ' + outs.length);
-                    for(var o=0; o < outs.length; o++)
-                    {
-                        parseFloat(outs[o].toFixed(3)).should.equal(parseFloat(bodyObject.AllBodyOutputs[b][o].toFixed(3)));
-                    }
-                }
-
-                creature.beforeConnection.should.equal(bodyObject.BeforeConnection);
-                creature.beforeNeuron.should.equal(bodyObject.BeforeNeuron);
-
-
-                creature.connections.length.should.equal(bodyObject.Connections.length);
-
+                //check our connections against known connections
                 for(var b=0; b< creature.connections.length; b++)
                 {
                     var cConn  = creature.connections[b];
                     var objConn  = bodyObject.Connections[b];
 
-
+                    parseFloat(cConn.weight.toFixed(3)).should.equal(parseFloat(objConn.Weight.toFixed(3)));
+                    if(cConn.sourceID != objConn.SourceNeuronId){
+                        console.log(cConn);
+                        console.log(objConn);
+                    }
+                    cConn.sourceID.should.equal(objConn.SourceNeuronId);
+                    cConn.targetID.should.equal(objConn.TargetNeuronId);
                 }
 
                 creature.hiddenLocations.count.should.equal(bodyObject.HiddenLocations.length);
@@ -181,17 +188,63 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                 creature.useLEO.should.equal(bodyObject.useLEO);
                 creature.isEmpty.should.equal(bodyIsEmpty);
 
+                //check our hidden locations against known hiddens
+                //we need to invert and check!
+                var invertedHidden = {};
+                for(var key in creature.hiddenLocations)
+                {
+                    if(key != 'count')
+                    {
+                        for(var innerKey in creature.hiddenLocations[key])
+                        {
+                            invertedHidden[creature.hiddenLocations[key][innerKey]] = {x: parseFloat(key), y:parseFloat(innerKey)};
+                        }
+                    }
+                }
+
+                for(var h=0; h< creature.hiddenLocations.count; h++)
+                {
+                    invertedHidden[h].x.should.equal(bodyObject.HiddenLocations[h].X);
+                    invertedHidden[h].y.should.equal(bodyObject.HiddenLocations[h].Y);
+                }
+
+
+//                creature.allBodyOutputs.length.should.equal(bodyObject.AllBodyOutputs.length);
+//                for(var b=0; b< creature.allBodyOutputs.length; b++)
+//                {
+//                    var outs = creature.allBodyOutputs[b];
+//
+//                    //leo outputs should be identical, without rounding
+//                    outs[1].should.equal(bodyObject.AllBodyOutputs[b][1]);
+//
+////                    console.log('outs: ' + outs.length);
+//                    for(var o=0; o < outs.length; o++)
+//                    {
+//                        parseFloat(outs[o].toFixed(3)).should.equal(parseFloat(bodyObject.AllBodyOutputs[b][o].toFixed(3)));
+//                    }
+//                }
+
+
+//                var buildNeurons = {count:0};
+//                for(var bn =0; bn < bodyObject.PreHiddenLocations.length; bn++)
+//                {
+//                    ensureDoubleArray(buildNeurons, bodyObject.PreHiddenLocations[bn].X,bodyObject.PreHiddenLocations[bn].Y);
+//                }
+//
+////                console.log(creature.preHiddenLocations);
+//                for(var nKey in creature.preHiddenLocations)
+//                {
+//                    if(nKey != 'count')
+//                    {
+//                        for(var innerKey in creature.preHiddenLocations[nKey])
+//                        {
+//                            console.log('Keys: ' + nKey + ' inner: ' + innerKey);
+//                            console.log('Creature: ' + creature.preHiddenLocations[nKey][innerKey] + ' build: '+ buildNeurons[nKey][innerKey]);
+//                            creature.preHiddenLocations[nKey][innerKey].should.equal(buildNeurons[nKey][innerKey]);
+//                        }
+//                    }
+//                }
                 //AllBodyOutputs
-
-
-
-
-
-
-
-
-                break;
-
 
             }
             done();

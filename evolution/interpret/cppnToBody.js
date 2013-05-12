@@ -55,6 +55,7 @@
             fY = -1;
         }
 
+//        console.log(queryPoints);
         var counter = 0;
         var conSourcePoints = {};//new Dictionary<long, PointF>();
         var conTargetPoints = {};//new Dictionary<long, PointF>();
@@ -65,13 +66,15 @@
         };
         var ensureDoubleArray = function(obj, x, y)
         {
-            if (!obj[x]){
+            //don't use !obj[x] since 0 gets grouped into that. poop.
+            if (obj[x] === undefined){
                 obj[x] = {};
             }
 
-            if(!obj[x][y]){
+            if(obj[x][y] === undefined){
                 obj[x][y] = obj.count;
                 obj.count++;
+//                console.log('x: ' + x + ' y: ' + y + ' obj: ' + obj[x][y]);
             }
         };
 
@@ -147,13 +150,43 @@
             }
         }
 
-        console.log('Counter: ' + counter);
+//        console.log('Counter: ' + counter);
 
         var connBefore = connections.length;
         var neuronBefore = hiddenNeurons.count;
 
-        cppnToBody.ensureSingleConnectedStructure(connections, hiddenNeurons, conSourcePoints, conTargetPoints);
+//        PreHiddenLocations
+//        var preNeurons = {count: 0};
 
+//        if(testing){
+//            var inverted = {};
+//
+//            for(var key in hiddenNeurons)
+//            {
+//                if(key != 'count')
+//                {
+//                    for(var innerKey in hiddenNeurons[key])
+//                    {
+//                        inverted[(hiddenNeurons[key][innerKey])] = {x: key, y: innerKey};
+//                    }
+//                }
+//            }
+//            console.log(inverted);
+//
+//            for(var ix =0; ix < hiddenNeurons.count; ix++)
+//            {
+//                console.log('ix: ' + ix + ' inv: ' + inverted[ix]);
+//                var point = inverted[ix];
+//                ensureDoubleArray(preNeurons, point.x, point.y);
+//            }
+//        }
+
+        var rep = cppnToBody.ensureSingleConnectedStructure(connections, hiddenNeurons, conSourcePoints, conTargetPoints);
+
+        connections = rep.connections;
+        hiddenNeurons = rep.hiddenNeurons;
+
+//        console.log('Looking at body with: ' + hiddenNeurons.count + ' conns: ' + connections.length);
         if (hiddenNeurons.count > 20 || connections.length > 100)
         {
             hiddenNeurons = {count:0};//new List<PointF>();
@@ -176,7 +209,7 @@
         };
 
         //then convert the body into JSON
-        console.log(" Nodes: " + hiddenNeurons.count + " Connections: " + connections.length);
+//        console.log(" Nodes: " + hiddenNeurons.count + " Connections: " + connections.length);
 
         return esBody;
     };
@@ -271,16 +304,25 @@
         }
 
         var inverseHidden = {};
-        for(var hKey in hiddenNeurons)
+        //we might adjust hidden neuron count later, make sure we keep original value
+        var originalHiddenCount = hiddenNeurons.count;
+        for(var key in hiddenNeurons)
         {
-            inverseHidden[hiddenNeurons[hKey]] = hKey;
+            if(key != 'count')
+            {
+                for(var innerKey in hiddenNeurons[key])
+                {
+                    inverseHidden[hiddenNeurons[key][innerKey]] = {x:key, y:innerKey};
+                }
+            }
         }
+
 
 
         if (finalChain && finalChain.count != 0)
         {
             var markDelete = [];
-
+            var point;
             for(var c =0; c < connections.length; c++)
             {
                 var connection = connections[c];
@@ -289,23 +331,41 @@
                 //if we don't have you in our chain, get rid of the object
                 if (!finalChain[connection.sourceID])
                 {
-                    delete hiddenNeurons[conSourcePoints[connection.gid]];
-//                        hiddenNeurons.Remove(conSourcePoints[conn.InnovationId]);
+                    point = conSourcePoints[connection.gid];
+
+                    //remove hidden node, friend!
+                    if(hiddenNeurons[point.x][point.y] !== undefined){
+                        delete hiddenNeurons[point.x][point.y];
+                        hiddenNeurons.count--;
+                    }
+
+                    //hiddenNeurons.Remove(conSourcePoints[conn.InnovationId]);
                     del = true;
+
                 }
 
                 if (!finalChain[connection.targetID])
                 {
-                    delete hiddenNeurons[conTargetPoints[connection.gid]];
-//                        hiddenNeurons.Remove(conTargetPoints[conn.InnovationId]);
+                    point = conTargetPoints[connection.gid];
+
+                    //remove hidden node, friend!
+                    if(hiddenNeurons[point.x][point.y] !== undefined){
+                        delete hiddenNeurons[point.x][point.y];
+                        hiddenNeurons.count--;
+                    }
+
+                    //hiddenNeurons.Remove(conTargetPoints[conn.InnovationId]);
+
                     del = true;
                 }
 
-                if (del)
+                if (del){
                     markDelete[connection.gid] = true;
+                }
             }
 
             //let's rebuild connections, and remove any deleted objects
+            var des = connections.length;
             var repConns = [];
             for(var c=0; c< connections.length; c++)
             {
@@ -313,19 +373,24 @@
                     repConns.push(connections[c]);
             }
             connections = repConns;
+//            console.log('actual Size: ' + des + ' Desired: ' + repConns.length);
 //            console.log('Connections: ');
 //            console.log(repConns);
+
 //                markDelete.ForEach(x => connections.Remove(x));
         }
 
         //now that we've deleted the hidden neuron objects, lets recalculate the current indices
-        var nCount = 0;
+        var nCount = 0, p;
 
         //we access the inverse object in order, and map to our hidden node array with deleted object
-        for(var hCount = 0; hCount < hiddenNeurons.count; hCount++)
+        for(var hid = 0; hid < originalHiddenCount; hid++)
         {
-            if(inverseHidden[hCount])
-                hiddenNeurons[inverseHidden[nCount]] = nCount++;
+            if(inverseHidden[hid]){
+                p = inverseHidden[hid];
+                if(hiddenNeurons[p.x][p.y] != undefined)
+                    hiddenNeurons[p.x][p.y] = nCount++;
+            }
         }
 
 
@@ -335,12 +400,14 @@
 
             //readjust connection source/target depending on hiddenNeuron array
             var point = conSourcePoints[connection.gid];
-            connection.sourceID = hiddenNeurons[point];
+            connection.sourceID = hiddenNeurons[point.x][point.y];
 
             //now adjust the target!
             point = conTargetPoints[connection.gid];
-            connection.targetID = hiddenNeurons[point];
+            connection.targetID = hiddenNeurons[point.x][point.y];
         }
+
+        return {connections: connections, hiddenNeurons: hiddenNeurons};
     };
     //send in the object, and also whetehr or not this is nodejs
 })(typeof exports === 'undefined'? this['cppnToBody']={}: exports, this, typeof exports === 'undefined'? true : false);

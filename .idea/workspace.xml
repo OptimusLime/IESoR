@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/evolution/neatjs" afterPath="$PROJECT_DIR$/evolution/neatjs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" afterPath="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/cppnToBodyTest.js" afterPath="$PROJECT_DIR$/test/cppnToBodyTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/testgenomebodies.json" afterPath="$PROJECT_DIR$/test/testgenomebodies.json" />
     </list>
     <ignored path="iesor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +30,7 @@
       <file leaf-file-name="cppnToBody.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/interpret/cppnToBody.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="13" selection-start="2354" selection-end="2354" vertical-scroll-proportion="-17.4">
+            <state line="10" column="15" selection-start="512" selection-end="512" vertical-scroll-proportion="-0.68">
               <folding />
             </state>
           </provider>
@@ -40,7 +39,7 @@
       <file leaf-file-name="cppnToBodyTest.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/cppnToBodyTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="166" column="0" selection-start="7872" selection-end="7872" vertical-scroll-proportion="0.65160525">
+            <state line="152" column="48" selection-start="7106" selection-end="7106" vertical-scroll-proportion="0.43398392">
               <folding />
             </state>
           </provider>
@@ -58,7 +57,7 @@
       <file leaf-file-name="neatConnection.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/neatjs/genome/neatConnection.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
+            <state line="7" column="19" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,16 +129,16 @@
         <option value="$PROJECT_DIR$/evolution/neatjs/genome/neatConnection.js" />
         <option value="$PROJECT_DIR$/evolution/neatjs/cppnjs/cppns/cppn.js" />
         <option value="$PROJECT_DIR$/evolution/neatjs/neatHelp/neatDecoder.js" />
-        <option value="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
         <option value="$PROJECT_DIR$/test/cppnToBodyTest.js" />
+        <option value="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -419,13 +418,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16898009" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14760147" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -530,13 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evolution/neatjs/genome/neatConnection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/evolution/neatjs/genome/neatGenome.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="654" column="45" selection-start="28665" selection-end="28665" vertical-scroll-proportion="0.0">
@@ -579,9 +571,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evolution/interpret/cppnToBody.js">
+    <entry file="file://$PROJECT_DIR$/evolution/neatjs/genome/neatConnection.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="13" selection-start="2354" selection-end="2354" vertical-scroll-proportion="-17.4">
+        <state line="7" column="19" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -593,9 +585,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/evolution/interpret/cppnToBody.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="15" selection-start="512" selection-end="512" vertical-scroll-proportion="-0.68">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/cppnToBodyTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="166" column="0" selection-start="7872" selection-end="7872" vertical-scroll-proportion="0.65160525">
+        <state line="152" column="48" selection-start="7106" selection-end="7106" vertical-scroll-proportion="0.43398392">
           <folding />
         </state>
       </provider>
