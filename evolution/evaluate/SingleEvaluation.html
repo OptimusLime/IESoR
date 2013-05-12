@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>IEC Single Object Evaluation</title>
 
-    <link rel="stylesheet" href="../Evolution/IECInfinite.css" type="text/css" />
+    <link rel="stylesheet" href="../../css/IECInfinite.css" type="text/css" />
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
     <!--<script src="../Helpers/jquery.isotope.js"></script>-->
 </head>
@@ -39,27 +39,23 @@
 
 </div> <!-- #container -->
 
+<!--grab our libraries-->
+<script type="text/javascript" src="../../libraries/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../libraries/jquery.numeric.js"></script>
+<script type="text/javascript" src="../../libraries/Box2d.min.js"></script>
+<script type="text/javascript" src="../../libraries/fabric.js"></script>
 
-    <script src="../Helpers/jquery-1.7.1.min.js"></script>
-    <script src="../Helpers/jquery.numeric.js"></script>
-    <!--load the experiment script when the body gets processed, so it has access to the canvas object for styling-->
+<!-- load up the helper files, some might be consolidated and removed later-->
+<script type="text/javascript" src="../../utilities/Helpers.js"></script>
+<script type="text/javascript" src="../../utilities/AjaxRequests.js"></script>
+<script type="text/javascript" src="../../utilities/jkl-parsexml.js"></script>
+<script type="text/javascript" src="../../utilities/loadXML.js"></script>
+<script type="text/javascript" src="../../utilities/IEC.js"></script>
 
-<script type="text/javascript" src="../Helpers/Box2d.js"></script>
-<script type="text/javascript" src="../Helpers/fabric.js"></script>
-    <!--has our getbody request logic-->
-<script type="text/javascript" src="../Helpers/Helpers.js"></script>
-<script type="text/javascript" src="../Helpers/AjaxRequests.js"></script>
-
-<script type="text/javascript" src="../Helpers/jkl-parsexml.js"></script>
-<script type="text/javascript" src="../Helpers/loadXML.js"></script>
-
-<script type="text/javascript" src="../fabBox/boxHelpers.js"></script>
-<script type="text/javascript" src="../fabBox/boxDrawers.js"></script>
-
-<script type="text/javascript" src="../fabBox/smallestWorld.js"></script>
-
-<script type="text/javascript" src="../Evolution/IEC.js"></script>
-
+<!--need to grab our physics, yo-->
+<script type="text/javascript" src="../../physics/boxHelpers.js"></script>
+<script type="text/javascript" src="../../physics/boxDrawers.js"></script>
+<script type="text/javascript" src="../../physics/smallestWorld.js"></script>
 
 
     <script>
@@ -167,7 +163,7 @@
 
             //we're done, make our callback with ids and behaviors!
             finishedFunction(null, genomeBehaviorDict);
-        }
+        };
 
         $('.positive-integer').numeric({ decimal: false, negative: false },  function() { alert("Positive integers only"); this.value = ""; this.focus(); });
 
