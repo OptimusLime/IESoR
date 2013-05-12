@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>IEC Framework- Infinite</title>
+
+    <link rel="stylesheet" href="IECInfinite.css" type="text/css" />
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <!--<script src="../Helpers/jquery.isotope.js"></script>-->
+</head>
+
+<body class="demos" >
+
+<nav id="site-nav">
+
+
+</nav> <!-- #site-nav -->
+
+<section id="content">
+
+<h1>Infinite Genomes</h1>
+
+
+<section id="copy">
+</section>
+
+
+    <div id="container" class="variable-sizes clearfix infinite-scrolling">
+
+
+</div> <!-- #container -->
+
+    <div id="loadmoreajaxloader" style="display:none;"><center><img src="../Helpers/ajax-loader.gif" /></center></div>
+
+<nav id="page_nav">
+    <a href="http://localhost:3000/getBodies"></a>
+</nav>
+
+<script src="../Helpers/jquery-1.7.1.min.js"></script>
+<script src="../Helpers/jquery.isotope.js"></script>
+<script src="../Helpers/jquery.infinitescroll.min.js"></script>
+    <script src="../Helpers/jquery.inview.js"></script>
+<!--load the experiment script when the body gets processed, so it has access to the canvas object for styling-->
+
+<script type="text/javascript" src="../Helpers/d3.v2.js"></script>
+<script type="text/javascript" src="../Helpers/jkl-parsexml.js"></script>
+<script type="text/javascript" src="../Helpers/loadXML.js"></script>
+
+<script type="text/javascript" src="../Helpers/Box2d.min.js"></script>
+<script type="text/javascript" src="../Helpers/fabric.js"></script>
+    <!--has our getbody request logic-->
+<script type="text/javascript" src="../Helpers/Helpers.js"></script>
+<script type="text/javascript" src="../Helpers/AjaxRequests.js"></script>
+
+<script type="text/javascript" src="../fabBox/boxHelpers.js"></script>
+<script type="text/javascript" src="../fabBox/boxDrawers.js"></script>
+
+<script type="text/javascript" src="../fabBox/smallestWorld.js"></script>
+
+<script type="text/javascript" src="IEC.js"></script>
+
+    <script>
+        var archiveOnScreen = {};
+        var archivePageLength = 12;
+
+        var doneWithLoading = function()
+        {
+            //on success, we're done loading
+            $('div#loadmoreajaxloader').hide();
+        };
+        var htmlID = '#container';
+        $(htmlID).scroll(function()
+        {
+            console.log('scrollheight: ' + $(this)[0].scrollHeight + ' and scrolltop: ' + $(this).scrollTop() + ' outerheight: ' + $(this).outerHeight());
+//            console.log('Scrolltop: ' + $(htmlID).scrollTop() + ' and height: ' + $(htmlID).height() + ' win top: ' + $(htmlID).offset().top);
+//            if($(htmlID).scrollTop() == $(htmlID).height() - $(htmlID).offset().top)
+            if($(htmlID)[0].scrollHeight - $(htmlID).scrollTop() <= $(htmlID).outerHeight())
+            {
+                $('div#loadmoreajaxloader').show();
+
+                getLatestArchive(
+                        //our successful archive check!
+                        function(archiveIDs){
+
+//                            console.log('Returned from archive');
+//                            console.log(archiveIDs);
+//                            console.log('Done archive;');
+
+                            if(!archiveIDs)
+                            {
+                                doneWithLoading();
+                                return;
+                            }
+
+                            var arArchiveIDs = archiveIDs;//JSON.parse(archiveIDs);
+
+//                            console.log(archiveIDs);
+
+                            var requiredBodies = [];
+
+                            //reverse the order, grab the most recent objects to display first
+                            for(var i=arArchiveIDs.length-1; i >= 0; i--)
+                            {
+                                //we haven't seen this archive object yet!
+                                if(!archiveOnScreen[arArchiveIDs[i]] && requiredBodies.length < archivePageLength){
+                                    requiredBodies.push(parseInt(arArchiveIDs[i]));
+                                    archiveOnScreen[arArchiveIDs[i]] = true;
+                                }
+                                if(requiredBodies.length >= archivePageLength)
+                                    break;
+                            }
+
+                            console.log('Fetching Archive IDs: ');
+                            console.log(requiredBodies);
+
+                            if(!requiredBodies)
+                            {
+                                console.log('Nothing new to display!');
+                                doneWithLoading();
+                                return;
+                            }
+
+                            //we have our IDs, quickly, fetch the genomes!
+                            getGenomes(requiredBodies, function(genomeBodies){
+
+                                //here me must add all our archive genome bodies!
+                                for(var genomeID in genomeBodies){
+
+                                    //parse it from string form, and send it to our world! mwahahaha
+                                    var genomeObject = JSON.parse(genomeBodies[genomeID]);
+
+                                    //Now, we're going to want to insert that object into our container, if you know what i mean
+                                    var smallWorld = addGenomeObjectDiv(genomeObject, '#container');
+
+                                    //Now we have our small world, grab the ID, so that we may reference it later?
+                                    var smallWorldID = smallWorld.worldID;
+
+                                    //start the loop, show me what you got!
+//                                    smallWorld.freezeLoop(true);
+                                    smallWorld.startLoop();
+//                                    smallWorld.shouldDrawBehavior(true, false);
+                                }
+
+                                doneWithLoading();
+
+                            }, function(err){
+
+                                console.log('Get genome error');
+                                console.log(err);
+                                doneWithLoading();
+                                return;
+
+                            } );
+
+                        },
+                        //our error function
+                        function(err){ //still need to hide on body error!
+                            doneWithLoading();
+                            console.log('Error: ' );
+                            console.log(err);
+                        }
+                )
+
+
+            }
+        });
+
+//    $(function(){
+//        var $container = $('#container');
+//
+//        console.log('Container setup');
+//
+//        $container.isotope({
+//            itemSelector : '.element'
+//        });
+//
+//        $container.infinitescroll({
+//            // other options
+//            navSelector  : '#page_nav',    // selector for the paged navigation
+//            nextSelector : '#page_nav a',
+//            loading: {
+//                        finishedMsg: 'No more pages to load.',
+//                        img: 'http://i.imgur.com/qkKy8.gif'
+//                    },
+//            dataType: 'json',
+//            appendCallback: false
+//        }, function(json, opts) {
+//            // Get json back
+//            //now we have a new body, wrap it up in a worldly object
+//            console.log('Incoming json body: ')
+//            console.log(json);
+//            console.log('end json');
+//            //var page = opts.state.currPage;
+//            // Do something with JSON data, create DOM elements, etc ..
+//        });
+
+//        $container.infinitescroll({
+//                    navSelector  : '#page_nav',    // selector for the paged navigation
+//                    nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
+//                    itemSelector : '.element',     // selector for all items you'll retrieve
+//                    loading: {
+//                        finishedMsg: 'No more pages to load.',
+//                        img: 'http://i.imgur.com/qkKy8.gif'
+//                    }
+//                },
+//                // call Isotope as a callback
+//                function( newElements ) {
+//                    $container.isotope( 'appended', $( newElements ) );
+//                }
+//        );
+//    });
+
+
+</script>
+
+<footer>
+   WIN Interactive set up by <a href="http://designforcode.com">Paul Szerlip</a> / and <a href="http://eplex.cs.ucf.edu">Eplex</a>
+</footer>
+
+</section> <!-- #content -->
+
+</body>
+
+</html>
