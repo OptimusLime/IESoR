@@ -21,7 +21,7 @@ function createXMLFileReader(elementName, jsonCallback)
 
                         var parser=new DOMParser();
                         var doc=parser.parseFromString(e.target.result,"text/xml");
-                        console.log(doc);
+//                        console.log(doc);
 
                         var xml = new JKL.ParseXML();
                         var xd =  xml.parseDocument(doc);

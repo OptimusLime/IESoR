@@ -1,0 +1,68 @@
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #FFF;
+    shape-rendering: crispEdges;
+}
+
+.dot {
+    stroke: #000;
+}
+
+.legend {
+    padding: 5px;
+    font: 10px sans-serif;
+    background: yellow;
+    box-shadow: 2px 2px 1px #888;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.grid path {
+    stroke-width: 0;
+}
+
+path.link {
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.5px;
+}
+.demo
+{
+
+    display: inline-block;
+}
+.genome
+{
+    float:left;
+}
+.shadow{
+    stroke: #FFF;
+    stroke-width: 1.5px;
+}
+
+/*marker#licensing {*/
+/*fill: green;*/
+/*}*/
+
+/*path.link.licensing {*/
+/*stroke: green;*/
+/*}*/
+
+path.link.conn {
+    stroke-dasharray: 0,2 1;
+}
+
+path.connector
+{
+    stroke-dasharray: 0,2 1;
+
+}
+
+circle {
+    fill: #ccc;
+    stroke: #333;
+    stroke-width: 1.5px;
+}

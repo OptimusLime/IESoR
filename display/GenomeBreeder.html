@@ -2,38 +2,127 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title></title>
+    <title>Genome Breeding</title>
+
+    <link rel="stylesheet" href="../css/d3.css" type="text/css" />
+
+    <!-- pull in our collections of jquery related libs-->
+    <script type="text/javascript" src="../libraries/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../libraries/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="../libraries/jquery.inview.js"></script>
+    <script type="text/javascript" src="../libraries/jquery-ui.js"></script>
+
+    <!-- pull in our collections of other useful libraries -->
+    <script type="text/javascript" src="../libraries/d3.v2.min.js"></script>
+    <script type="text/javascript" src="../libraries/Box2d.min.js"></script>
+    <script type="text/javascript" src="../libraries/fabric.js"></script>
+
+    <!--get all of our nice little helper "libraries"-->
+    <script type="text/javascript" src="../utilities/jkl-parsexml.js"></script>
+    <script type="text/javascript" src="../utilities/loadXML.js"></script>
+    <script type="text/javascript" src="../utilities/Helpers.js"></script>
+    <script type="text/javascript" src="../utilities/AjaxRequests.js"></script>
+    <script type="text/javascript" src="../utilities/IEC.js"></script>
+    <script type="text/javascript" src="../utilities/d3/d3PCA.js"></script>
+
+    <!--load in our physics-->
+    <script type="text/javascript" src="../physics/boxHelpers.js"></script>
+    <script type="text/javascript" src="../physics/boxDrawers.js"></script>
+    <script type="text/javascript" src="../physics/smallestWorld.js"></script>
+
+    <!--add in neat files -->
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/utility/utilities.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/neatHelp/neatParameters.js" ></script>
+
+    <!--need some cppn files as well -->
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/components/cppnNode.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFunctions.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js" ></script>
+
+    <script type="text/javascript" src="../evolution/neatjs/genome/neatNode.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/genome/neatConnection.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/genome/neatGenome.js" ></script>
+
+
+    <!--finally our iesor functions-->
+    <script type="text/javascript" src="../evolution/interpret/cppnToBody.js" ></script>
+    <script type="text/javascript" src="../evolution/interpret/genomeCSharpToJS.js" ></script>
+    <script type="text/javascript" src="../utilities/d3/d3CPPN.js"></script>
+    <script type="text/javascript" src="../utilities/d3/d3Genome.js"></script>
+
 </head>
 <body>
 
-<!-- pull in our collections of jquery related libs-->
-<script type="text/javascript" src="../libraries/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="../libraries/jquery.isotope.min.js"></script>
-<script type="text/javascript" src="../libraries/jquery.inview.js"></script>
-<script type="text/javascript" src="../libraries/jquery-ui.js"></script>
+<div id="genomes" class="demo"></div>
 
-<!-- pull in our collections of other useful libraries -->
-<script type="text/javascript" src="../libraries/d3.v2.min.js"></script>
-<script type="text/javascript" src="../libraries/Box2d.min.js"></script>
-<script type="text/javascript" src="../libraries/fabric.js"></script>
+<!-- we have our script for loading in a seed genome, then creating combinations -->
+<script  type="text/javascript">
 
-<!--get all of our nice little helper "libraries"-->
-<script type="text/javascript" src="../utilities/jkl-parsexml.js"></script>
-<script type="text/javascript" src="../utilities/loadXML.js"></script>
-<script type="text/javascript" src="../utilities/Helpers.js"></script>
-<script type="text/javascript" src="../utilities/AjaxRequests.js"></script>
-<script type="text/javascript" src="../utilities/IEC.js"></script>
-<script type="text/javascript" src="../utilities/d3PCA.js"></script>
+    //it reads a little cleaner if we go and fetch from the "require" object first
+    //mimicking the nodejs kind of setup
+    var require = this;
 
-<!--load in our physics-->
-<script type="text/javascript" src="../physics/boxHelpers.js"></script>
-<script type="text/javascript" src="../physics/boxDrawers.js"></script>
-<script type="text/javascript" src="../physics/smallestWorld.js"></script>
 
-<!--add in neat files asynchronously -->
-<script type="text/javascript" src="../evolution/neatjs/genome/neatGenome.js"></script>
-<script type="text/javascript" src="../evolution/interpret/cppnToBody.js"></script>
+    var loadSeedGenome = function(seedFunction)
+    {
+        //we have to go fetch an xml file
+        $.get('../data/leoEmptySeed.xml', function(d){
+            var xml = new JKL.ParseXML();
+            var xd =  xml.parseDocument(d);
 
+            if(xd){
+                seedFunction(xd['#document'].genome);
+            }
+            else
+                seedFunction(null);
+        });
+    };
+
+    $(document).ready(function() {
+        // Handler for page being ready
+        var genomeSharpToJS = require['genomeSharpToJS'];
+        var d3Genome = require['d3Genome'];
+        var neatParameters = require['neatParameters'];
+
+        //load in a seed genome, call back when done!
+        loadSeedGenome(function(seedGenome)
+        {
+            console.log(seedGenome);
+
+            var ng = genomeSharpToJS.ConvertCSharpToJS(seedGenome);
+            var np = new neatParameters.NeatParameters();
+            np.pMutateAddConnection = .03;
+            np.pMutateAddNode = .03;
+            np.pMutateDeleteConnection = .01;
+            np.pMutateConnectionWeights = .93;
+
+//            var DEFAULT_P_MUTATE_CONNECTION_WEIGHTS = 0.988;
+//            var DEFAULT_P_MUTATE_ADD_NODE = 0.002;
+//            var DEFAULT_P_MUTATE_ADD_MODULE = 0.0;
+//            var DEFAULT_P_MUTATE_ADD_CONNECTION = 0.02;
+//            var DEFAULT_P_MUTATE_DELETE_CONNECTION = 0.001;
+//            var DEFAULT_P_MUTATE_DELETE_SIMPLENEURON = 0.00;
+
+            var mutate = 50, nNode = {}, nConn ={};
+            for(var i=0; i< mutate; i++)
+                ng.mutate(nNode,nConn, np);
+
+            //let's debug by displaying the seed genome
+            $('#genomes').append('<div id="genome-' + ng.localID +  '" class="genome"></div>');
+            var gGraph = d3Genome.GenomeGraph("#genome-" + ng.localID, 400,400, ng.nodes, ng.connections);
+
+        });
+
+
+
+
+
+    });
+
+
+
+
+</script>
 
 
 

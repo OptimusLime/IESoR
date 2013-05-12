@@ -12,6 +12,14 @@
     return parent;
 };
 
+var componentToHex = function(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+var rgbToHex = function (r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
 var stringToFunction = function(str) {
     var arr = str.split(".");
