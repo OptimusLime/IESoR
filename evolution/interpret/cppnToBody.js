@@ -197,15 +197,37 @@
         if (hiddenNeurons.count == 0 || connections.length == 0)
             isEmpty = true;
 
+
+        var invertedHidden = {};
+        for(var key in hiddenNeurons)
+        {
+            if(key != 'count')
+            {
+                for(var innerKey in hiddenNeurons[key])
+                {
+                    invertedHidden[hiddenNeurons[key][innerKey]] = {x: parseFloat(key), y:parseFloat(innerKey)};
+                }
+            }
+        }
+
+        var hiddenFinal = [];
+        for(var i=0; i< hiddenNeurons.count; i++)
+        {
+            hiddenFinal.push(invertedHidden[i]);
+        }
+
+
+
         var esBody = {
             allBodyOutputs : allBodyOutputs,
             beforeNeuron: neuronBefore,
             beforeConnection: connBefore,
             connections : connections,
-            hiddenLocations : hiddenNeurons,
+            hiddenLocations : hiddenFinal,//hiddenNeurons,
             inputLocations : inputs,
             useLEO : useLeo,
-            isEmpty: isEmpty
+            isEmpty: isEmpty,
+            fromJS: true
         };
 
         //then convert the body into JSON

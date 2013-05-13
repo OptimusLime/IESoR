@@ -29,11 +29,15 @@ path.link {
     stroke: #666;
     stroke-width: 1.5px;
 }
-.demo
+.demo, .next
 {
-
     display: inline-block;
 }
+.next
+{
+    float:left;
+}
+
 .genome
 {
     float:left;

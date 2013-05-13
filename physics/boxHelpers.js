@@ -305,19 +305,22 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 
     this.jsonParseNodeApp = function(jsonData)
     {
-        //The structure of the json is as follows
-
         //All the bodies are inside of nodes
         //should all be of type "mass" or "node"
 
-        //so let's create our bodies
+        var inLocations = jsonData.fromJS ? 'inputLocations' : 'InputLocations';
+        var hidLocations = jsonData.fromJS ? 'hiddenLocations' : 'HiddenLocations';
+        var connLocation = jsonData.fromJS ? 'connections' : 'Connections';
+        var x = jsonData.fromJS ? 'x' : 'X';
+        var y = jsonData.fromJS ? 'y' : 'Y';
+        var src = jsonData.fromJS ? 'sourceID' : 'sourceNeuronId';
+        var tgt = jsonData.fromJS ? 'targetID' : 'targetNeuronId';
 
-//        console.log('Loaded body info: ');
-//        console.log(jsonData);
+        //behave differently if you can from javascript or c#, duh!
+        var oNodes = jsonData[inLocations].concat(jsonData[hidLocations])
 
-        var oNodes = jsonData.InputLocations.concat(jsonData.HiddenLocations);
-
-        var connections = jsonData.Connections;
+        //different name if you come from c# or js
+        var connections =  jsonData[connLocation];
 
         var oBodyCount = this.bodiesList.length;
         var bodyID = this.bodiesList.length;
@@ -357,6 +360,9 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
              //   var nodeObj = aBodies[b];
             var nodeLocation = oNodes[nodeKey];
 
+                var nodeX = nodeLocation[x];
+                var nodeY= nodeLocation[y];
+
                 //characterization of novelty, novlety + local search
                 //look at polar, why did i do it????
                 //bias local connectrions with leo
@@ -367,9 +373,9 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 //            console.log('Polar scaled: ');
 //                console.log( {x: parseFloat(nodeLocation.X), y: parseFloat(nodeLocation.Y)});
 //            xScaled = polarScaled.x;// (parseFloat(nodeLocation.X) +1)*300;
-                xScaled = (parseFloat(nodeLocation.X) +1)*maxAllowedWidth;
+                xScaled = (parseFloat(nodeX) +1)*maxAllowedWidth;
 //            yScaled = polarScaled.y;//(parseFloat(nodeLocation.Y) +1)*200;
-                yScaled = (parseFloat(nodeLocation.Y) +1)*maxAllowedHeight;
+                yScaled = (parseFloat(nodeY) +1)*maxAllowedHeight;
               //FOR each node, we make a body with certain properties, then increment count
                 entities[bodyID] = (Entity.build({id:bodyID, x: xScaled, y: yScaled, radius: .5 }));
 
@@ -424,8 +430,8 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 //                console.log('No prob3');
                 var connectionObject = connections[connectionID];
 
-                var sourceID = oBodyCount + parseInt(connectionObject.SourceNeuronId);
-                var targetID = oBodyCount + parseInt(connectionObject.TargetNeuronId);
+                var sourceID = oBodyCount + parseInt(connectionObject[src]);
+                var targetID = oBodyCount + parseInt(connectionObject[tgt]);
 
 
                 if(sourceID == targetID){

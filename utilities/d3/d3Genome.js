@@ -18,7 +18,7 @@
             //replace our current nodes with the clones
             nodes.push(neatNode.NeatNode.Copy(oNodes[i]));
         }
-        console.log(nodes);
+//        console.log(nodes);
 
         var nodeLookup = neatGenome.Help.CreateGIDLookup(nodes);
 
@@ -127,7 +127,7 @@
             .enter().append("svg:circle")
             .attr("r", 6)
             .style("fill", function(d,i){
-                console.log(i);
+//                console.log(i);
                 switch(d.type)
                 {
                     case cppnNode.NodeType.hidden:

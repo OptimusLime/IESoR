@@ -36,12 +36,17 @@
 
     <!--need some cppn files as well -->
     <script type="text/javascript" src="../evolution/neatjs/cppnjs/components/cppnNode.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/components/cppnConnection.js" ></script>
     <script type="text/javascript" src="../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFunctions.js" ></script>
     <script type="text/javascript" src="../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js" ></script>
+    <script type="text/javascript" src="../evolution/neatjs/cppnjs/cppns/cppn.js" ></script>
+
 
     <script type="text/javascript" src="../evolution/neatjs/genome/neatNode.js" ></script>
     <script type="text/javascript" src="../evolution/neatjs/genome/neatConnection.js" ></script>
     <script type="text/javascript" src="../evolution/neatjs/genome/neatGenome.js" ></script>
+
+    <script type="text/javascript" src="../evolution/neatjs/neatHelp/neatDecoder.js" ></script>
 
 
     <!--finally our iesor functions-->
@@ -53,15 +58,121 @@
 </head>
 <body>
 
-<div id="genomes" class="demo"></div>
+<div id="genomes" class="next"></div>
+<div id="pcaViewer" class="next"></div>
 
 <!-- we have our script for loading in a seed genome, then creating combinations -->
 <script  type="text/javascript">
 
+
+    var cachedObjects = {};
+    var lastSelectedIx;
+    var lastGenomeID;
+    var previousSizedWorld;
+    var previousSizedWorldID;
+    var rescale = true;
+    var shouldFetchCache = true;
+    var legend;
+
+    var setGenomeBodyInViewer = function(bodyObject, absoluteFitness, prepend)
+    {
+        //we already have an object in the genome viewer -- stop it, and remove it
+        if(previousSizedWorld)
+        {
+            previousSizedWorld.stopLoop();
+            delete previousSizedWorld;
+            $('#' + divIDFromGenome(lastGenomeID, previousSizedWorldID)).remove();
+//
+            if(!prepend)
+                $('#stats').remove();
+
+        }
+
+        //now we want to set up our genome inside viewer below the PCA Chart (or to the side)
+        var sizedWorld = addGenomeToSizedDiv(bodyObject, {containID: '#pcaViewer', width: 400, height: 400, zombieMode: false});
+
+//                                    sizedWorld.stopLoop();
+//        sizedWorld.shouldDrawBehavior(true,false);
+        previousSizedWorld = sizedWorld;
+        previousSizedWorldID = sizedWorld.worldID;
+        lastGenomeID = bodyObject.GenomeID;
+
+        var debugMode = false;
+        var updateLocation = (debugMode ? $('#com') : undefined);
+        if(!prepend){
+            $('#pcaViewer').prepend('<div id="stats">' +
+                    '<input type="button" id="playPause" class="worldOverlay" value="Play/Pause"/>' +
+                    '<input type="button" id="reset" class="worldOverlay" value="Reset"/>'
+                //if we have saving functionality, include a button here
+                    + (debugMode ?
+                    '<input type="button" id="saveToSVG" class="worldOverlay" value="Save SVG"/>' : '')
+                    + (debugMode ? ' Distance: ' + absoluteFitness + ' Distance Traveled: <div id="com"></div>' : '')
+                    + '</div>');
+
+
+//            var behavior = sizedWorld.runSimulationForBehavior( {startEval: true, visual: true,
+//                isVisible: true,
+//                drawBehavior: false,
+//                zombieMode: true, genomeID:uid});
+
+//            console.log('Behavior Fit: ' + behavior.behavior.fitness);
+
+
+            $('#playPause').click(function()
+            {
+                if(previousSizedWorld)
+                {
+//                    console.log('Play paused!')
+                    if(previousSizedWorld.interruptLoop)
+                        previousSizedWorld.startLoop(updateLocation);
+                    else
+                        previousSizedWorld.stopLoop();
+                }
+            });
+
+            $('#reset').click(function()
+            {
+//                console.log('Reset!')
+                if(previousSizedWorld)
+                {
+                    setGenomeBodyInViewer(lastGenomeID, 0, true);
+
+                    if(debugMode)
+                        previousSizedWorld.stopLoop();
+                }
+            });
+
+            if(debugMode)
+            {
+                $('#saveToSVG').click(function()
+                {
+//                    console.log('Saving to SVG!')
+                    if(previousSizedWorld)
+                    {
+                        //without the .svg at the end, that will be added
+                        saveSVGToFile(previousSizedWorld.drawObject.fabricCanvas.toSVG(), "svg" + text_filename.val());
+                        //                    alert();
+                    }
+                });
+            }
+
+        }
+
+        sizedWorld.startLoop(updateLocation);
+
+
+//                                    var smallWorld = addGenomeObjectDiv(cachedObjects[d.uid], '#pcaViewer');
+//                                    smallWorld.startLoop();
+//                                    smallWorld.shouldDrawBehavior(true,false);
+//                                    prevSmallWorld = smallWorld;
+//                                    prevSmallID = smallWorld.worldID;
+//                                    lastSmallGenome = d.uid;
+    };
+
+
     //it reads a little cleaner if we go and fetch from the "require" object first
     //mimicking the nodejs kind of setup
     var require = this;
-
 
     var loadSeedGenome = function(seedFunction)
     {
@@ -78,38 +189,56 @@
         });
     };
 
+    var createSeededBody = function(seedGenome, np)
+    {
+        var ng = genomeSharpToJS.ConvertCSharpToJS(seedGenome);
+
+        var mutate = 50, nNode = {}, nConn ={};
+        for(var i=0; i< mutate; i++)
+            ng.mutate(nNode,nConn, np);
+
+        var cppn = ng.networkDecode();
+
+        var body = cppnToBody.CPPNToBody(cppn, true, 2);
+        body.GenomeID = ng.localID;
+
+        return {genome: ng, network: cppn, body: body};
+    };
+
+
+
     $(document).ready(function() {
         // Handler for page being ready
         var genomeSharpToJS = require['genomeSharpToJS'];
         var d3Genome = require['d3Genome'];
         var neatParameters = require['neatParameters'];
+        var cppnToBody = require['cppnToBody'];
 
         //load in a seed genome, call back when done!
         loadSeedGenome(function(seedGenome)
         {
             console.log(seedGenome);
 
-            var ng = genomeSharpToJS.ConvertCSharpToJS(seedGenome);
+
             var np = new neatParameters.NeatParameters();
             np.pMutateAddConnection = .03;
             np.pMutateAddNode = .03;
             np.pMutateDeleteConnection = .01;
             np.pMutateConnectionWeights = .93;
 
-//            var DEFAULT_P_MUTATE_CONNECTION_WEIGHTS = 0.988;
-//            var DEFAULT_P_MUTATE_ADD_NODE = 0.002;
-//            var DEFAULT_P_MUTATE_ADD_MODULE = 0.0;
-//            var DEFAULT_P_MUTATE_ADD_CONNECTION = 0.02;
-//            var DEFAULT_P_MUTATE_DELETE_CONNECTION = 0.001;
-//            var DEFAULT_P_MUTATE_DELETE_SIMPLENEURON = 0.00;
+            var obj = createSeededBody(seedGenome, np);
+            while(!(obj.body.hiddenLocations.length && obj.body.connections.length))
+            {
+                obj = createSeededBody(seedGenome, np);
+            }
 
-            var mutate = 50, nNode = {}, nConn ={};
-            for(var i=0; i< mutate; i++)
-                ng.mutate(nNode,nConn, np);
+            //let's debug by displaying the genome genetics
+            $('#genomes').append('<div id="genome-' + obj.genome.localID +  '" class="genome"></div>');
+            var gGraph = d3Genome.GenomeGraph("#genome-" +  obj.genome.localID, 400,400,  obj.genome.nodes,  obj.genome.connections);
 
-            //let's debug by displaying the seed genome
-            $('#genomes').append('<div id="genome-' + ng.localID +  '" class="genome"></div>');
-            var gGraph = d3Genome.GenomeGraph("#genome-" + ng.localID, 400,400, ng.nodes, ng.connections);
+            //after loading our genome, we want to display our sexy body
+            setGenomeBodyInViewer(obj.body, 0);
+
 
         });
 

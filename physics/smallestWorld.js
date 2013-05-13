@@ -962,19 +962,8 @@ smallNS.SmallWorld.prototype.addJSONBody = function(jsonData)
 
         //right now, this is a bodyObject with InputLocations, HiddenLocations, and Connections
 
-        //we grab our genomeID
-        this.lastObjectID = parseInt(jsonData.GenomeID);
+    this.behavior.initialMorphology = this.theWorld.jsonParseNodeApp(jsonData);
 
-//        console.log('Afterid');
-
-        var inCnt = jsonData.InputLocations.length;
-        var hiCnt = jsonData.HiddenLocations.length;
-
-        var data = jsonData.InputLocations.concat(jsonData.HiddenLocations);
-
-        var connections = jsonData.Connections;
-
-     this.behavior.initialMorphology = this.theWorld.jsonParseNodeApp(jsonData);
 //        this.behavior.startingCOM = this.theWorld.nodesCenterOfMass();
 
 };

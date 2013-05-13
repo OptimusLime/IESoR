@@ -183,29 +183,29 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                     cConn.targetID.should.equal(objConn.TargetNeuronId);
                 }
 
-                creature.hiddenLocations.count.should.equal(bodyObject.HiddenLocations.length);
+                creature.hiddenLocations.length.should.equal(bodyObject.HiddenLocations.length);
                 creature.inputLocations.length.should.equal(bodyObject.InputLocations.length);
                 creature.useLEO.should.equal(bodyObject.useLEO);
                 creature.isEmpty.should.equal(bodyIsEmpty);
 
                 //check our hidden locations against known hiddens
                 //we need to invert and check!
-                var invertedHidden = {};
-                for(var key in creature.hiddenLocations)
-                {
-                    if(key != 'count')
-                    {
-                        for(var innerKey in creature.hiddenLocations[key])
-                        {
-                            invertedHidden[creature.hiddenLocations[key][innerKey]] = {x: parseFloat(key), y:parseFloat(innerKey)};
-                        }
-                    }
-                }
+//                var invertedHidden = {};
+//                for(var key in creature.hiddenLocations)
+//                {
+//                    if(key != 'count')
+//                    {
+//                        for(var innerKey in creature.hiddenLocations[key])
+//                        {
+//                            invertedHidden[creature.hiddenLocations[key][innerKey]] = {x: parseFloat(key), y:parseFloat(innerKey)};
+//                        }
+//                    }
+//                }
 
-                for(var h=0; h< creature.hiddenLocations.count; h++)
+                for(var h=0; h< creature.hiddenLocations.length; h++)
                 {
-                    invertedHidden[h].x.should.equal(bodyObject.HiddenLocations[h].X);
-                    invertedHidden[h].y.should.equal(bodyObject.HiddenLocations[h].Y);
+                    creature.hiddenLocations[h].x.should.equal(bodyObject.HiddenLocations[h].X);
+                    creature.hiddenLocations[h].y.should.equal(bodyObject.HiddenLocations[h].Y);
                 }
 
 
