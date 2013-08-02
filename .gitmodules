@@ -1,6 +1,0 @@
-[submodule "cppnjs"]
-	path = cppnjs
-	url = https://github.com/OptimusLime/CPPN.js.git
-[submodule "evolution/neatjs"]
-	path = evolution/neatjs
-	url = f:/Users/Paul/Dropbox/Repos/neatjs/
