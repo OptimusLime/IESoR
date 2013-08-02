@@ -5,17 +5,19 @@ var util = require('util');
 var xml2js = require('xml2js');
 
 var genomeSharpToJS = require('../evolution/interpret/genomeCSharpToJS.js');
-var neatNode = require('../evolution/neatjs/genome/neatNode.js');
-var neatConnection = require('../evolution/neatjs/genome/neatConnection.js');
-var neatGenome = require('../evolution/neatjs/genome/neatGenome.js');
+
+var cppnjs = require('cppn');
+var neatjs = require('neatjs');
+
+var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');//require('../evolution/neatjs/genome/neatNode.js');
+var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');//require('../evolution/neatjs/genome/neatConnection.js');
+var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');// require('../evolution/neatjs/genome/neatGenome.js');
 
 var cppnToBody = require('../evolution/interpret/cppnToBody.js');
 
-
-var cppns = require('../evolution/neatjs/cppnjs/cppns/cppn.js');
-var cppnConnection = require('../evolution/neatjs/cppnjs/components/cppnConnection.js');
-var cppnNode = require('../evolution/neatjs/cppnjs/components/cppnNode.js');
-var cppnActivationFactory = require('../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js');
+var cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');//require('../evolution/neatjs/cppnjs/components/cppnConnection.js');
+var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');//require('../evolution/neatjs/cppnjs/components/cppnNode.js');
+var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');//require('../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js');
 
 describe('Testing C# to JS Genome converstion',function(){
 

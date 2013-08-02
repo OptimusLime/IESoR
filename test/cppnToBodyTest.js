@@ -2,19 +2,20 @@ var assert = require('assert');
 var should = require('should');
 var fs = require('fs');
 
-var utilities = require('../evolution/neatjs/cppnjs/utility/utilities.js');
+var cppnjs = require('cppn');
+var neatjs = require('neatjs');
 
-var neatNode = require('../evolution/neatjs/genome/neatNode.js');
-var neatConnection = require('../evolution/neatjs/genome/neatConnection.js');
-var neatGenome = require('../evolution/neatjs/genome/neatGenome.js');
+var utilities = cppnjs.loadLibraryFile('cppnjs', 'utilities');//require('../evolution/neatjs/cppnjs/utility/utilities.js');
+
+var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');//require('../evolution/neatjs/genome/neatNode.js');
+var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');//require('../evolution/neatjs/genome/neatConnection.js');
+var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');// require('../evolution/neatjs/genome/neatGenome.js');
 
 var cppnToBody = require('../evolution/interpret/cppnToBody.js');
 
-
-var cppns = require('../evolution/neatjs/cppnjs/cppns/cppn.js');
-var cppnConnection = require('../evolution/neatjs/cppnjs/components/cppnConnection.js');
-var cppnNode = require('../evolution/neatjs/cppnjs/components/cppnNode.js');
-var cppnActivationFactory = require('../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js');
+var cppnConnection = cppnjs.loadLibraryFile('cppnjs', 'cppnConnection');//require('../evolution/neatjs/cppnjs/components/cppnConnection.js');
+var cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');//require('../evolution/neatjs/cppnjs/components/cppnNode.js');
+var cppnActivationFactory = cppnjs.loadLibraryFile('cppnjs', 'cppnActivationFactory');//require('../evolution/neatjs/cppnjs/activationFunctions/cppnActivationFactory.js');
 
 describe('Testing cppnToBody functions against the known working C# version',function(){
 
@@ -105,10 +106,10 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                 //now we're ready to make a genome
                 var genome = new neatGenome.NeatGenome(genomeObject.GenomeId, nodes, connections, ins , outs , false);
 
-                genome.localID.should.equal(genomeObject.GenomeId);
+                genome.gid.should.equal(genomeObject.GenomeId);
                 genome.inputNodeCount.should.equal(genomeObject.InputNeuronCount);
                 genome.outputNodeCount.should.equal(genomeObject.OutputNeuronCount);
-                (typeof genome.localID).should.equal('number');
+                (typeof genome.gid).should.equal('number');
                 (typeof genome.inputNodeCount).should.equal('number');
                 (typeof genome.outputNodeCount).should.equal('number');
 

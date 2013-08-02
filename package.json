@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+      "cppn" : "0.x.x",
+      "neatjs" : "0.x.x"
+  },
+    "devDependencies": {
     "mocha": "1.9.x",
     "should": "1.2.x",
     "xml2js": "0.2.x"

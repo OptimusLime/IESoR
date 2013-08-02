@@ -7,6 +7,14 @@
     var neatNode = isBrowser ? selfBrowser['neatNode'] : require('../../evolution/neatjs/genome/neatNode.js');
     var neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('../../evolution/neatjs/genome/neatConnection.js');
 
+    d3Genome.CheckDependencies = function()
+    {
+        cppnNode = isBrowser ? selfBrowser['cppnNode'] : require('../../evolution/neatjs/cppnjs/components/cppnNode.js');
+        neatGenome = isBrowser ? selfBrowser['neatGenome'] : require('../../evolution/neatjs/genome/neatGenome.js');
+        neatNode = isBrowser ? selfBrowser['neatNode'] : require('../../evolution/neatjs/genome/neatNode.js');
+        neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('../../evolution/neatjs/genome/neatConnection.js');
+    };
+
     //initialization of our world. Clears everything pretty much
     d3Genome.GenomeGraph= function(elementID,  w, h, oNodes, oConnections) {
 

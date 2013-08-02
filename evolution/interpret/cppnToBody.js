@@ -4,7 +4,9 @@
 //    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
     var cppnToBody = exports;
 
-    var neatConnection = isBrowser ? selfBrowser['neatConnection'] : require('../neatjs/genome/neatConnection.js');
+    var neatjs = require('neatjs');
+
+    var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');//isBrowser ? selfBrowser['neatConnection'] : require('../neatjs/genome/neatConnection.js');
 
     //convert genome to body using decoder! In case you forget
     //   INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);

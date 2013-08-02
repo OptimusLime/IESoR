@@ -89,7 +89,7 @@
         }
 
         //now we want to set up our genome inside viewer below the PCA Chart (or to the side)
-        var sizedWorld = addGenomeToSizedDiv(bodyObject, {containID: '#pcaViewer', width: 400, height: 400, zombieMode: false});
+        var sizedWorld = addGenomeToSizedDiv(bodyObject, {containID: '#pcaViewer', width: 300, height: 300, zombieMode: false});
 
 //                                    sizedWorld.stopLoop();
 //        sizedWorld.shouldDrawBehavior(true,false);
@@ -234,7 +234,7 @@
 
             //let's debug by displaying the genome genetics
             $('#genomes').append('<div id="genome-' + obj.genome.localID +  '" class="genome"></div>');
-            var gGraph = d3Genome.GenomeGraph("#genome-" +  obj.genome.localID, 400,400,  obj.genome.nodes,  obj.genome.connections);
+            var gGraph = d3Genome.GenomeGraph("#genome-" +  obj.genome.localID, 300,300,  obj.genome.nodes,  obj.genome.connections);
 
             //after loading our genome, we want to display our sexy body
             setGenomeBodyInViewer(obj.body, 0);
