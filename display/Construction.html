@@ -3,8 +3,88 @@
 <html>
 <head>
     <title>cppn construction</title>
+
+    <!-- include jQuery + plugins, and handling of touch on ios/android -->
+    <script type="text/javascript" language="javascript" src="../libraries/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../libraries/d3.v2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../libraries/jkl-parsexml.js"></script>
+    <script type="text/javascript" language="javascript" src="../libraries/loadXML.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../node_modules/cppn/cppnjs.js"></script>
+    <script type="text/javascript" language="javascript" src="../node_modules/neatjs/neatjs.js"></script>
+    <script type="text/javascript" language="javascript" src="../evolution/interpret/cppnToBody.js"></script>
+    <script type="text/javascript" language="javascript" src="../evolution/interpret/genomeCSharpToJS.js"></script>
+
+
+    <script type="text/javascript" language="javascript">
+
+
+
+        $(window).ready(function(){
+
+
+            var globals = window;
+            var commonEvolution = globals['common'];
+
+            var libLocations =
+            {
+                'cppnjs' : '../node_modules/cppn',
+                'neatjs' : '../node_modules/neatjs'
+            };
+
+            commonEvolution.asyncLoadLibraries(libLocations, function(err)
+            {
+                //cppns are a go!
+                var cppnjs = globals['cppnjs'];
+
+                //let's load in the file identifying our interesting genomes
+
+                var genomeSharpToJS = globals['genomeSharpToJS'];
+                var cppnToBody = globals['cppnToBody'];
+
+                //if you require some dependencies, you should load in library file way (i.e. load iesor.js, and that handles it)
+                //for now, a quick hack
+                genomeSharpToJS.CheckDependencies();
+                cppnToBody.CheckDependencies();
+
+                $.getJSON('../data/genomes/allSelectedGenomeXML.json', function(genomeDict)
+                {
+
+                    //console.log(genomeDict);
+
+                    //getjson returns a parsed json object already --- no parsing necessary
+
+                    for(var gid in genomeDict)
+                    {
+                        //grab a neat genome using the loaded json object
+                        var ng = genomeSharpToJS.ConvertCSharpToJS(genomeDict[gid]);
+                        //we have a neat genome
+                        //we should convert the genome into a cppn, then a body
+                        var cppn = ng.networkDecode();
+
+                        //used leo, and had a weight range of 3.0 for the experiments -- should yield identical creatures
+                        var creature = cppnToBody.CPPNToBody(cppn, true, 3.0, true);
+
+                        //we have a creature, verify output by sticking it into an actual environment!
+                        console.log('Cppn: ');
+                        console.log(cppn);
+                        console.log('Creature: ');
+                        console.log(creature);
+
+
+                    }
+
+                });
+
+
+
+            });
+        });
+
+    </script>
+
 </head>
 <body>
 
 </body>
-</html>
+</html>y

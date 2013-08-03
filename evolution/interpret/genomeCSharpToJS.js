@@ -4,8 +4,8 @@
 //    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
     var genomeSharpToJS = exports;
 
-    var neatjs = require('neatjs');
-    var cppnjs = require('cppn');
+    var neatjs = isBrowser ? selfBrowser['common'] : require('neatjs');
+    var cppnjs = isBrowser ? selfBrowser['common'] : require('cppn');
 
     var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');//isBrowser ? selfBrowser['neatConnection'] : require('../neatjs/genome/neatConnection.js');
 
@@ -13,6 +13,17 @@
     var neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');//isBrowser ? selfBrowser['neatNode'] : require('../neatjs/genome/neatNode.js');
     var neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');//isBrowser ? selfBrowser['neatGenome'] : require('../neatjs/genome/neatGenome.js');
 
+    genomeSharpToJS.CheckDependencies = function()
+    {
+        //load cppnjs objects
+        cppnNode = cppnjs.loadLibraryFile('cppnjs', 'cppnNode');
+
+        //laod our neatjs objects now
+        neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+        neatNode = neatjs.loadLibraryFile('neatjs', 'neatNode');
+        neatGenome = neatjs.loadLibraryFile('neatjs', 'neatGenome');//isBrowser ? selfBrowser['neatGenome'] : require('../neatjs/genome/neatGenome.js');
+
+    };
 
     genomeSharpToJS.NeuronTypeToNodeType = function(type)
     {

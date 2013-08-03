@@ -175,7 +175,7 @@ describe('Testing cppnToBody functions against the known working C# version',fun
                     var cConn  = creature.connections[b];
                     var objConn  = bodyObject.Connections[b];
 
-                    parseFloat(cConn.weight.toFixed(3)).should.equal(parseFloat(objConn.Weight.toFixed(3)));
+                    parseFloat(cConn.weight.toFixed(4)).should.equal(parseFloat(objConn.Weight.toFixed(4)));
                     if(cConn.sourceID != objConn.SourceNeuronId){
                         console.log(cConn);
                         console.log(objConn);

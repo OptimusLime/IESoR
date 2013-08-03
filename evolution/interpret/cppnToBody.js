@@ -4,9 +4,16 @@
 //    var cantorPair = isBrowser ? selfBrowser['cantorPair'] : require('../utility/cantorPair.js');
     var cppnToBody = exports;
 
-    var neatjs = require('neatjs');
+    var neatjs = isBrowser ? selfBrowser['common'] : require('neatjs');
 
     var neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');//isBrowser ? selfBrowser['neatConnection'] : require('../neatjs/genome/neatConnection.js');
+
+
+    cppnToBody.CheckDependencies = function()
+    {
+        //laod our neatjs objects now
+        neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
+    };
 
     //convert genome to body using decoder! In case you forget
     //   INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);
