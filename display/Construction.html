@@ -50,7 +50,55 @@
                 $.getJSON('../data/genomes/allSelectedGenomeXML.json', function(genomeDict)
                 {
 
+                    //grab grid information, for populating the D3 object
+                    var gridPoints = cppnToBody.ConstructGridObject(9).grid;
+
                     //console.log(genomeDict);
+
+                    var width = 350;
+                    var height = 350;
+                    var radius = 5;
+                    var padding = 5;
+
+                    var svg = d3.select("#d3Grid").append("svg")
+                            .attr("width", width)
+                            .attr("height", height)
+                            .style("margin", 20);
+
+                    var xMin = d3.min(gridPoints, function(d){return d.x;})
+                    var xMax = d3.max(gridPoints, function(d){return d.x;})
+
+                    var xScale = d3.scale.linear()
+                            .domain([xMin, xMax])
+                            .range([padding, width-padding]);
+
+                    var yMin = d3.min(gridPoints, function(d){return d.y;})
+                    var yMax = d3.max(gridPoints, function(d){return d.y;})
+
+                    var yScale = d3.scale.linear()
+                            .domain([yMin, yMax])
+                            .range([padding, height-padding]);
+
+                    var circles = svg.selectAll("circles")
+                            .data(gridPoints)
+                            .enter()
+                            .append("circle")
+                            .style("fill", "steelblue")
+                            .attr("cx", function(d){return xScale(d.x);})
+                            .attr("cy", function(d){return yScale(d.y);})
+                            .attr("r", radius);
+
+
+                    var processing = svg.selectAll("processCircles")
+                            .data([gridPoints[0]])
+                            .enter()
+                            .append("circle")
+                            .style("fill", "red")
+                            .attr("cx", function(d){return xScale(d.x);})
+                            .attr("cy", function(d){return yScale(d.y);})
+                            .attr("r", radius);
+
+
 
                     //getjson returns a parsed json object already --- no parsing necessary
 
@@ -86,5 +134,7 @@
 </head>
 <body>
 
+<div id="d3Grid"></div>
+
 </body>
-</html>y
+</html>

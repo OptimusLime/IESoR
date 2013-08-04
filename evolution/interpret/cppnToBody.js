@@ -15,31 +15,8 @@
         neatConnection = neatjs.loadLibraryFile('neatjs', 'neatConnection');
     };
 
-    //convert genome to body using decoder! In case you forget
-    //   INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);
-    cppnToBody.CPPNToBody = function(cppn, useLeo, weightRange, testing)
+    cppnToBody.ConstructGridObject = function(resolution)
     {
-
-        var isEmpty = false;
-
-        //we want the genome, so we can acknowledge the genomeID!
-
-        //now convert a network to a set of hidden neurons and connections
-
-        //we'll make body specific function calls later
-
-        var inputs =[], outputs = [], hiddenNeurons = {};
-
-        //zero out our count object :)
-        hiddenNeurons.count = 0;
-
-        var connections = [];
-
-        //loop through a grid, defined by some resolution, and test every connection against another using leo
-
-        var resolution = 9;
-        //int resolutionHalf = resolution / 2;
-
         var dx = 2 / (resolution-1);
         var dy = 2 / (resolution -1);
         var fX = -1, fY = -1;
@@ -63,6 +40,38 @@
             fX += dx;
             fY = -1;
         }
+
+        return {grid: queryPoints, threeX: xDistanceThree, threeY: yDistanceThree};
+
+    };
+    //convert genome to body using decoder! In case you forget
+    //   INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);
+    cppnToBody.CPPNToBody = function(cppn, useLeo, weightRange, testing)
+    {
+
+        var isEmpty = false;
+
+        //we want the genome, so we can acknowledge the genomeID!
+
+        //now convert a network to a set of hidden neurons and connections
+
+        //we'll make body specific function calls later
+
+        var inputs =[], outputs = [], hiddenNeurons = {};
+
+        //zero out our count object :)
+        hiddenNeurons.count = 0;
+
+        var connections = [];
+
+        //loop through a grid, defined by some resolution, and test every connection against another using leo
+
+        //build grid of points, and define 3*dx and 3*dy for the resolution
+        var grid = cppnToBody.ConstructGridObject(9);
+
+        var queryPoints = grid.grid;
+        var xDistanceThree = grid.threeX;
+        var yDistanceThree = grid.threeY;
 
 //        console.log(queryPoints);
         var counter = 0;
@@ -92,6 +101,8 @@
         var src, tgt;
         var cnt =0;
         var allBodyOutputs = [];
+        var allBodyInputs = [];
+
         //for each points we have
         for(var p1=0; p1 < queryPoints.length; p1++)
         {
@@ -107,9 +118,10 @@
                     var outs = cppnToBody.queryCPPNOutputs(cppn, xyPoint.x, xyPoint.y, otherPoint.x, otherPoint.y);//, maxXDistanceCenter(xyPoint, otherPoint),  minYDistanceGround(xyPoint, otherPoint));
                     var weight = outs[0];
 
-                    if(testing)
+                    if(testing){
+                        allBodyInputs.push({p1: xyPoint, p2: otherPoint});
                         allBodyOutputs.push(outs);
-
+                    }
                     if (useLeo)
                     {
                         if (outs[1] > 0)
@@ -228,9 +240,6 @@
 
 
         var esBody = {
-            allBodyOutputs : allBodyOutputs,
-            beforeNeuron: neuronBefore,
-            beforeConnection: connBefore,
             connections : connections,
             hiddenLocations : hiddenFinal,//hiddenNeurons,
             inputLocations : inputs,
@@ -238,6 +247,19 @@
             isEmpty: isEmpty,
             fromJS: true
         };
+
+        if(testing)
+        {
+            //an array of point pairs (p1, p2), representing input coordinates
+            esBody['allBodyInputs'] = allBodyInputs;
+            //an array of all the network outputs
+            esBody['allBodyOuputs'] = allBodyOutputs;
+
+
+            //count of neurons and connections before the cutoff function (if over a certain amount, they are cut off)
+            esBody['beforeNeuron'] = neuronBefore;
+            esBody['beforeConnection'] = connBefore;
+        }
 
         //then convert the body into JSON
 //        console.log(" Nodes: " + hiddenNeurons.count + " Connections: " + connections.length);

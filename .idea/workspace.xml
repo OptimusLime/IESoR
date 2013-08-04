@@ -4,13 +4,13 @@
     <list default="true" id="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" name="Default" comment="" />
     <ignored path="iesor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375490645629" ignored="false" />
+    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375626938057" ignored="false" />
     <file path="/genomeCSharpToJS.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375402915019" ignored="false" />
     <file path="/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403007246" ignored="false" />
-    <file path="/cppnToBody.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403070391" ignored="false" />
+    <file path="/cppnToBody.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375626786557" ignored="false" />
     <file path="/cppnToBodyTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403505875" ignored="false" />
     <file path="/*.regexp" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403511720" ignored="false" />
-    <file path="/Construction.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375498048128" ignored="false" />
+    <file path="/Construction.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375628281036" ignored="false" />
     <file path="/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485588109" ignored="false" />
     <file path="$PROJECT_DIR$/../iecjs/template/examples/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485590184" ignored="false" />
     <file path="$PROJECT_DIR$/../basewin/client/BasicWINClient/BasicWINClient/MainWindow.xaml.cs" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375493372184" ignored="false" />
@@ -34,10 +34,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="genomeCSharpToJS.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="genomeCSharpToJS.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="8" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.54381084">
+            <state line="23" column="8" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -61,19 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cppnToBodyTest.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/cppnToBodyTest.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="16" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testgenomebodies.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/testgenomebodies.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78635" column="7" selection-start="2123138" selection-end="2123142" vertical-scroll-proportion="-9.431373">
+            <state line="78635" column="7" selection-start="2123138" selection-end="2123142" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -82,7 +73,7 @@
       <file leaf-file-name="cppnToBody.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution/interpret/cppnToBody.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="483" selection-end="483" vertical-scroll-proportion="-7.48">
+            <state line="17" column="15" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -100,7 +91,7 @@
       <file leaf-file-name="allSelectedGenomeXML.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/genomes/allSelectedGenomeXML.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="67064" selection-start="67064" selection-end="67064" vertical-scroll-proportion="-0.0">
+            <state line="0" column="67064" selection-start="67064" selection-end="67064" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,10 +106,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Construction.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Construction.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/display/Construction.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="1140" selection-end="1140" vertical-scroll-proportion="-11.769231">
+            <state line="90" column="0" selection-start="3832" selection-end="3832" vertical-scroll-proportion="0.10075567">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PCA.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/display/PCA.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="0" selection-start="355" selection-end="355" vertical-scroll-proportion="105.26923">
               <folding />
             </state>
           </provider>
@@ -155,17 +155,17 @@
         <option value="$PROJECT_DIR$/test/genomeConversionTest.js" />
         <option value="$PROJECT_DIR$/test/cppnToBodyTest.js" />
         <option value="$PROJECT_DIR$/evolution/evaluate/createGenomeJSON.js" />
+        <option value="$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js" />
         <option value="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
         <option value="$PROJECT_DIR$/display/Construction.html" />
-        <option value="$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="85" />
-    <option name="width" value="1678" />
-    <option name="height" value="925" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -232,38 +232,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="neatjs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -355,24 +323,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genomes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -387,8 +337,8 @@
     <property name="options.lastSelected" value="project.propVCSSupport.Confirmation" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../iecjs" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -452,13 +402,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="85" width="1678" height="925" extended-state="0" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17083588" sideWeight="0.6148825" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16898009" sideWeight="0.6148825" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -535,13 +485,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/pcaData.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -565,9 +508,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/evolution/evaluate/SingleEvaluation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="297" column="0" selection-start="11575" selection-end="11575" vertical-scroll-proportion="-29.576923">
-          <folding />
-        </state>
+        <state line="297" column="0" selection-start="11575" selection-end="11575" vertical-scroll-proportion="-29.576923" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/genomeConversionTest.js">
@@ -586,7 +527,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/testgenomebodies.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78635" column="7" selection-start="2123138" selection-end="2123142" vertical-scroll-proportion="-9.431373">
+        <state line="78635" column="7" selection-start="2123138" selection-end="2123142" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -626,23 +567,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="8" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/display/PCA.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="355" selection-end="355" vertical-scroll-proportion="105.26923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/evolution/interpret/cppnToBody.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="483" selection-end="483" vertical-scroll-proportion="-7.48">
+        <state line="17" column="15" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/display/Construction.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="1140" selection-end="1140" vertical-scroll-proportion="-11.769231">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="8" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.54381084">
+        <state line="90" column="0" selection-start="3832" selection-end="3832" vertical-scroll-proportion="0.10075567">
           <folding />
         </state>
       </provider>
