@@ -14,6 +14,7 @@
     <script type="text/javascript" language="javascript" src="../node_modules/neatjs/neatjs.js"></script>
     <script type="text/javascript" language="javascript" src="../evolution/interpret/cppnToBody.js"></script>
     <script type="text/javascript" language="javascript" src="../evolution/interpret/genomeCSharpToJS.js"></script>
+    <script type="text/javascript" language="javascript" src="../display/d3BodyConstructor.js"></script>
 
 
     <script type="text/javascript" language="javascript">
@@ -37,94 +38,310 @@
                 //cppns are a go!
                 var cppnjs = globals['cppnjs'];
 
+                var neatjs = globals['neatjs'];
+
+
+                var neatGenome = neatjs.neatGenome;
                 //let's load in the file identifying our interesting genomes
 
                 var genomeSharpToJS = globals['genomeSharpToJS'];
                 var cppnToBody = globals['cppnToBody'];
+                var d3BodyConstructor = globals['d3BodyConstructor'];
 
                 //if you require some dependencies, you should load in library file way (i.e. load iesor.js, and that handles it)
                 //for now, a quick hack
                 genomeSharpToJS.CheckDependencies();
                 cppnToBody.CheckDependencies();
+                d3BodyConstructor.CheckDependencies();
 
-                $.getJSON('../data/genomes/allSelectedGenomeXML.json', function(genomeDict)
+
+                var objectJSONPath = '../data/genomes/selectedBodyConstruction.json';
+                var bodyConstructGraph = new d3BodyConstructor.d3Grid(objectJSONPath, 'd3Grid', 500,500, function()
                 {
-
-                    //grab grid information, for populating the D3 object
-                    var gridPoints = cppnToBody.ConstructGridObject(9).grid;
-
-                    //console.log(genomeDict);
-
-                    var width = 350;
-                    var height = 350;
-                    var radius = 5;
-                    var padding = 5;
-
-                    var svg = d3.select("#d3Grid").append("svg")
-                            .attr("width", width)
-                            .attr("height", height)
-                            .style("margin", 20);
-
-                    var xMin = d3.min(gridPoints, function(d){return d.x;})
-                    var xMax = d3.max(gridPoints, function(d){return d.x;})
-
-                    var xScale = d3.scale.linear()
-                            .domain([xMin, xMax])
-                            .range([padding, width-padding]);
-
-                    var yMin = d3.min(gridPoints, function(d){return d.y;})
-                    var yMax = d3.max(gridPoints, function(d){return d.y;})
-
-                    var yScale = d3.scale.linear()
-                            .domain([yMin, yMax])
-                            .range([padding, height-padding]);
-
-                    var circles = svg.selectAll("circles")
-                            .data(gridPoints)
-                            .enter()
-                            .append("circle")
-                            .style("fill", "steelblue")
-                            .attr("cx", function(d){return xScale(d.x);})
-                            .attr("cy", function(d){return yScale(d.y);})
-                            .attr("r", radius);
-
-
-                    var processing = svg.selectAll("processCircles")
-                            .data([gridPoints[0]])
-                            .enter()
-                            .append("circle")
-                            .style("fill", "red")
-                            .attr("cx", function(d){return xScale(d.x);})
-                            .attr("cy", function(d){return yScale(d.y);})
-                            .attr("r", radius);
-
-
-
-                    //getjson returns a parsed json object already --- no parsing necessary
-
-                    for(var gid in genomeDict)
-                    {
-                        //grab a neat genome using the loaded json object
-                        var ng = genomeSharpToJS.ConvertCSharpToJS(genomeDict[gid]);
-                        //we have a neat genome
-                        //we should convert the genome into a cppn, then a body
-                        var cppn = ng.networkDecode();
-
-                        //used leo, and had a weight range of 3.0 for the experiments -- should yield identical creatures
-                        var creature = cppnToBody.CPPNToBody(cppn, true, 3.0, true);
-
-                        //we have a creature, verify output by sticking it into an actual environment!
-                        console.log('Cppn: ');
-                        console.log(cppn);
-                        console.log('Creature: ');
-                        console.log(creature);
-
-
-                    }
-
+                    //ready to construct!
+                    //let's do it!!
+                    bodyConstructGraph.fullBodyAnimation('148147', {startIx: 630, increaseSpeed: true});
                 });
 
 
+
+//                $.getJSON('../data/genomes/allSelectedGenomeXML.json', function(genomeDict)
+//                {
+//
+//                    $.getJSON('../data/genomes/selectedBodyConstruction.json', function(bodyConstructs)
+//                    {
+//
+//
+//                        var gridPoints = [];
+//                        for(var ix in bodyConstructs.grid){
+//                            var gp = bodyConstructs.grid[ix];
+//                            gridPoints.push({x:gp.X, y:gp.Y});
+//                        }
+//
+//                        //grab grid information, for populating the D3 object
+////                        var gridPoints = cppnToBody.ConstructGridObject(9).grid;
+//
+//                        //console.log(genomeDict);
+//
+//                        var width = 500;
+//                        var height = 500;
+//                        var radius = 5;
+//                        var padding = 1.5*radius;
+//
+//                        var svg = d3.select("#d3Grid").append("svg")
+//                                .attr("width", width)
+//                                .attr("height", height)
+//                                .style("margin", 20);
+//
+//                        var xMin = d3.min(gridPoints, function(d){return d.x;})
+//                        var xMax = d3.max(gridPoints, function(d){return d.x;})
+//
+//                        var xScale = d3.scale.linear()
+//                                .domain([xMin, xMax])
+//                                .range([padding, width-padding]);
+//
+//                        var yMin = d3.min(gridPoints, function(d){return d.y;})
+//                        var yMax = d3.max(gridPoints, function(d){return d.y;})
+//
+//                        var yScale = d3.scale.linear()
+//                                .domain([yMin, yMax])
+//                                .range([padding, height-padding]);
+//
+//
+//                        var selectedPoints = [gridPoints[0],gridPoints[1]];
+//
+//                        var connections = [];
+//
+//                        var pointsEqual = function(p1,p2)
+//                        {
+//                            return p1.x == p2.x && p1.y == p2.y;
+//                        };
+//
+//                        var isSelected = function(d)
+//                        {
+//                            for(var i=0; i < selectedPoints.length; i++)
+//                                if(pointsEqual(d, selectedPoints[i]))
+//                                    return true;
+//
+//                            return false;
+//                        };
+//
+//
+//                        //default circle colors
+//                        var circles = svg.selectAll("circles")
+//                                .data(gridPoints)
+//                                .enter()
+//                                .append("circle")
+//                                .style("fill", "steelblue")
+//                                .attr("cx", function(d){return xScale(d.x);})
+//                                .attr("cy", function(d){return yScale(d.y);})
+//                                .attr("r", radius);
+//
+//
+//
+//
+//
+//                        var finalConnCount = 0;
+//
+//                        var seenConns= [];
+//
+//                        var lineDuration = 125;
+//                        var animationSpeed = 125;
+//                        var circleSpeed = 125;
+//
+//                        var skipIndex = 576;//600;//132;
+//                        var inputIx = skipIndex;
+//
+//                        var d3Line = d3.svg.line()
+//                                .x(function(d) { return xScale(d.x); })
+//                                .y(function(d) { return yScale(d.y); })
+//                                .interpolate("basis");
+//
+//                        var redrawLines = function()
+//                        {
+//                            var lines = svg.selectAll("lines")
+//                                    .data(connections);
+//                            lines
+//                                    .enter()
+//                                    .append("path")
+////                                    .data(function(d,i){return [connections[i].p1, connections[i].p2];})
+//                                    .attr("d", function(d){ return d3Line([d.p1, d.p2]);})
+//                                    .style("stroke", function(d){ return d.color;})
+////                                    .style("opacity", function(d){ return d.opacity;})
+//                                    .style("stroke-width", 3.0)
+////                                    .style("stroke-linecap", "round")
+////                                    .attr("x1", function(d) {return xScale((d.p1.x + d.p2.x)/2);})
+////                                    .attr("y1", function(d) {return yScale((d.p1.y + d.p2.y)/2);})
+////                                    .attr("x2", function(d) {return xScale((d.p1.x + d.p2.x)/2);})
+////                                    .attr("y2", function(d) {return yScale((d.p1.y + d.p2.y)/2);})
+////                                    .transition()
+////                                    .duration(lineDuration)
+//////                                    .style("opacity", function(d){ return d.opacity;})
+////                                    .style("stroke", function(d){ return d.color;})
+////                                    .attr("x1", function(d) {return xScale(d.p1.x);})
+////                                    .attr("y1", function(d) {return yScale(d.p1.y);})
+////                                    .attr("x2", function(d) {return xScale(d.p2.x);})
+////                                    .attr("y2", function(d) {return yScale(d.p2.y);});
+//
+//                        };
+//
+//
+//
+//
+//
+//
+//
+//                        //getjson returns a parsed json object already --- no parsing necessary
+//                        var next = function(max)
+//                        {
+//                            return Math.floor(Math.random()*max);
+//                        };
+//
+//                        var inputs;
+//                        var ixToConnection;
+//                        var creatureConnections;
+//                        var creatureGenome;
+//
+//                       var retrieveValues = function(gid, genomeDict)
+//                       {
+//                            //grab a neat genome using the loaded json object
+//                            var ng = genomeSharpToJS.ConvertCSharpToJS(genomeDict[gid]);
+//                           creatureGenome = ng;
+//
+//                           var builtBody = bodyConstructs.genomes[gid];
+//
+//                           var allBodyInputs = [];
+//                           for(var ix in builtBody.AllBodyInputs)
+//                           {
+//                               var ip = builtBody.AllBodyInputs[ix];
+//                                allBodyInputs.push({p1: {x: ip.Key.X, y: ip.Key.Y}, p2: {x: ip.Value.X, y: ip.Value.Y}});
+//                           }
+//
+//                           inputs = allBodyInputs;
+//                           ixToConnection = builtBody.indexToConnection;
+//
+//
+//                           creatureConnections = [];
+//                           for(var c=0; c < builtBody.Connections.length; c++)
+//                           {
+//                               builtBody.Connections[c].gid = builtBody.Connections[c].InnovationId;
+//                               creatureConnections.push(builtBody.Connections[c]);
+//                           }
+//
+////                           creatureConnections = builtBody.connections;
+//
+//                            //we have a neat genome
+//                            //we should convert the genome into a cppn, then a body
+////                            var cppn = ng.networkDecode();
+////
+////                            //used leo, and had a weight range of 3.0 for the experiments -- should yield identical creatures
+////                            var creature = cppnToBody.CPPNToBody(cppn, true, 3.0, true);
+////
+////                            inputs = creature.allBodyInputs;
+////                            ixToConnection = creature.indexToConnection;
+////                            creatureConnections = creature.connections;
+////
+////                            var sel = next(inputs.length);
+////                            console.log(inputs[sel].p1);
+////                            console.log(inputs[sel].p2);
+//
+//                            //we have a creature, verify output by sticking it into an actual environment!
+//    //                        console.log('Cppn: ');
+//    //                        console.log(cppn);
+//    //                        console.log('Creature: ');
+//    //                        console.log(creature);
+//
+//
+//                        };
+//
+////                        retrieveValues('148147', genomeDict);//***Favorite walker, easy to understand (after bug fix)
+////                        retrieveValues('141432', genomeDict);
+////                        retrieveValues('227741', genomeDict);
+////                        retrieveValues('129808', genomeDict);//*** best-ish so far
+////                        retrieveValues('49938', genomeDict);//meh
+////                        retrieveValues('131126', genomeDict);
+//                        retrieveValues('103536', genomeDict);
+//
+//
+//
+//                        var connectionLookup = neatGenome.Help.CreateGIDLookup(creatureConnections);
+//
+//                        var updateD3 = function()
+//                        {
+//
+//                            //end with nuffin
+//                            if(inputIx == inputs.length)
+//                                selectedPoints = [];
+//                            else
+//                                selectedPoints = [inputs[inputIx].p1, inputs[inputIx].p2];
+//
+//                            svg.selectAll("circle")
+//                                    .transition()
+//                                    .duration(circleSpeed)
+//                                    .style("fill", function(d){
+//                                        return isSelected(d) ? "red" : "steelblue";
+//                                    })
+//                                    .attr("cx", function(d){return xScale(d.x);})
+//                                    .attr("cy", function(d){return yScale(d.y);})
+//                                    .attr("r", function(d){
+//                                        return isSelected(d) ? radius*1.5 : radius;
+//                                    });
+//
+//
+//                            //we need to check if we have a connection at these locations
+//                            if(ixToConnection[inputIx] !== undefined)
+//                            {
+//                                var cID = ixToConnection[inputIx];
+//
+//                                //check for gid of connection
+//                                var finalConnection = connectionLookup[cID];
+//
+//                                //we have a connection!
+//                                if(finalConnection !== undefined){
+//                                    connections.push({p1: inputs[inputIx].p1, p2: inputs[inputIx].p2, color: finalConnection ? "purple" : "black", opacity: finalConnection ? 1 : .1});
+//                                    redrawLines();
+//                                    console.log('Total creature con: ' + creatureConnections.length + ' final Con: ' + finalConnCount);
+//                                }
+//
+//                            }
+//
+//
+//    //                        svg.selectAll("line")
+//    //                                .data(connections)
+//    //                                .style("stroke", "purple")
+//    //                                .style("stroke-width", 5)
+//    //                                .attr("x1", function(d) {return xScale(d.p1.x);})
+//    //                                .attr("y1", function(d) {return yScale(d.p1.y);})
+//    //                                .attr("x2", function(d) {return xScale(d.p2.x);})
+//    //                                .attr("y2", function(d) {return yScale(d.p2.y);});
+//    //                                .attr("x1", function(d) {return xScale((d.p1.x + d.p2.x)/2);})
+//    //                                .attr("y1", function(d) {return yScale((d.p1.y + d.p2.y)/2);})
+//    //                                .attr("x2", function(d) {return xScale((d.p1.x + d.p2.x)/2);})
+//    //                                .attr("y2", function(d) {return yScale((d.p1.y + d.p2.y)/2);})
+//    //                                .transition()
+//    //                                .duration(circleSpeed)
+//    //                                .style("fill", "purple")
+//    //                                .attr("x1", function(d) {return xScale(d.p1.x);})
+//    //                                .attr("y1", function(d) {return yScale(d.p1.y);})
+//    //                                .attr("x2", function(d) {return xScale(d.p2.x);})
+//    //                                .attr("y2", function(d) {return yScale(d.p2.y);});
+//
+//                            inputIx++;
+//                            animationSpeed*=.995;
+//                            circleSpeed*=.995;
+//
+//                            if(inputIx <= inputs.length)
+//                                setTimeout(updateD3,animationSpeed);
+//
+//                        };
+
+//                        setTimeout(updateD3,0);
+
+
+//                  });
+
+
+//                });
 
             });
         });

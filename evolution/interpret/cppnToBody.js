@@ -103,6 +103,8 @@
         var allBodyOutputs = [];
         var allBodyInputs = [];
 
+        var attemptToConnectionMap = {};
+
         //for each points we have
         for(var p1=0; p1 < queryPoints.length; p1++)
         {
@@ -121,6 +123,7 @@
                     if(testing){
                         allBodyInputs.push({p1: xyPoint, p2: otherPoint});
                         allBodyOutputs.push(outs);
+
                     }
                     if (useLeo)
                     {
@@ -146,6 +149,9 @@
 
                             connections.push(connection);
 
+                            if(testing)
+                                attemptToConnectionMap[allBodyInputs.length] = counter-1;
+
                         }
                     }
                     else
@@ -165,6 +171,9 @@
                         connection.cppnOutputs = outs;
 
                         connections.push(connection);
+
+                        if(testing)
+                            attemptToConnectionMap[allBodyInputs.length] = counter-1;//connections.length;
                     }
 
                 }
@@ -255,6 +264,8 @@
             //an array of all the network outputs
             esBody['allBodyOuputs'] = allBodyOutputs;
 
+            //what index of attempts did we create this connection
+            esBody['indexToConnection'] = attemptToConnectionMap;
 
             //count of neurons and connections before the cutoff function (if over a certain amount, they are cut off)
             esBody['beforeNeuron'] = neuronBefore;
