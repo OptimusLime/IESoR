@@ -35,8 +35,9 @@
     <file path="/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376058795804" ignored="false" />
     <file path="/IECInfinite.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376067134693" ignored="false" />
     <file path="/GenomeBreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376065598430" ignored="false" />
-    <file path="/README.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068512727" ignored="false" />
+    <file path="/README.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068778256" ignored="false" />
     <file path="/simpleapp.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376066508542" ignored="false" />
+    <file path="/License.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068932567" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,16 +69,34 @@
       <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="495" selection-end="495" vertical-scroll-proportion="0.0">
+            <state line="20" column="7" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="3" selection-start="20" selection-end="20" vertical-scroll-proportion="0.04992658">
+            <state line="16" column="0" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="License.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/License.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.16017964">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/ESHyperneat/README.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="10" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,15 +106,6 @@
         <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="10" column="34" selection-start="286" selection-end="286" vertical-scroll-proportion="-6.8">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="boxHelpers.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/physics/boxHelpers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -137,15 +147,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="boxDrawers.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/physics/boxDrawers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -164,7 +165,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/test/cppnToBodyTest.js" />
         <option value="$PROJECT_DIR$/evolution/evaluate/createGenomeJSON.js" />
         <option value="$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js" />
         <option value="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
@@ -178,8 +178,9 @@
         <option value="$PROJECT_DIR$/html/display/GenomeBreeder.html" />
         <option value="$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js" />
         <option value="$PROJECT_DIR$/html/display/IECInfinite.html" />
-        <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.txt" />
+        <option value="$PROJECT_DIR$/License.txt" />
       </list>
     </option>
   </component>
@@ -284,6 +285,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ESHyperneat" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -447,20 +466,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3CPPN.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PCA.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -545,16 +550,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.txt">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="495" selection-end="495" vertical-scroll-proportion="0.0">
+        <state line="16" column="0" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/client/ESHyperneat/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="3" selection-start="20" selection-end="20" vertical-scroll-proportion="0.04992658">
+        <state line="14" column="10" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="7" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/License.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.16017964">
           <folding />
         </state>
       </provider>

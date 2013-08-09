@@ -1,0 +1,40 @@
+-------------
+1. LICENSE
+-------------
+
+Some of this code is from Colin Green's SharpNEAT 1.0 (http://sharpneat.sourceforge.net/).  All original SharpNEAT code is covered by the original SharpNEAT license as described by Colin Green:
+
+"The SharpNeat project consists of the core code packaged as SharpNeatLib and the main application simply called SharpNeat. SharpNeatLib is released under the Gnu Lesser General Public License (LGPL) which means you can link to it from your own programs, proprietory or otherwise.
+
+The SharpNeat application is released under the Gnu General Public License (GPL)."
+
+This package contains code for a Indirectly Encoded Sodarace (IESoR).
+
+All code pertaining to the simulator
+ HyperSharpNEAT which modifies original SharpNEAT 1.0 to implement HyperNEAT and add additional functionality such as Novelty Search and Evolvable-Substrate HyperNEAT (ES-HyperNEAT).  Additionally it includes a multiagent simulator.
+
+The HyperNEAT additions and simulator are covered by the following license:
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation (LGPL may be granted upon request). This program is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details.
+
+---------------------
+2. USAGE and SUPPORT
+---------------------
+
+We hope that this software will be a useful starting point for your own explorations in neuroevolution. The software is provided as is, however, we will do our best to maintain it and accommodate suggestions. If you want to be notified of future releases of the software or have questions, comments, bug reports or suggestions, send email to one of the authors.
+
+Alternatively, you may post your questions on the NEAT Users Group at : http://tech.groups.yahoo.com/group/neat/.
+
+--------------
+3. FORUM
+--------------
+
+We are available to answer questions at the NEAT Users Group:
+
+http://tech.groups.yahoo.com/group/neat/
+
+-------------------
+4. ACKNOWLEDGEMENTS
+-------------------
+
+Special thanks to Colin Green for creating SharpNEAT.

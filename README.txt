@@ -1,5 +1,17 @@
-Indirectly Encoded SodaRace, IESoR. Example individuals can be found here: http://eplex.cs.ucf.edu/ecal13/demo/ECAL_PCA.html
+Indirectly Encoded SodaRace, IESoR v 1.0
 By Paul Szerlip
+EMail: pszerlip@cs.ucf.edu
+http://eplex.cs.ucf.edu
+
+Faculty Supervisor: Kenneth Stanley
+kstanley@eecs.ucf.edu
+
+Example individuals can be found here: http://eplex.cs.ucf.edu/ecal13/demo/ECAL_PCA.html
+
+IESoR is built in part on the HyperSharpNEAT code
+By David D'Ambrosio, Joel Lehman, and Sebastian Risi (itself based on SharpNEAT)
+
+Current Documentation for this package is included in this README file (future documentation on github)
 
 //The documentation of this package as well as the code itself is currently undergoing many changes
 //If you are interested in the library, it's best to follow the repository on Github, and file ALL bugs there
