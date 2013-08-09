@@ -1,0 +1,58 @@
+<genome id="5" species-id="0" age="1" fitness="1.00">
+  <neurons>
+    <neuron id="0" type="bias" activationFunction="NullFn" layer="0"/>
+    <neuron id="1" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="2" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="3" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="4" type="in" activationFunction="NullFn" layer="0"/>
+    <neuron id="5" type="out" activationFunction="BipolarSigmoid" layer="10"/>
+    <neuron id="6" type="out" activationFunction="StepFunction" layer="10"/>
+	<neuron id="7" type="out" activationFunction="BipolarSigmoid" layer="10"/>
+	<neuron id="8" type="out" activationFunction="BipolarSigmoid" layer="10"/>
+    <neuron id="100" type="hid" activationFunction="Gaussian" layer="5"/>
+    <neuron id="101" type="hid" activationFunction="Gaussian" layer="5"/>
+  </neurons>
+  <connections>
+  <!-- Set the generic connections from inputs to output neurons, except for the LEO node -->
+    <connection innov-id="9" src-id="0" tgt-id="5" weight="1" />
+	<connection innov-id="10" src-id="0" tgt-id="7" weight="1" />
+	<connection innov-id="11" src-id="0" tgt-id="8" weight="1" />
+	
+	 <connection innov-id="12" src-id="1" tgt-id="5" weight="1" />
+	<connection innov-id="13" src-id="1" tgt-id="7" weight="1" />
+	<connection innov-id="14" src-id="1" tgt-id="8" weight="1" />
+	
+	 <connection innov-id="15" src-id="2" tgt-id="5" weight="1" />
+	<connection innov-id="16" src-id="2" tgt-id="7" weight="1" />
+	<connection innov-id="17" src-id="2" tgt-id="8" weight="1" />
+	
+	 <connection innov-id="18" src-id="3" tgt-id="5" weight="1" />
+	<connection innov-id="19" src-id="3" tgt-id="7" weight="1" />
+	<connection innov-id="20" src-id="3" tgt-id="8" weight="1" />
+	
+	 <connection innov-id="21" src-id="4" tgt-id="5" weight="1" />
+	<connection innov-id="22" src-id="4" tgt-id="7" weight="1" />
+	<connection innov-id="23" src-id="4" tgt-id="8" weight="1" />
+	
+	
+	 <!-- Now we add a local x-bias, connect x1, x2 to Gaussian at Node 100, opposite weights -->
+    <connection innov-id="30" src-id="1" tgt-id="100" weight="1" />
+    <connection innov-id="31" src-id="3" tgt-id="100" weight="-1" />
+	 <!-- Patch the gaussian to the StepFunction output (leo) -->
+	<connection innov-id="32" src-id="100" tgt-id="6" weight="1" />
+	
+	 <!-- Now we add a local y-bias, connect y1, y2 to Gaussian at Node 101, opposite weights -->
+    <connection innov-id="33" src-id="2" tgt-id="101" weight="1" />
+    <connection innov-id="34" src-id="4" tgt-id="101" weight="-1" />
+	 <!-- Patch the gaussian to the StepFunction output (leo) -->
+	<connection innov-id="35" src-id="101" tgt-id="6" weight="1" />
+	
+	
+	 <!-- Finally, wire the bias to counteract the gaussians -->
+	  <!-- Normally, we'd balance it with equal weights, but since we want some 
+			bodily connections, and the way ES-HyperNEAT starts, we only half balance it
+	  -->
+    <connection innov-id="36" src-id="0" tgt-id="6" weight="0" />
+	
+  </connections>
+</genome>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Environment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <walls />
+  <name>khepera_room2.xml</name>
+  <maxDistance>134.3503</maxDistance>
+  <start_point>
+    <x>0</x>
+    <y>0</y>
+  </start_point>
+  <goal_point>
+    <x>100</x>
+    <y>100</y>
+  </goal_point>
+  <group_orientation>0</group_orientation>
+  <robot_spacing>30</robot_spacing>
+  <robot_heading>0</robot_heading>
+  <seed>0</seed>
+  <view_x>-92.089</view_x>
+  <view_y>-61.9364624</view_y>
+  <view_scale>0.5859978</view_scale>
+  <AOIRectangle>
+    <Location>
+      <X>30</X>
+      <Y>60</Y>
+    </Location>
+    <Size>
+      <Width>640</Width>
+      <Height>500</Height>
+    </Size>
+    <X>30</X>
+    <Y>60</Y>
+    <Width>640</Width>
+    <Height>500</Height>
+  </AOIRectangle>
+  <POIPosition />
+</Environment>

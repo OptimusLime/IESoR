@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ExperimentWrapper xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RoomClearingExperiment>
+    <gridCollision>false</gridCollision>
+    <substrateDescriptionFilename>hardmaze_substrate.xml</substrateDescriptionFilename>
+    <adaptableANN>false</adaptableANN>
+    <modulatoryANN>false</modulatoryANN>
+    <normalizeWeights>true</normalizeWeights>
+    <populationSize>150</populationSize>
+    <headingNoise>0</headingNoise>
+    <effectorNoise>0</effectorNoise>
+    <sensorNoise>0</sensorNoise>
+    <timesToRunEnvironments>1</timesToRunEnvironments>
+    <evaluationTime>45</evaluationTime>
+    <timestep>0.099</timestep>
+    <explanatoryText>Hard Maze Experiment</explanatoryText>
+    <scriptFile />
+    <robotModelName>MazeRobotPieSlice</robotModelName>
+    <fitnessFunctionName>HardMazeFitness</fitnessFunctionName>
+    <behaviorCharacterizationName>null</behaviorCharacterizationName>
+    <environmentName>hardmaze_env.xml</environmentName>
+    <overrideDefaultSensorDensity>false</overrideDefaultSensorDensity>
+    <rangefinderSensorDensity>5</rangefinderSensorDensity>
+    <overrideTeamFormation>true</overrideTeamFormation>
+    <group_orientation>90</group_orientation>
+    <group_spacing>30</group_spacing>
+    <robot_heading>270</robot_heading>
+    <useScript>false</useScript>
+    <collisionPenalty>false</collisionPenalty>
+    <multipleEnvironments>false</multipleEnvironments>
+    <evolveSubstrate>true</evolveSubstrate>
+    <numberRobots>1</numberRobots>
+    <homogeneousTeam>true</homogeneousTeam>
+    <agentsVisible>true</agentsVisible>
+    <agentsCollide>true</agentsCollide>
+  </RoomClearingExperiment>
+</ExperimentWrapper>

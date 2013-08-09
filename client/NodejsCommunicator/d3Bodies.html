@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+
+</head>
+<body>
+
+</body>
+
+<script src="d3.v2.js"></script>
+<script>
+
+//    var data = [
+//        {x: 10.0, y: 9.14},
+//        {x:  8.0, y: 8.14},
+//        {x: 13.0, y: 8.74},
+//        {x:  9.0, y: 8.77},
+//        {x: 11.0, y: 9.26},
+//        {x: 14.0, y: 8.10},
+//        {x:  6.0, y: 6.13},
+//        {x:  4.0, y: 3.10},
+//        {x: 12.0, y: 9.13},
+//        {x:  7.0, y: 7.26},
+//        {x:  5.0, y: 4.74},
+//    ];
+
+
+
+    d3.json("http://127.0.0.1:3000/get", function(jsonData)
+    {
+        console.log("JSON fetched: ");
+        console.log( jsonData);//.InputLocations.concat(jsonData.HiddenLocations));
+
+        //right now, this is a bodyObject with InputLocations, HiddenLocations, and Connections
+
+        var inCnt = jsonData.InputLocations.length;
+        var hiCnt = jsonData.HiddenLocations.length;
+
+        var data = jsonData.InputLocations.concat(jsonData.HiddenLocations);
+
+        var connections = jsonData.Connections;
+
+        var margin = {top: 0, right: 0, bottom: 0, left: 0},
+                width = 960,
+                height = 500;
+
+        var x = pad(d3.scale.linear()
+                .domain(d3.extent(data, function(d, i) { return d.X; }))
+                .range([0, width - margin.left - margin.right]), 40);
+
+        var y = pad(d3.scale.linear()
+                .domain(d3.extent(data, function(d, i) { return d.Y; }))
+                .range([ height - margin.top - margin.bottom,0]), 40);
+
+        var svg = d3.select("body").append("svg").style("border", "1px solid black")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("class", "dot line chart");
+
+
+        svg.selectAll(".dot")
+                .data(data)
+                .enter().append("circle")
+                .style("fill", function(d, i) {
+                    return i < inCnt ? "#00f" : "#050";
+                })
+                .attr("class", "dot")
+                .attr("cx", function(d) { return x(d.X); })
+                .attr("cy", function(d) { return y(d.Y); })
+                .attr("r", 12)
+    console.log("Connections: ");
+        console.log(connections);
+
+        svg.selectAll(".line")
+                .data(connections)
+                .enter().append("line")
+                .style("stroke-width", function(d) { return 1.5;})//Math.sqrt(d.value); });
+                .style("stroke", function(d) { return "#000"})
+                .attr("x1", function(c){ return x(c.coordinates[0]); })
+                .attr("y1", function(c){ return y(c.coordinates[1]); })
+                .attr("x2", function(c){ return x(c.coordinates[2]); })
+                .attr("y2", function(c){ return y(c.coordinates[3]); });
+
+
+    });
+
+
+    function pad(scale, k) {
+        return scale;
+//        var range = scale.range();
+//        if (range[0] > range[1]) k *= -1;
+//        return scale.domain([range[0] - k, range[1] + k].map(scale.invert)).nice();
+    }
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,15 @@
+<substrate leo="false">
+  <neuronGroups>
+    <group id="0" type="Input" startx="-1.0" starty="-1.0" endx="1.0" endy="-1.0" dx="5" dy="1" />
+    <group id="1" type="Input" startx="-1.0" starty="-1.2" endx="1.0" endy="-1.2" dx="4" dy="1" />
+    <group id="2" type="Hidden" startx="-1.0" starty="0.0" endx="1.0" endy="0.0" dx="10" dy="1" />
+    <group id="3" type="Output" startx="-1.0" starty="1.0" endx="1.0" endy="1.0" dx="3" dy="1" />
+  </neuronGroups>
+  <connections>
+    <connection src-id="0" tg-id="2" type="fully-connected" />
+    <connection src-id="1" tg-id="2" type="fully-connected" />
+    <connection src-id="2" tg-id="2" type="fully-connected" />
+    <!--<connection src-id="2" tg-id="2" type="fully-connected" />-->
+    <connection src-id="2" tg-id="3" type="fully-connected" />
+  </connections>
+</substrate>
