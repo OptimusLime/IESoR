@@ -102,7 +102,7 @@ dcNS.CPPNGraph= function(elementID,  w, h, nodes, links, weights) {
         .enter().append("svg:circle")
         .attr("r", 6)
         .style("fill", function(d){
-            switch(d.type)
+            switch(d.nodeType)
             {
                 case "Hidden":
                     return "#0C6";

@@ -140,7 +140,7 @@
             .attr("r", 6)
             .style("fill", function(d,i){
 //                console.log(i);
-                switch(d.type)
+                switch(d.nodeType)
                 {
                     case cppnNode.NodeType.hidden:
                         return "#0C6";

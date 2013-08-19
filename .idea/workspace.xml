@@ -4,12 +4,12 @@
     <list default="true" id="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" name="Default" comment="" />
     <ignored path="iesor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376057936818" ignored="false" />
+    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775104797" ignored="false" />
     <file path="/genomeCSharpToJS.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375402915019" ignored="false" />
-    <file path="/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375733385955" ignored="false" />
+    <file path="/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835932108" ignored="false" />
     <file path="/cppnToBody.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375638206454" ignored="false" />
     <file path="/cppnToBodyTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403505875" ignored="false" />
-    <file path="/*.regexp" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375805692794" ignored="false" />
+    <file path="/*.regexp" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937741015" ignored="false" />
     <file path="/Construction.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375731091138" ignored="false" />
     <file path="/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485588109" ignored="false" />
     <file path="$PROJECT_DIR$/../iecjs/template/examples/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485590184" ignored="false" />
@@ -19,7 +19,7 @@
     <file path="/selectedGenomeIDs.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375639508105" ignored="false" />
     <file path="/d3BodyConstructor.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375760580274" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375821850446" ignored="false" />
-    <file path="/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375821850446" ignored="false" />
+    <file path="/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376938338926" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375733440120" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/css/reveal.min.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375733709659" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/js/reveal.min.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375733709659" ignored="false" />
@@ -31,13 +31,165 @@
     <file path="/boxHelpers.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375805342667" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/js/physics/boxDrawers.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375805521021" ignored="false" />
     <file path="/boxDrawers.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375805463849" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376061851417" ignored="false" />
-    <file path="/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376058795804" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376921350735" ignored="false" />
+    <file path="/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376921336657" ignored="false" />
     <file path="/IECInfinite.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376067134693" ignored="false" />
     <file path="/GenomeBreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376065598430" ignored="false" />
     <file path="/README.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068778256" ignored="false" />
     <file path="/simpleapp.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376066508542" ignored="false" />
     <file path="/License.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068932567" ignored="false" />
+    <file path="/PCA.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376080030989" ignored="false" />
+    <file path="/d3PcaPrivate.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376087872204" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/model/schemaLoading.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780074186" ignored="false" />
+    <file path="/schemaLoading.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780059619" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376795209000" ignored="false" />
+    <file path="/getTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376234436464" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/getTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376255064805" ignored="false" />
+    <file path="/insertAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376253208405" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/insertAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376253255341" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835935042" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/insertTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376255054117" ignored="false" />
+    <file path="/insertTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376155090881" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/cuid/dist/node-cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376157416964" ignored="false" />
+    <file path="/node-cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376157996900" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/node_modules/cuid/dist/node-cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376157492077" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/node_modules/cuid/dist/browser-cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376157582944" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/uuid/node-cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376158034820" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/uuid/cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376158374507" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/uuid/cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376158316875" ignored="false" />
+    <file path="/cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376795739123" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/NEAT/plugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376177438102" ignored="false" />
+    <file path="/plugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191190561" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/generator/mainGenerator.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922466697" ignored="false" />
+    <file path="/mainGenerator.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922467027" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/main/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376879205119" ignored="false" />
+    <file path="/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780444015" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/NEAT/params.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376173289897" ignored="false" />
+    <file path="/params.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376173284915" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/evolution/iec.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191125281" ignored="false" />
+    <file path="/iec.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786349001" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/evolution/iec.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191069460" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937109096" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/neatjs.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191125281" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/evolution/multiobjective.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376174531719" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191125281" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/schemas/NEATGenotype.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376175726953" ignored="false" />
+    <file path="/NEATGenotype.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376175721226" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/test/loadWINTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835913035" ignored="false" />
+    <file path="/loadWINTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835870817" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/Generic/plugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376180581454" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937326316" ignored="false" />
+    <file path="/neatjs.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376181010361" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/Generic/genericPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922479900" ignored="false" />
+    <file path="/genericPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376276546159" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/plugins/NEAT/neatParameters.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376881933120" ignored="false" />
+    <file path="/neatParameters.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376881932124" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatConnection.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376191125281" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937258141" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786683388" ignored="false" />
+    <file path="/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937323437" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376324703141" ignored="false" />
+    <file path="/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376324701899" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/seedAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376265794875" ignored="false" />
+    <file path="/seedAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376265766603" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780470489" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/picbreeder/picbreeder.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376195653202" ignored="false" />
+    <file path="/picbreeder.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376195650306" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/picbreeder/node_modules/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376195729308" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/schemaTesting.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376255058456" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/testseeds/seed1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376254370853" ignored="false" />
+    <file path="/seed1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936559804" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/schema1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376235010573" ignored="false" />
+    <file path="/schema1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376235009463" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/test/seedTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376254908070" ignored="false" />
+    <file path="/seedTests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376254837627" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/removeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376247995254" ignored="false" />
+    <file path="/removeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376247969229" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/picbreeder/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376252345411" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376921136678" ignored="false" />
+    <file path="/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376843492910" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-api/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835324415" ignored="false" />
+    <file path="/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834958631" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/ui/winui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376347759063" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/ui/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376347803722" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../Maestro/BugChaseMaestro/NodeApp/examples/tracking.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376688417002" ignored="false" />
+    <file path="/tracking.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376675647154" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/win-evolution.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376796100858" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/modules/iecBasic/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937911651" ignored="false" />
+    <file path="/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376938135628" ignored="false" />
+    <file path="$PROJECT_DIR$/../basewin/test/connectionAPITests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376756415136" ignored="false" />
+    <file path="/connectionAPITests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376756415136" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834228020" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/win-ui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834713075" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/iec.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376774259819" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/winui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775266495" ignored="false" />
+    <file path="/winui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376774695239" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376774793164" ignored="false" />
+    <file path="$PROJECT_DIR$/../cppnjs/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775167683" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/canon.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/node_modules/sax/examples/shopping.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/text.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/node_modules/sax/examples/not-pretty.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/node_modules/sax/examples/test.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/node_modules/xml2js/node_modules/sax/examples/big-not-pretty.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775219223" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/modules/iecBasic/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376846420195" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/generic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376882745940" ignored="false" />
+    <file path="/generic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376775584712" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/html/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376938344352" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/iec/basic/basic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376776657482" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376795242124" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/basic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376776662726" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779580600" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780503930" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/seeds/seed1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936586468" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/schemas/generic.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779819114" ignored="false" />
+    <file path="/generic.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779816904" ignored="false" />
+    <file path="/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780421683" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/node_modules/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376780449477" ignored="false" />
+    <file path="/win-evolution.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376787225152" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/win-evolution.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376796123568" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376938212056" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/iec/basic/js/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937797520" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/evolution/iec.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937289400" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/genome/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936730276" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/genome/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786652811" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/genome/neatMutation.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786653794" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/neatjs.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786653794" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/evolution/multiobjective.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786653794" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/neatjs/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786653794" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatMutation.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786683388" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/genome/neatMutation.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786731426" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/node_modules/xml2js/node_modules/sax/examples/test.xml" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786731426" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/neatjs/genome/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786731426" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-base/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376795813947" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-base/winbase.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376794913067" ignored="false" />
+    <file path="/winbase.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376794892878" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-base/uuid/cuid.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376795753368" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376796123568" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-api/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376833601347" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/win-ui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834757323" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376844879832" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-api/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376843130573" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376863085183" ignored="false" />
+    <file path="/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376863085183" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/iec/basic/js/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376848057708" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/css/iecBasic.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922582252" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937258141" ignored="false" />
+    <file path="/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936599843" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/genome/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936756586" ignored="false" />
+    <file path="/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936703049" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/test/genomeConversionTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936821586" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/test/genomeTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936870300" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/test/nodeTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936973850" ignored="false" />
+    <file path="$PROJECT_DIR$/../neatjs/neatHelp/neatDecoder.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937003528" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937258141" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937258141" ignored="false" />
+    <file path="/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937379324" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/d3/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937362134" ignored="false" />
+    <file path="/d3CPPN.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937453536" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,62 +209,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PCA.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/display/PCA.html">
+      <file leaf-file-name="d3PcaPrivate.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="0" selection-start="1904" selection-end="1904" vertical-scroll-proportion="-26.961538">
+            <state line="56" column="35" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.txt">
+      <file leaf-file-name="d3WIN.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3WIN.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="7" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0">
+            <state line="32" column="39" selection-start="781" selection-end="783" vertical-scroll-proportion="-5.28">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="d3CPPN.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3CPPN.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0">
+            <state line="102" column="21" selection-start="2979" selection-end="2979" vertical-scroll-proportion="0.25692695">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="License.txt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/License.txt">
+      <file leaf-file-name="AjaxRequests.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/utilities/AjaxRequests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.16017964">
+            <state line="236" column="23" selection-start="6139" selection-end="6139" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/ESHyperneat/README.txt">
+      <file leaf-file-name="d3Genome.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3Genome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="10" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+            <state line="206" column="49" selection-start="7227" selection-end="7227" vertical-scroll-proportion="-3.92">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simpleapp.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="34" selection-start="286" selection-end="286" vertical-scroll-proportion="-6.8">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="smallestWorld.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/physics/smallestWorld.js">
+      <file leaf-file-name="d3PCA.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PCA.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -120,28 +263,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleEvaluation.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/evolution/evaluate/SingleEvaluation.html">
+      <file leaf-file-name="cppnjs.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/node_modules/cppn/cppnjs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="48" selection-start="2211" selection-end="2211" vertical-scroll-proportion="1.3076923">
+            <state line="197" column="47" selection-start="6385" selection-end="6385" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IECInfinite.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/display/IECInfinite.html">
+      <file leaf-file-name="json.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/node_modules/connect/node_modules/formidable/example/json.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="55" selection-start="253" selection-end="253" vertical-scroll-proportion="22.884615">
+            <state line="40" column="14" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IECCurrent.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/display/IECCurrent.html">
+      <file leaf-file-name="winapi.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/win/winapi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="131.42308">
+            <state line="79" column="37" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Construction.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/display/Construction.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="444" selection-end="654" vertical-scroll-proportion="-5.8846154">
               <folding />
             </state>
           </provider>
@@ -165,22 +317,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/evolution/evaluate/createGenomeJSON.js" />
-        <option value="$PROJECT_DIR$/evolution/interpret/genomeCSharpToJS.js" />
-        <option value="$PROJECT_DIR$/evolution/interpret/cppnToBody.js" />
-        <option value="$PROJECT_DIR$/data/genomes/errorGenomes.json" />
         <option value="$PROJECT_DIR$/data/genomes/selectedGenomeIDs.json" />
         <option value="$PROJECT_DIR$/display/d3BodyConstructor.js" />
         <option value="$PROJECT_DIR$/display/Construction.html" />
         <option value="$PROJECT_DIR$/physics/boxHelpers.js" />
         <option value="$PROJECT_DIR$/physics/smallestWorld.js" />
-        <option value="$PROJECT_DIR$/html/utilities/d3/d3Genome.js" />
         <option value="$PROJECT_DIR$/html/display/GenomeBreeder.html" />
         <option value="$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js" />
         <option value="$PROJECT_DIR$/html/display/IECInfinite.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/License.txt" />
+        <option value="$PROJECT_DIR$/html/display/PCA.html" />
+        <option value="$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js" />
+        <option value="$PROJECT_DIR$/html/utilities/AjaxRequests.js" />
+        <option value="$PROJECT_DIR$/html/utilities/d3/d3Genome.js" />
+        <option value="$PROJECT_DIR$/html/utilities/d3/d3CPPN.js" />
       </list>
     </option>
   </component>
@@ -214,16 +366,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,6 +395,108 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="d3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neatjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iesor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cppn" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -308,13 +552,23 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Confirmation" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../winjs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../iecjs" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -388,6 +642,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3846154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19732206" sideWeight="0.61538464" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -398,7 +653,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3846154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -466,90 +720,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3WIN.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="15" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/evolution/interpret/cppnToBody.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/display/GenomeBreeder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="1423" selection-end="1423" vertical-scroll-proportion="-17.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/boxDrawers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/boxHelpers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/smallestWorld.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/display/PCA.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="0" selection-start="1904" selection-end="1904" vertical-scroll-proportion="-26.961538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/evolution/evaluate/SingleEvaluation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="48" selection-start="2211" selection-end="2211" vertical-scroll-proportion="1.3076923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="34" selection-start="286" selection-end="286" vertical-scroll-proportion="-6.8">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/display/IECInfinite.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="55" selection-start="253" selection-end="253" vertical-scroll-proportion="22.884615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/display/IECCurrent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="131.42308">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0">
@@ -573,7 +743,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/License.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.16017964">
+        <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/display/PCA.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="13" selection-start="4962" selection-end="4962" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/neatjs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="204" column="33" selection-start="6380" selection-end="6380" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/node_modules/cppn/cppnjs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="197" column="47" selection-start="6385" selection-end="6385" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/node_modules/connect/node_modules/formidable/example/json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="14" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/win/winapi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="37" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/display/Construction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="444" selection-end="654" vertical-scroll-proportion="-5.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/AjaxRequests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="236" column="23" selection-start="6139" selection-end="6139" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3Genome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="49" selection-start="7227" selection-end="7227" vertical-scroll-proportion="-3.92">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PCA.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="35" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3WIN.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="39" selection-start="781" selection-end="783" vertical-scroll-proportion="-5.28">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3CPPN.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="21" selection-start="2979" selection-end="2979" vertical-scroll-proportion="0.25692695">
           <folding />
         </state>
       </provider>

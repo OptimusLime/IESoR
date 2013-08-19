@@ -14,10 +14,37 @@ var defaultSaveFunction = function()
     {
         console.log('Saving!');
 //            console.log(JSON.stringify(cachedObjects));
+
+        var pcaObjects=  {};
+        for(var gid in dataObjects)
+        {
+            var data = dataObjects[gid];
+            var cached = cachedObjects[data.uid];
+
+            if(!cached){
+                console.log('Cannot find: ' + data.uid);
+                continue;
+            }
+
+            pcaObjects[data.uid] =
+            {
+                "GenomeID" :  cached.GenomeID,
+                "Connections" : cached.Connections,
+                "HiddenLocations" : cached.HiddenLocations,
+                "InputLocations"  : cached.InputLocations,
+                "Objectives" : cached.Objectives,
+                "Fitness" :  cached.Fitness,
+                "Locality" : cached.Locality,
+                "useLEO" :   cached.useLEO
+            };
+        }
+
+        //only take objects from the pca chart, doy!
+
         var BB = get_blob();
         saveAs(
             new BB(
-                [JSON.stringify(cachedObjects)]
+                [JSON.stringify(pcaObjects)]
                 , {type: "text/json;charset=" + document.characterSet}
             )
             , text_filename.val() +  ".json"

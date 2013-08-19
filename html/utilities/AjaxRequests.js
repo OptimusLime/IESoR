@@ -20,7 +20,7 @@ function getBodies(numberBodies, bodyCallback, errorCallback)
         type: 'GET',
         data: {"numberOfBodies" : numberBodies },
         cache: false,
-        timeout: 30000,
+        timeout: 60000,
         complete: function() {
             //called when complete
             console.log('done with get bodies request');
@@ -49,7 +49,7 @@ function getGenomes(genomeIDArray, bodyCallback, errorCallback)
         type: 'GET',
         data: {"genomeIDArray" : genomeIDArray },
         cache: false,
-        timeout: 30000,
+        timeout: 60000,
         complete: function() {
             //called when complete
             console.log('done with get genomeIDs request');
@@ -79,7 +79,7 @@ function getGenomeEvaluations(genomeIDArray, bodyCallback, errorCallback)
         type: 'GET',
         data: {"genomeIDArray" : genomeIDArray },
         cache: false,
-        timeout: 30000,
+        timeout: 60000,
         complete: function() {
             //called when complete
             console.log('done with get genomeIDs request');
@@ -109,7 +109,7 @@ function getCurrentGeneration(bodyCallback, errorCallback)
         url: "http://127.0.0.1:3000/getCurrentGeneration",
         type: 'GET',
         cache: false,
-        timeout: 30000,
+        timeout: 60000,
         complete: function() {
             //called when complete
             console.log('done with Generation request');
@@ -136,7 +136,7 @@ function getBestIndividuals(uid, bodyCallback, errorCallback)
         url: "http://127.0.0.1:3000/getBestBodies?uid="+ uid,
         type: 'GET',
         cache: false,
-        timeout: 30000,
+        timeout: 60000,
         complete: function() {
             //called when complete
             console.log('done with best request');
@@ -173,7 +173,7 @@ function ajaxWIN(route, bodyCallback, errorCallback)
         url: "http://127.0.0.1:3000/" + route,
         type: 'GET',
         cache: false,
-        timeout: 60000,
+        timeout: 90000,
         complete: function() {
             //called when complete
             console.log('done with PCA request');
@@ -202,7 +202,7 @@ function getLatestArchive(bodyCallback, errorCallback)
         url: "http://127.0.0.1:3000/getArchive",
         type: 'GET',
         cache: false,
-        timeout: 30000,
+        timeout: 90000,
         complete: function() {
             //called when complete
             console.log('done with Archive request');
@@ -234,7 +234,7 @@ function toggleSelectedBody(genomeID, successCallback, errorCallback)
         data: JSON.stringify({"genomeID" : genomeID }),
         contentType: "application/json",
         cache: false,
-        timeout: 30000,
+        timeout: 90000,
         complete: function() {
             //called when complete
             console.log('toggle process complete');
