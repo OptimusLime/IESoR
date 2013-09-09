@@ -357,6 +357,63 @@ namespace NodeCommunicator.Evolution
             return queryPoints;
         }
 
+
+        Dictionary<long, ConnectionGeneList> outwardNodeConnections(ConnectionGeneList cgl)
+        {
+            Dictionary<long, ConnectionGeneList> nodesToOut = new Dictionary<long, ConnectionGeneList>();
+
+            for (var i = 0; i < cgl.Count; i++)
+            {
+                //grab the connection
+                ConnectionGene cg = cgl[i];
+
+                //we actually need to make sure any node that receives a connection must have a connection gene list -- even if it contains nothing
+                //i.e. if I go to check how many outgoing connections to a node that only has incoming connections -- if we don't do this step
+                //that query will throw a key not found exception in C#
+                if (!nodesToOut.ContainsKey(cg.TargetNeuronId))
+                    nodesToOut.Add(cg.TargetNeuronId, new ConnectionGeneList());
+
+                if(!nodesToOut.ContainsKey(cg.SourceNeuronId))
+                {
+                    //add source node, and list of possible connections
+                    nodesToOut.Add(cg.SourceNeuronId, new ConnectionGeneList());
+                }
+
+                //add this gene to the object holding souce nodes and their outgoing connections
+                nodesToOut[cg.SourceNeuronId].Add(cg);
+            }
+
+            return nodesToOut;
+        }
+
+        Dictionary<long, ConnectionGeneList> inwardNodeConnections(ConnectionGeneList cgl)
+        {
+            Dictionary<long, ConnectionGeneList> nodesInward = new Dictionary<long, ConnectionGeneList>();
+
+            for (var i = 0; i < cgl.Count; i++)
+            {
+                //grab the connection
+                ConnectionGene cg = cgl[i];
+
+                //we actually need to make sure any node that receives a connection must have a connection gene list -- even if it contains nothing
+                //i.e. if I go to check how many outgoing connections to a node that only has incoming connections -- if we don't do this step
+                //that query will throw a key not found exception in C#
+                if (!nodesInward.ContainsKey(cg.SourceNeuronId))
+                    nodesInward.Add(cg.SourceNeuronId, new ConnectionGeneList());
+
+                if (!nodesInward.ContainsKey(cg.TargetNeuronId))
+                {
+                    //add source node, and list of possible connections
+                    nodesInward.Add(cg.TargetNeuronId, new ConnectionGeneList());
+                }
+
+                //add this gene to the object holding souce nodes and their outgoing connections
+                nodesInward[cg.TargetNeuronId].Add(cg);
+            }
+
+            return nodesInward;
+        }
+
         public ESBodyInformation genomeIntoBodyObject(IGenome genome, out bool isEmpty)
         {
             INetwork net = GenomeDecoder.DecodeToModularNetwork((NeatGenome)genome);
@@ -552,7 +609,11 @@ namespace NodeCommunicator.Evolution
             var beforeNeuron = hiddenNeurons.Count;
             //var hiddenCopy = new List<PointF>(hiddenNeurons);
 
-            ensureSingleConnectedStructure(connections, hiddenNeurons, conSourcePoints, conTargetPoints);
+
+            Dictionary<long, ConnectionGeneList> connectionsGoingOut = outwardNodeConnections(connections);
+            Dictionary<long, ConnectionGeneList> connectionsGoingInward = inwardNodeConnections(connections);
+
+            ensureSingleConnectedStructure(connections, connectionsGoingInward,  connectionsGoingOut, hiddenNeurons, conSourcePoints, conTargetPoints);
 
             if (hiddenNeurons.Count > 20 || connections.Count > 100)
             {
@@ -615,72 +676,173 @@ namespace NodeCommunicator.Evolution
             return (float)Math.Sqrt(xDistanceSq(p1,p2) + yDistanceSq(p1,p2));
         }
 
-        void ensureSingleConnectedStructure(ConnectionGeneList connections, List<PointF> hiddenNeurons, Dictionary<long, PointF> conSourcePoints, Dictionary<long, PointF> conTargetPoints)
+
+        ConnectionGene firstConnectionNotInvestigated(List<ConnectionGene> connections, List<ConnectionGene> allConnectionsSeen)
         {
-            List<List<long>> allChains = new List<List<long>>();
+            for(int c=0; c < connections.Count; c++)
+            {
+                if(!allConnectionsSeen.Contains(connections[c]))
+                    return connections[c];
+            }
+
+            return null;
+        }
+
+        void ensureSingleConnectedStructure(ConnectionGeneList connections,
+            Dictionary<long, ConnectionGeneList> inwardConnection, Dictionary<long, ConnectionGeneList> outwardConnections, 
+            List<PointF> hiddenNeurons, Dictionary<long, PointF> conSourcePoints, Dictionary<long, PointF> conTargetPoints)
+        {
             int maxChain = 0;
 
-            foreach (var con in connections)
+            //no changes for 0 or 1 connections -- nothing could be disconnected
+            if (connections.Count <= 1)
+                return;
+
+            List<ConnectionGeneList> connectionChains = new List<ConnectionGeneList>();
+
+            List<ConnectionGene> seenConnections = new List<ConnectionGene>();
+            List<long> seenNodes = new List<long>();
+
+            while (seenConnections.Count < connections.Count)
             {
-                bool isInChain = false;
-                List<long> nChain = null;
-                foreach (List<long> chain in allChains)
-                {
-                    maxChain = Math.Max(chain.Count, maxChain);
 
-                    if (chain.Contains(con.SourceNeuronId) || chain.Contains(con.TargetNeuronId))
+                List<long> investigateNodes = new List<long>();
+                ConnectionGene firstInvestigate = firstConnectionNotInvestigated(connections, seenConnections);
+
+                if (firstInvestigate == null)
+                {
+                    throw new Exception("Shouldn't be here, the while loop should have failed!");
+                }
+
+                //this will mark our chain of connections
+                ConnectionGeneList conChain = new ConnectionGeneList();
+
+                //get ready to investigate the node of a connection we haven't seen
+                investigateNodes.Add(firstInvestigate.SourceNeuronId);
+
+                //still have nodes left to investigate, we should continue
+                while (investigateNodes.Count > 0)
+                {
+
+                    //this will be the next nodes we take a look at
+                    List<long> nextInvestigate = new List<long>();
+
+                    //for all the nodes we need to look at
+                    for (int i = 0; i < investigateNodes.Count; i++)
                     {
-                        nChain = chain;
-                        isInChain = true;
-                        break;
+                        //grab the node id (this is the starting node, and we want to see all outward connections for that node)
+                        //i.e. who does this node connect to!
+                        long sourceNode = investigateNodes[i];
+
+                        //don't examine nodes you've already seen -- but we shouodln't get here anyways
+                        if (seenNodes.Contains(sourceNode))
+                            continue;
+
+                        //we mark it as seen, even before looking, in case of recurring connections
+                        seenNodes.Add(sourceNode);
+
+                        //grab all of our connections coming out of this node
+                        //make a copy, we're going to modify it
+                        ConnectionGeneList cgOut = outwardConnections[sourceNode];
+
+                        //for each connection
+                        for (var c = 0; c < cgOut.Count; c++)
+                        {
+                            //grab our connection gene
+                            var cg = cgOut[c];
+
+                            //add it to our chain, since it's connected!
+                            //recursive chain connections are actually not allowed
+                            if (cg.SourceNeuronId != cg.TargetNeuronId)
+                                conChain.Add(cg);
+
+                            //also note that we've seen this connection -- no duplicates please -- although I don't know if
+                            //this will ever be triggered -- i don't think so
+                            if(!seenConnections.Contains(cg))
+                                seenConnections.Add(cg);
+
+                            //we need to investigate another node -- no duplicates please!
+                            if (!seenNodes.Contains(cg.TargetNeuronId) && !nextInvestigate.Contains(cg.TargetNeuronId))
+                                nextInvestigate.Add(cg.TargetNeuronId);
+
+                        }
+
+
+                        //and grab all of the connections going inward too -- we need to go both direction
+                        cgOut = inwardConnection[sourceNode];
+
+                        //for each connection
+                        for (var c = 0; c < cgOut.Count; c++)
+                        {
+                            //grab our connection gene
+                            var cg = cgOut[c];
+
+                            //add it to our chain, since it's connected!
+                            //recursive chain connections are actually not allowed
+                            if (cg.SourceNeuronId != cg.TargetNeuronId)
+                                conChain.Add(cg);
+
+                            //also note that we've seen this connection -- no duplicates please -- although I don't know if
+                            //this will ever be triggered -- i don't think so
+                            if (!seenConnections.Contains(cg))
+                                seenConnections.Add(cg);
+
+                            //we need to investigate another node -- no duplicates please!
+                            //going for inward goofers
+                            if (!seenNodes.Contains(cg.SourceNeuronId) && !nextInvestigate.Contains(cg.SourceNeuronId))
+                                nextInvestigate.Add(cg.SourceNeuronId);
+                        }
+
                     }
+
+                    //we have now investigated all of our previous nodes
+                    //time to move to the next batch!
+                    investigateNodes = nextInvestigate;
                 }
 
-                if (!isInChain)
-                {
-                    nChain = new List<long>();
-                    allChains.Add(nChain);
-                }
+                //now we have exhausted the chain of possible nodes to investigate
 
-                if (!nChain.Contains(con.SourceNeuronId))
-                    nChain.Add(con.SourceNeuronId);
+                //that means we have the final chain here
+                //so we add it for later investigation
+                connectionChains.Add(conChain);
 
-                if (!nChain.Contains(con.TargetNeuronId))
-                    nChain.Add(con.TargetNeuronId);
-
-
+                maxChain = Math.Max(conChain.Count, maxChain);
             }
 
 
-            List<long> finalChain = allChains.Find(chain => chain.Count == maxChain);
-            if (finalChain != null && finalChain.Count != 0)
-            {
-                List<ConnectionGene> markDelete = new List<ConnectionGene>();
+            //now we simply choose the maximum connection chain -- or the first one with the max found
+            ConnectionGeneList maxCGL = connectionChains.First(x => x.Count == maxChain);
 
-                foreach (var conn in connections)
+            //dump the previous connections
+            connections.Clear();
+
+            //absorb the correct connections
+            connections.AddRange(maxCGL);
+
+
+            //now we need to say which hidden neurons actually make sense still
+            hiddenNeurons.Clear();            
+            connections.ForEach(con =>
                 {
-                    bool delete = false;
-                    //if we don't have you in our chain, get rid of the object
-                    if (!finalChain.Contains(conn.SourceNeuronId))
-                    {
-                        hiddenNeurons.Remove(conSourcePoints[conn.InnovationId]);
-                        delete = true;
-                    }
+                    //no duplicates please!
+                    PointF potential = conSourcePoints[con.InnovationId];
+                    hiddenNeurons.Add(potential);
+                    potential = conTargetPoints[con.InnovationId];
+                    hiddenNeurons.Add(potential);
+                });
 
-                    if (!finalChain.Contains(conn.TargetNeuronId))
-                    {
-                        hiddenNeurons.Remove(conTargetPoints[conn.InnovationId]);
-                        delete = true;
-                    }
+            //make sure points are distinct, and no dupes -- we only need to do this once
+            var tempDistinct = hiddenNeurons.Distinct().ToList();
+            hiddenNeurons.Clear();
+            hiddenNeurons.AddRange(tempDistinct);
 
-                    if (delete)
-                        markDelete.Add(conn);
-                }
-                markDelete.ForEach(x => connections.Remove(x));
-                //connections.RemoveAll(x => !(finalChain.Contains(x.SourceNeuronId) || finalChain.Contains(x.TargetNeuronId)));
-                //hiddenNeurons.RemoveAll(hn => 
-            }
+            //otherwise, in other languages, we would simply check to make sure no duplicates on entry
+            //kind like this
+            //if (!hiddenNeurons.Any(p => p.X == potential.X && p.Y == potential.Y))
+            //    hiddenNeurons.Add(potential);
 
+
+            //now we have to correct the indices of the max-chain of objects
             connections.ForEach(con =>
             {
                 //readjust connection source/target depending on hiddenNeuron array

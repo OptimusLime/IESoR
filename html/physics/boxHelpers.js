@@ -31,7 +31,8 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 
 
 
-
+//at what dimensions do you draw the body, regardless of painting info
+    this.bodyProp = {width: 400, height:400};
 
     this.canvasWidth = width;
     this.canvasHeight = height;
