@@ -4,12 +4,12 @@
     <list default="true" id="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" name="Default" comment="" />
     <ignored path="iesor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378512940319" ignored="false" />
+    <file path="/Dummy.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379263942452" ignored="false" />
     <file path="/genomeCSharpToJS.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375402915019" ignored="false" />
     <file path="/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377060150894" ignored="false" />
     <file path="/cppnToBody.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375638206454" ignored="false" />
     <file path="/cppnToBodyTest.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375403505875" ignored="false" />
-    <file path="/*.regexp" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378516846915" ignored="false" />
+    <file path="/*.regexp" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689136321" ignored="false" />
     <file path="/Construction.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375731091138" ignored="false" />
     <file path="/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485588109" ignored="false" />
     <file path="$PROJECT_DIR$/../iecjs/template/examples/picbreeder.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375485590184" ignored="false" />
@@ -17,7 +17,7 @@
     <file path="/createGenomeJSON.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375497692874" ignored="false" />
     <file path="/errorGenomes.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375639092782" ignored="false" />
     <file path="/selectedGenomeIDs.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375639508105" ignored="false" />
-    <file path="/d3BodyConstructor.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375760580274" ignored="false" />
+    <file path="/d3BodyConstructor.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689359561" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377704385309" ignored="false" />
     <file path="/index.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377704377501" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1375733440120" ignored="false" />
@@ -88,8 +88,8 @@
     <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937258141" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/neatjs/genome/neatGenome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376786683388" ignored="false" />
     <file path="/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377101756768" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377365966622" ignored="false" />
-    <file path="/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377365873503" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379267582941" ignored="false" />
+    <file path="/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379267543461" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-save/routes/seedAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377269029195" ignored="false" />
     <file path="/seedAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377268954846" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374294033" ignored="false" />
@@ -106,8 +106,8 @@
     <file path="$PROJECT_DIR$/../winjs/win-save/routes/removeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377106486022" ignored="false" />
     <file path="/removeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377106445451" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/picbreeder/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376252345411" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374088246" ignored="false" />
-    <file path="/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374087558" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379266119663" ignored="false" />
+    <file path="/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379265700239" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-api/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376835324415" ignored="false" />
     <file path="/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834958631" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/ui/winui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376347759063" ignored="false" />
@@ -140,12 +140,12 @@
     <file path="$PROJECT_DIR$/../winjs/examples/generic/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377095715979" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/basic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376776662726" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/server/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779580600" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377370110005" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379264110807" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/server/seeds/seed1.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936586468" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/server/schemas/generic.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779819114" ignored="false" />
     <file path="/generic.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376779816904" ignored="false" />
-    <file path="/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377370110331" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/node_modules/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377370080469" ignored="false" />
+    <file path="/server.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379264043492" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/server/node_modules/win-save/win.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379263724415" ignored="false" />
     <file path="/win-evolution.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376787225152" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/win-evolution.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376796123568" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/iecBasic.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377032229720" ignored="false" />
@@ -169,14 +169,14 @@
     <file path="$PROJECT_DIR$/../winjs/win-api/package.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376833601347" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/win-ui.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376834757323" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377103034106" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379265831489" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-api/win-api.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376843130573" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376863085183" ignored="false" />
     <file path="/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376863085183" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-ui/iec/basic/js/gridBehavior.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376848057708" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/win-gen.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922296881" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/css/iecBasic.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376922582252" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/css/iecBasic.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379272814117" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377029890896" ignored="false" />
     <file path="/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936599843" ignored="false" />
     <file path="$PROJECT_DIR$/../neatjs/genome/neatNode.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376936756586" ignored="false" />
@@ -187,11 +187,11 @@
     <file path="$PROJECT_DIR$/../neatjs/neatHelp/neatDecoder.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937003528" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377030052173" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/plugins/NEAT/neatPlugin.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377101804978" ignored="false" />
-    <file path="/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937379324" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/d3/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937362134" ignored="false" />
+    <file path="/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379280260560" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/iec/basic/js/d3/d3Genome.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379280258241" ignored="false" />
     <file path="/d3CPPN.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376937453536" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377033528992" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374148778" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379280865677" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-api/win-save/win-save.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379265736083" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/minifyPacakge.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377016019117" ignored="false" />
     <file path="/minifyPacakge.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377016020099" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/win-min.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377016033541" ignored="false" />
@@ -257,7 +257,7 @@
     <file path="$PROJECT_DIR$/../winpub/home.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377115858006" ignored="false" />
     <file path="/home.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377115638696" ignored="false" />
     <file path="$PROJECT_DIR$/../winpub/html/home.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377116881592" ignored="false" />
-    <file path="/home.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377373450973" ignored="false" />
+    <file path="/home.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379284501096" ignored="false" />
     <file path="$PROJECT_DIR$/../../../Maestro/BugChaseMaestro/NodeApp/simpleapp.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377203229395" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-save/routes/sessionAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377267449349" ignored="false" />
     <file path="/sessionAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377267116510" ignored="false" />
@@ -274,22 +274,25 @@
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/win-save/test/schemaTesting.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377269747624" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-ui/home/basic/standardHome.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377300113662" ignored="false" />
     <file path="/standardHome.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377300037385" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-ui/home/basic/css/standard.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377300177648" ignored="false" />
-    <file path="/standard.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377298214322" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/win-save/routes/homeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374475951" ignored="false" />
-    <file path="/homeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374473980" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-ui/home/basic/css/standard.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379281627358" ignored="false" />
+    <file path="/standard.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379281626985" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/win-save/routes/homeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379267797973" ignored="false" />
+    <file path="/homeAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379267698542" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-gen/node_modules/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377367546863" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/server/node_modules/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377367546863" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-evolution/node_modules/win-gen/node_modules/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377367546863" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-evolution/node_modules/win-gen/node_modules/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377367546863" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/examples/generic/node_modules/win-gen/node_modules/win-save/routes/getAPI.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377367546863" ignored="false" />
-    <file path="$PROJECT_DIR$/../winjs/examples/generic/html/home.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377374118779" ignored="false" />
+    <file path="$PROJECT_DIR$/../winjs/examples/generic/html/home.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379284692107" ignored="false" />
     <file path="/minifyData.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628667125" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/minifyData.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628667678" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/mPcaData.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628872995" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/mData.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628872995" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/simpleserve.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377632583062" ignored="false" />
     <file path="/AjaxRequests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378576343112" ignored="false" />
+    <file path="/PotentialUI.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689078462" ignored="false" />
+    <file path="/d3WindowGraph.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689494160" ignored="false" />
+    <file path="/iecBasic.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379272795912" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,37 +312,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="d3WIN.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3WIN.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="39" selection-start="781" selection-end="783" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="d3CPPN.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3CPPN.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="33" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="smallestWorld.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/physics/smallestWorld.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="27" selection-start="4854" selection-end="4855" vertical-scroll-proportion="-5.12">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="boxDrawers.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/physics/boxDrawers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="711" column="57" selection-start="23719" selection-end="23732" vertical-scroll-proportion="-483.48">
+            <state line="711" column="57" selection-start="23719" selection-end="23732" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -348,13 +324,13 @@
       <file leaf-file-name="boxHelpers.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/physics/boxHelpers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="437" column="14" selection-start="15356" selection-end="15356" vertical-scroll-proportion="-0.68">
+            <state line="437" column="14" selection-start="15356" selection-end="15356" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AjaxRequests.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AjaxRequests.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/utilities/AjaxRequests.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
@@ -363,28 +339,57 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PotentialUI.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/evolution/potential/PotentialUI.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="35" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="d3WindowGraph.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/evolution/potential/d3WindowGraph.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="5" selection-start="1314" selection-end="1314" vertical-scroll-proportion="1.1982379">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenomeBreeder.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/display/GenomeBreeder.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PCA.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/display/PCA.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="29" selection-start="5085" selection-end="5085" vertical-scroll-proportion="-6.5384617">
+            <state line="43" column="72" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="json.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/node_modules/connect/node_modules/formidable/example/json.js">
+      <file leaf-file-name="d3BodyConstructor.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/display/d3BodyConstructor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="14" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
+            <state line="304" column="63" selection-start="9752" selection-end="9752" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="winapi.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/win/winapi.js">
+      <file leaf-file-name="d3.v2.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/d3.v2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="37" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+            <state line="2704" column="15" selection-start="90394" selection-end="90394" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -417,9 +422,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/display/d3BodyConstructor.js" />
-        <option value="$PROJECT_DIR$/display/Construction.html" />
-        <option value="$PROJECT_DIR$/physics/boxHelpers.js" />
         <option value="$PROJECT_DIR$/physics/smallestWorld.js" />
         <option value="$PROJECT_DIR$/html/display/GenomeBreeder.html" />
         <option value="$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js" />
@@ -427,12 +429,15 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/License.txt" />
-        <option value="$PROJECT_DIR$/html/display/PCA.html" />
         <option value="$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js" />
         <option value="$PROJECT_DIR$/html/utilities/d3/d3Genome.js" />
         <option value="$PROJECT_DIR$/html/utilities/d3/d3CPPN.js" />
         <option value="$PROJECT_DIR$/html/physics/boxHelpers.js" />
         <option value="$PROJECT_DIR$/html/utilities/AjaxRequests.js" />
+        <option value="$PROJECT_DIR$/html/display/PCA.html" />
+        <option value="$PROJECT_DIR$/html/display/d3BodyConstructor.js" />
+        <option value="$PROJECT_DIR$/html/evolution/potential/d3WindowGraph.js" />
+        <option value="$PROJECT_DIR$/html/evolution/potential/PotentialUI.html" />
       </list>
     </option>
   </component>
@@ -468,16 +473,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -524,7 +519,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
+              <option name="myItemId" value="evolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="potential" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -542,109 +541,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="d3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="physics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="neatjs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cppn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="display" />
+              <option name="myItemId" value="evolution" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -662,22 +559,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iesor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ESHyperneat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -688,9 +577,9 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Confirmation" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Maestro/BugChaseMaestro/NodeApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../winjs" />
     <property name="FullScreen" value="false" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
@@ -758,13 +647,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="154" y="94" width="1458" height="887" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3846154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19732206" sideWeight="0.61538464" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19732206" sideWeight="0.61538464" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -773,6 +661,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3846154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -840,66 +729,53 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/License.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="36" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/neatjs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="204" column="33" selection-start="6380" selection-end="6380" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="35" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3Genome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="49" selection-start="7227" selection-end="7227" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3PCA.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/node_modules/cppn/cppnjs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="197" column="47" selection-start="6385" selection-end="6385" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="197" column="47" selection-start="6385" selection-end="6385" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/node_modules/connect/node_modules/formidable/example/json.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="14" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="40" column="14" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/node_modules/neatjs/win/winapi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="37" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="79" column="37" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3WIN.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="39" selection-start="781" selection-end="783" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="32" column="39" selection-start="781" selection-end="783" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/utilities/d3/d3CPPN.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="33" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0">
+        <state line="120" column="33" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/physics/smallestWorld.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="27" selection-start="4854" selection-end="4855" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/physics/boxDrawers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="711" column="57" selection-start="23719" selection-end="23732" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/physics/boxHelpers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="437" column="14" selection-start="15356" selection-end="15356" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/utilities/AjaxRequests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -911,38 +787,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/smallestWorld.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="27" selection-start="4854" selection-end="4855" vertical-scroll-proportion="-5.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/boxDrawers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="711" column="57" selection-start="23719" selection-end="23732" vertical-scroll-proportion="-483.48">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/display/PCA.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="29" selection-start="5085" selection-end="5085" vertical-scroll-proportion="-6.5384617">
+        <state line="43" column="72" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/physics/boxHelpers.js">
+    <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/d3.v2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="14" selection-start="15356" selection-end="15356" vertical-scroll-proportion="-0.68">
+        <state line="2704" column="15" selection-start="90394" selection-end="90394" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/utilities/AjaxRequests.js">
+    <entry file="file://$PROJECT_DIR$/html/display/GenomeBreeder.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/display/d3BodyConstructor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="304" column="63" selection-start="9752" selection-end="9752" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/evolution/potential/PotentialUI.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="35" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/evolution/potential/d3WindowGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="5" selection-start="1314" selection-end="1314" vertical-scroll-proportion="1.1982379">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

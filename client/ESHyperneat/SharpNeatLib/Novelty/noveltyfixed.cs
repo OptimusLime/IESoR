@@ -37,6 +37,7 @@ namespace SharpNeatLib.Novelty
 	    public GenomeList measure_against;
 	    public GenomeList archive;
 	    public GenomeList pending_addition;
+        int latestPopulation = 1;
 	    
 	    public void addPending()
 	    {
@@ -85,7 +86,95 @@ namespace SharpNeatLib.Novelty
 	        
 	        return true;
 	    }
-	    
+
+        public void addPendingTournament()
+        {
+            //loop through all inside of pending addition, and add the most novel of the batch
+
+            if (pending_addition.Count == 0)
+                return;
+            if (pending_addition.Count == 1)
+            {
+                //just add to archive
+                archive.Add(pending_addition[0]);
+                pending_addition.Clear();
+                return;
+            }
+            else
+            {
+                //tournament select until everything is removed
+
+                Dictionary<IGenome, double> genomesDistances = new Dictionary<IGenome, double>();
+                List<Pair<double, NeatGenome.NeatGenome>> pairedList = new List<Pair<double, NeatGenome.NeatGenome>>();
+                foreach(IGenome pending in pending_addition)
+                {
+
+                    List<double> distances = new List<double>();
+
+                    foreach (IGenome genome in archive)
+                    {
+                        distances.Add(BehaviorDistance.Distance(((NeatGenome.NeatGenome)genome).Behavior, ((NeatGenome.NeatGenome)pending).Behavior));
+                    }
+                    distances.Sort();
+                    double finalDistance = 0;
+                    var iterate = Math.Min(distances.Count, nearest_neighbors);
+                    for (var i = 0; i < iterate; i++)
+                        finalDistance += distances[i];
+
+                    genomesDistances.Add(pending, finalDistance);
+                }
+
+                while (pending_addition.Count > 0)
+                {
+                    //we're done here!
+                    if (pending_addition.Count == 1)
+                    {
+                        archive.Add(pending_addition[0]);
+                        pending_addition.Clear();
+                        return;
+                    }
+
+                    //otherwise, we have at least 2 objects inside of the pending
+                    //let's select two objects, check which is more novel, and add that one!
+
+                    //measured distance from the archive to all of the pending objects, no select objects and compare, adding the most novel
+                    int selectOne = Utilities.Next(pending_addition.Count);
+
+                    IGenome p1 = pending_addition[selectOne];
+
+                    int selectTwo = Utilities.Next(pending_addition.Count);
+
+                    while (selectTwo == selectOne)
+                        selectTwo = Utilities.Next(pending_addition.Count);
+
+                    //now we have two selections
+                    IGenome p2 = pending_addition[selectTwo];
+
+                    //got out two, check the comparison on genome distances
+                    //add the more novelt ot he archive
+                    if (genomesDistances[p1] >= genomesDistances[p2])
+                        archive.Add(p1);
+                    else
+                        archive.Add(p2);
+
+                    pending_addition.Remove(p1);
+                    pending_addition.Remove(p2);
+                }
+
+            }
+
+        }
+        public bool probabalisticArchiveAdd(NeatGenome.NeatGenome ng, bool addToPending)
+        {
+            if (Utilities.NextDouble() < 6.0 / latestPopulation)
+            {
+                pending_addition.Add(ng);
+                return true;
+            }
+            else
+                return false;
+        }
+
 	    //measure the novelty of an organism against the fixed population
 	    public double measureNovelty(NeatGenome.NeatGenome neatgenome)
 	    {
@@ -267,6 +356,7 @@ namespace SharpNeatLib.Novelty
 
         public void updatePopulationFitness(GenomeList genomePop)
         {
+            latestPopulation = genomePop.Count;
             for (int i = 0; i < genomePop.Count; i++)
             {
                 //we might not need to make copies
