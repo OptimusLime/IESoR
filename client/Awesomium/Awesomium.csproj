@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05DF084E-C53E-4D58-B14A-CE3DC7734A52}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Awesomium</RootNamespace>
+    <AssemblyName>Awesomium</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Awesomium.Core, Version=1.7.2.2, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Awesomium\Awesomium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Controls, Version=1.7.2.2, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Awesomium\Awesomium.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\ExperimentRunner\packages\log4net.2.0.2\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\ExperimentRunner\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common">
+      <HintPath>Awesomium\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase">
+      <HintPath>Awesomium\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine">
+      <HintPath>Awesomium\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperWebSocket">
+      <HintPath>Awesomium\SuperWebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Compile Include="SimpleCommunicator.cs" />
+    <Compile Include="SimplePrinter.cs" />
+    <Compile Include="sockets\MasterSocketManager.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Evolution\JSPopulationEvaluator.cs" />
+    <Compile Include="Evolution\SimpleExperiment.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="html\data\data.json" />
+    <Resource Include="html\data\genomes\allSelectedGenomeXML.json" />
+    <Resource Include="html\data\genomes\errorGenomes.json" />
+    <Resource Include="html\data\genomes\selectedBodyConstruction.json" />
+    <Resource Include="html\data\genomes\selectedGenomeIDs.json" />
+    <Resource Include="html\data\pcaData.json" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ESHyperneat\SharpNeatLib\SharpNeatLib.csproj">
+      <Project>{3A64602B-C5E0-4CB7-99B0-1FC6ABB4449A}</Project>
+      <Name>SharpNeatLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExperimentRunner\SocketIO\SocketIOClient.csproj">
+      <Project>{352C9BC1-F74C-4741-A09D-7227BC60C057}</Project>
+      <Name>SocketIOClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Accord.Math\Accord.Math.csproj">
+      <Project>{F718E9A8-DB62-4785-8C49-4333A60D256A}</Project>
+      <Name>Accord.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Accord.Statistics\Accord.Statistics.csproj">
+      <Project>{FD8101DD-C95D-42D6-AD44-AE01C25F2811}</Project>
+      <Name>Accord.Statistics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="html\css\d3.css" />
+    <Resource Include="html\css\IECInfinite.css" />
+    <Resource Include="html\display\Construction.html" />
+    <Resource Include="html\display\d3BodyConstructor.js" />
+    <Resource Include="html\display\GenomeBreeder.html" />
+    <Resource Include="html\display\IECCurrent.html" />
+    <Resource Include="html\display\IECInfinite.html" />
+    <Resource Include="html\display\PCA.html" />
+    <Resource Include="html\evolution\evaluate\createGenomeJSON.js" />
+    <Resource Include="html\evolution\evaluate\SingleEvaluation.html" />
+    <Resource Include="html\evolution\interpret\cppnToBody.js" />
+    <Resource Include="html\evolution\interpret\genomeCSharpToJS.js" />
+    <Resource Include="html\evolution\potential\d3WindowGraph.js" />
+    <Resource Include="html\evolution\potential\PotentialUI.html" />
+    <Resource Include="html\libraries\Box2d.min.js" />
+    <Resource Include="html\libraries\d3.v2.min.js" />
+    <Resource Include="html\libraries\fabric.js" />
+    <Resource Include="html\libraries\jkl-parsexml.js" />
+    <Resource Include="html\libraries\jquery-1.7.1.min.js" />
+    <Resource Include="html\libraries\jquery-ui.js" />
+    <Resource Include="html\libraries\jquery.infinitescroll.min.js" />
+    <Resource Include="html\libraries\jquery.inview.js" />
+    <Resource Include="html\libraries\jquery.isotope.min.js" />
+    <Resource Include="html\libraries\jquery.numeric.js" />
+    <Resource Include="html\libraries\loadXML.js" />
+    <Resource Include="html\physics\boxDrawers.js" />
+    <Resource Include="html\physics\boxHelpers.js" />
+    <Resource Include="html\physics\smallestWorld.js" />
+    <Resource Include="html\utilities\AjaxRequests.js" />
+    <Resource Include="html\utilities\Blob.js" />
+    <Resource Include="html\utilities\d3\d3CPPN.js" />
+    <Resource Include="html\utilities\d3\d3Genome.js" />
+    <Resource Include="html\utilities\d3\d3PCA.js" />
+    <Resource Include="html\utilities\d3\d3PcaPrivate.js" />
+    <Resource Include="html\utilities\d3\d3WIN.js" />
+    <Resource Include="html\utilities\FileSaver.js" />
+    <Resource Include="html\utilities\Helpers.js" />
+    <Resource Include="html\utilities\IEC.js" />
+    <Resource Include="html\utilities\jkl-parsexml.js" />
+    <Resource Include="html\utilities\loadXML.js" />
+    <Resource Include="html\utilities\WINRequests.js" />
+    <Resource Include="html\data\leoEmptySeed.xml" />
+    <Resource Include="html\css\images\ajax-loader.gif" />
+    <Resource Include="html\css\images\pin-off.gif" />
+    <Resource Include="html\css\images\pin-on.gif" />
+    <Resource Include="html\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Resource Include="html\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Resource Include="html\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Resource Include="html\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Resource Include="html\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Resource Include="html\css\jquery-ui.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="html\utilities\websocketClient.js" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy  "$(SolutionDir)..\data\" "$(TargetDir)";</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

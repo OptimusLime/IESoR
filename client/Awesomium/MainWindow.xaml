@@ -1,0 +1,67 @@
+﻿<Window x:Class="NodeCommunicator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:awe="http://schemas.awesomium.com/winfx"
+        xmlns:data="http://schemas.awesomium.com/winfx/data"
+        xmlns:core="clr-namespace:Awesomium.Core;assembly=Awesomium.Core"
+        Title="MainWindow"
+        MinHeight="480"
+        MinWidth="640"
+        Height="768" 
+        Width="1024"
+        >
+    <Window.Resources>
+        <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
+            <awe:WebSessionProvider.DataSources>
+                <data:ResourceDataSourceProvider x:Key="local" Type="Packed" />
+            </awe:WebSessionProvider.DataSources>
+            <core:WebPreferences 
+                WebSecurity="False"
+                />
+        </awe:WebSessionProvider>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Viewbox VerticalAlignment="Top">
+            <Label Name="labal" Content="C# WIN Communicator" />
+        </Viewbox>
+        <Grid Grid.Row="1"> 
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <awe:WebControl 
+            Name="webControl" 
+            Grid.Row="0" 
+            Margin="5"
+            WebSession="{Binding Source={StaticResource webSession}}" 
+            Source="asset://local/html/display/PCA.html" 
+            ConsoleMessage="webControl_ConsoleMessage" 
+            NativeViewInitialized="webControl_NativeViewInitialized" />
+            
+            <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <TextBox Name="EventText" Grid.Row="0" Text="STUFF WILL GO HERE" Margin="10"></TextBox>
+            </ScrollViewer>-->
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="ConnectNoveltyButton" Grid.Row="1" Grid.Column="0" Content="Connect and Run with Novelty" Margin="10" Click="ConnectNoveltyButton_Click"></Button>
+                <Button Name="PingButton" Grid.Row="1" Grid.Column="1" Content="Evaluate Random Genome" Margin="10" Click="PingButton_Click"></Button>
+
+            </Grid>
+           
+
+
+
+        </Grid>
+       
+    </Grid>
+</Window>
