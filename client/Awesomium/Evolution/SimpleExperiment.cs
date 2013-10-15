@@ -179,6 +179,12 @@ namespace NodeCommunicator.Evolution
         #region Test Evaluate Genomes
         
         NoveltyThread novel;
+
+        public bool isRunning
+        {
+            get { return novel != null; }
+        }
+
         public void StartNoveltyEvaluations()
         {
             try

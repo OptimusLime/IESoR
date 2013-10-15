@@ -8,6 +8,8 @@ using SharpNeatLib.Evolution;
 //using Microsoft.JScript.Vsa;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
+using Awesomium.sockets;
+using System.Threading;
 
 public class JSEval
 {
@@ -51,264 +53,482 @@ namespace NodeCommunicator.Evolution
         SimpleCommunicator simpleCom;
 
         bool waitingOnEvaluation = false;
-        Dictionary<long, KeyValuePair<double[], List<double>>> genomeBehaviors;
-        Dictionary<long, List<double>> genomeSecondaryBehaviors;
-        Dictionary<long, double> fitnessDictionary;
+        //Dictionary<long, KeyValuePair<double[], List<double>>> genomeBehaviors;
+        //Dictionary<long, List<double>> genomeSecondaryBehaviors;
+        //Dictionary<long, double> fitnessDictionary;
         //not entirely concerned with this yet. 
+
         public void EvaluatePopulation(Population pop, EvolutionAlgorithm ea)
         {
-            List<long> genomeIDs = pop.GenomeList.Select(x => (long)x.GenomeId).ToList();
 
-            //mostly for memory cleanup stuff -- don't really need to do this
-            if(genomeBehaviors!=null)
-                genomeBehaviors.Clear();
+            Dictionary<long, string> evaluateObjects = new Dictionary<long,string>();
 
-            if (fitnessDictionary != null)
-                fitnessDictionary.Clear();
-
-            Dictionary<long, KeyValuePair<double[], List<double>>> genomeBs = new Dictionary<long,KeyValuePair<double[],List<double>>>();
-
-        
-            fitnessDictionary = new Dictionary<long, double>();
-            genomeSecondaryBehaviors = new Dictionary<long, List<double>>();
-
-            //break our communication up into 5 almost equal chunks (maybe a better number to select here)
-           var genomesChunks = genomeIDs.GroupBy(x => genomeIDs.IndexOf(x) % 7);
-                
-            foreach(var chunk in genomesChunks)
+            foreach (var genome in pop.GenomeList)
             {
-                var genomes = serialCallCommunicatorWithIDs(chunk.ToList());
-                foreach (var gReturn in genomes)
+
+                //each genome needs evaluation
+
+                //first, convert each body
+
+                bool isEmpty = false;
+                
+                
+                //do something really quick if empty!
+                string body = simpleCom.simpleExperiment.genomeIntoBodyJSON(genome, out isEmpty);
+
+                if(isEmpty)
                 {
-                    genomeBs.Add(gReturn.Key, gReturn.Value);
+                    //assign generic stuff here
+                }
+                else
+                {
+                    evaluateObjects.Add(genome.GenomeId, body);  
                 }
             }
 
-            while (genomeBs.Count == 0)
-            {
-                //send them back, we want the right ones no matter what!
-                genomeBs = serialCallCommunicatorWithIDs(genomeIDs);
-            }
+            JArray args = new JArray();
+            args.Add(evaluateObjects);
+
+
+            //RestResponse<T> response = null;
+            //var executedCallBack = new AutoResetEvent(false);
+            //client.ExecuteAsync(request, (RestResponse<T> aSyncResponse) =>
+            //{
+            //    response = aSyncResponse;
+            //    executedCallBack.Set();
+            //});
+
+            //executedCallBack.WaitOne();
+            //continue execution synchronously
+
+            var executedCallBack = new AutoResetEvent(false);
+
+            MasterSocketManager.callEvaluatorJS("headlessEvaluateGenomeBehaviors", args, "window",
+                (JObject finishedResults) =>
+                {
+                    //Evaluated all genome objects here
+                    //ready to proceed with evolution evaluation
+
+                    Dictionary<long, double> fitnessResults;
+                    Dictionary<long, List<double>> secondBehavior;
+                    var processedBehavior = processEvaluationResults(finishedResults, pop.GenomeList, out fitnessResults, out secondBehavior);
+
+
+                    int objCount = 3;
+                    //assign genome behaviors to population objects!
+                    foreach (IGenome genome in pop.GenomeList)
+                    {
+                        //calculate our progress in obj
+
+                        double[] accumObjectives = new double[objCount];
+                        for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
+
+                        //our real fitness is measured by distance traveled
+                        genome.RealFitness = fitnessResults[genome.GenomeId];
+                        genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+
+                        //set the behavior yo!
+                        //objectives should be [ fitness, 0, 0 ] -- to be updated with novelty stuff
+                        genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = processedBehavior[genome.GenomeId].Value };
+
+                        if (secondBehavior.Count > 0)
+                            genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = secondBehavior[genome.GenomeId] };
+                    }
+
+
+                    //continue onwards and upwards with newly acquired evaluation information
+                    executedCallBack.Set();
+
+                    return null;
+                });
+
+
+            executedCallBack.WaitOne();
+            //continue execution synchronously
+
+        }
+
+        Dictionary<long, KeyValuePair<double[], List<double>>> processEvaluationResults(JObject jsonResults, GenomeList pop, 
+            out Dictionary<long, double> fitnessEvaluation, out Dictionary<long, List<double>> genomeSecondBehaviors)
+        {
+            //to return
+            Dictionary<long, KeyValuePair<double[], List<double>>> genomeBehaviorDict = new Dictionary<long, KeyValuePair<double[], List<double>>>();
+            
+            //to create and send out
+            genomeSecondBehaviors = new Dictionary<long, List<double>>();
+            fitnessEvaluation = new Dictionary<long, double>();
 
             try
             {
+                var parsedJson = jsonResults;
                 int objCount = 3;
-                //assign genome behaviors to population objects!
-                foreach (IGenome genome in pop.GenomeList)
+
+                //for each genome, we need to build our double list
+                foreach (var genome in pop)
                 {
-                    //calculate our progress in obj
+                    var gID = genome.GenomeId;
+
+                    if (genomeBehaviorDict.ContainsKey(gID))
+                        continue;
+
+                    List<double> doubleBehavior = new List<double>();
 
                     double[] accumObjectives = new double[objCount];
                     for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
 
-                    //our real fitness is measured by distance traveled
-                    genome.RealFitness = fitnessDictionary[genome.GenomeId];
-                    genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+                    //LINQ way to do it
+                    //    parsedJson[gID.ToString()].SelectMany(
+                    //    xyBehavior => new List<double>(){ xyBehavior["x"].Value<double>(), xyBehavior["y"].Value<double>()}
+                    //).ToList<double>();
 
-                    //set the behavior yo!
-                    //objectives should be [ fitness, 0, 0 ] -- to be updated with novelty stuff
-                    genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = genomeBs[genome.GenomeId].Key, behaviorList = genomeBs[genome.GenomeId].Value };
+                    var genomeEntry = parsedJson[gID.ToString()];
 
-                    if (genomeSecondaryBehaviors.Count > 0)
-                        genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = genomeBs[genome.GenomeId].Key, behaviorList = genomeSecondaryBehaviors[genome.GenomeId] };
-                }
+                    double val;
+                    if (!double.TryParse(genomeEntry["fitness"].ToString(), out val))
+                        val = EvolutionAlgorithm.MIN_GENOME_FITNESS;
 
-                //if (ea.NeatParameters.noveltySearch)
-                //{
-                //    if (ea.NeatParameters.noveltySearch && ea.noveltyInitialized)
-                //    {
-                //        ea.CalculateNovelty();
-                //    }
-                //}
+                    fitnessEvaluation.Add(gID, Math.Max(EvolutionAlgorithm.MIN_GENOME_FITNESS, val));
 
-            }
-            catch (Exception e)
-            {
-                //check our last object
-                var parsedJson = JObject.Parse((string)lastReturnedObject.Args[0]);
-                //Console.WriteLine(parsedJson);
-                Console.WriteLine("Error: " + e.Message);
-                Console.WriteLine(e.StackTrace);
+                    int ix = 0;
 
-                throw e;
-
-            }
-        }
-
-        Dictionary<long, KeyValuePair<double[], List<double>>> SerialEvaluateGenomes(List<long> genomeIds)
-        {
-            return serialCallCommunicatorWithIDs(genomeIds);
-        }
-        dynamic lastReturnedObject;
-
-        Dictionary<long, KeyValuePair<double[], List<double>>> serialCallCommunicatorWithIDs(List<long> genomeIDs)
-        {
-            
-            waitingOnEvaluation = true;
-
-            callCommunicatorWithIDs(genomeIDs, (jsonString) =>
-            {
-                lastReturnedObject = jsonString;
-
-                //get our genome behaviors!
-                //genomeBehaviors = new Dictionary<long, KeyValuePair<double[], List<double>>>();//new Dictionary<long, List<double>>();
-
-                //fitnessDictionary = new Dictionary<long, double>();
-                genomeBehaviors = new Dictionary<long, KeyValuePair<double[], List<double>>>();//new Dictionary<long, List<double>>();
-
-
-                if (jsonString.Args.Length > 0)
-                {
-                    //we try parsing our object into a dictionary like object
-                    try
+                    foreach (var objective in genomeEntry["objectives"])
                     {
-                        var parsedJson = JObject.Parse((string)jsonString.Args[0]);
-                        int objCount = 3;
-                        
-                        //for each genome, we need to build our double list
-                        foreach (var gID in genomeIDs)
+                        if (double.TryParse(objective.ToString(), out val))
                         {
-                            if (genomeBehaviors.ContainsKey(gID))
-                                continue;
-
-                            List<double> doubleBehavior = new List<double>();
-                            
-                            double[] accumObjectives = new double[objCount];
-                            for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
-
-                                //LINQ way to do it
-                            //    parsedJson[gID.ToString()].SelectMany(
-                            //    xyBehavior => new List<double>(){ xyBehavior["x"].Value<double>(), xyBehavior["y"].Value<double>()}
-                            //).ToList<double>();
-
-                            var genomeEntry = parsedJson[gID.ToString()];
-
-                            double val;
-                            if (!double.TryParse(genomeEntry["fitness"].ToString(), out val))
-                                val = EvolutionAlgorithm.MIN_GENOME_FITNESS;
-
-                            fitnessDictionary.Add(gID, Math.Max(EvolutionAlgorithm.MIN_GENOME_FITNESS, val));
-
-                          int ix=0;
-
-                            foreach (var objective in genomeEntry["objectives"])
-                            {
-                                if (double.TryParse(objective.ToString(), out val))
-                                {
-                                    accumObjectives[ix] = val;
-                                }
-                                ix++;
-                            }
-
-                            
-
-                                foreach (var behavior in genomeEntry["behavior"])
-                                {
-
-                                    if (double.TryParse(behavior.ToString(), out val))
-                                    {
-                                        doubleBehavior.Add(val);
-                                    }
-                                    else
-                                    {
-
-                                        if (double.TryParse(behavior["x"].ToString(), out val))
-                                            doubleBehavior.Add(val);
-
-                                        if (double.TryParse(behavior["y"].ToString(), out val))
-                                            doubleBehavior.Add(val);
-
-                                    }
-                                }
-
-                                if (genomeEntry["secondBehavior"] != null)
-                                {
-
-                                    List<double> secondBehavior = new List<double>();
-
-                                    foreach (var behavior in genomeEntry["secondBehavior"])
-                                    {
+                            accumObjectives[ix] = val;
+                        }
+                        ix++;
+                    }
 
 
-                                        if (double.TryParse(behavior.ToString(), out val))
-                                        {
-                                            secondBehavior.Add(val);
-                                        }
-                                        else
-                                        {
 
-                                            if (double.TryParse(behavior["x"].ToString(), out val))
-                                                secondBehavior.Add(val);
+                    foreach (var behavior in genomeEntry["behavior"])
+                    {
 
-                                            if (double.TryParse(behavior["y"].ToString(), out val))
-                                                secondBehavior.Add(val);
+                        if (double.TryParse(behavior.ToString(), out val))
+                        {
+                            doubleBehavior.Add(val);
+                        }
+                        else
+                        {
 
-                                        }
-                                    }
+                            if (double.TryParse(behavior["x"].ToString(), out val))
+                                doubleBehavior.Add(val);
 
-                                    genomeSecondaryBehaviors.Add(gID, secondBehavior);                            
-
-                                }
-
-                            
-                            
-                            //now we have our double behavior, add to our behavior dictionary
-                            //we assume no duplicated for simplicity
-                            genomeBehaviors.Add(gID, new KeyValuePair<double[], List<double>>(accumObjectives, doubleBehavior));
+                            if (double.TryParse(behavior["y"].ToString(), out val))
+                                doubleBehavior.Add(val);
 
                         }
-
                     }
-                    catch (Exception e)
+
+                    if (genomeEntry["secondBehavior"] != null)
                     {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine(e.StackTrace);
-                        throw e;
+
+                        List<double> secondBehavior = new List<double>();
+
+                        foreach (var behavior in genomeEntry["secondBehavior"])
+                        {
+
+
+                            if (double.TryParse(behavior.ToString(), out val))
+                            {
+                                secondBehavior.Add(val);
+                            }
+                            else
+                            {
+
+                                if (double.TryParse(behavior["x"].ToString(), out val))
+                                    secondBehavior.Add(val);
+
+                                if (double.TryParse(behavior["y"].ToString(), out val))
+                                    secondBehavior.Add(val);
+
+                            }
+                        }
+
+                        genomeSecondBehaviors.Add(gID, secondBehavior);
+
                     }
 
+
+
+                    //now we have our double behavior, add to our behavior dictionary
+                    //we assume no duplicated for simplicity
+                    genomeBehaviorDict.Add(gID, new KeyValuePair<double[], List<double>>(accumObjectives, doubleBehavior));
+
                 }
-                
-                //when finished, stop the eval procedure, error or not (which we don't yet check for -- or timeout!)
-                waitingOnEvaluation = false;
-
-            });
-
-            int timeout = 400000;
-            bool timedOut = false;
-            DateTime now = DateTime.Now;
-            //then we wait for a return
-            //this is very very very dangerous without error checking
-            while (!timedOut && waitingOnEvaluation){
-
-                if ((DateTime.Now - now).TotalMilliseconds > timeout)
-                {
-                    timedOut = true;
-                  simpleCom.printString("TIMED OUT EVALUATION, RETRYING");
-                }
-            
-            }
-
-            //skip over the rest, just send an empty object
-            if (timedOut)
-                return new Dictionary<long, KeyValuePair<double[], List<double>>>();
-
-            try
-            {
-                //we have some returned evaluation, go ahead and print that poop.
-                simpleCom.printString("Finished serial evaluation of: " + SimplePrinter.listToString<long>(genomeIDs));
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw e;
             }
 
-            return genomeBehaviors;
+
+            return genomeBehaviorDict;
+
         }
-        void callCommunicatorWithIDs(List<long> genomeIDs, JSONDynamicEventHandler jsonEvent)
-        {
-            simpleCom.callEventWithJSON("evaluateGenomes",  JArray.FromObject(genomeIDs).ToString() ,jsonEvent);
-        }
+
+
+
+        //public void OldEvaluatePopulation(Population pop, EvolutionAlgorithm ea)
+        //{
+        //    List<long> genomeIDs = pop.GenomeList.Select(x => (long)x.GenomeId).ToList();
+
+        //    //mostly for memory cleanup stuff -- don't really need to do this
+        //    if(genomeBehaviors!=null)
+        //        genomeBehaviors.Clear();
+
+        //    if (fitnessDictionary != null)
+        //        fitnessDictionary.Clear();
+
+        //    Dictionary<long, KeyValuePair<double[], List<double>>> genomeBs = new Dictionary<long,KeyValuePair<double[],List<double>>>();
+
+        
+        //    fitnessDictionary = new Dictionary<long, double>();
+        //    genomeSecondaryBehaviors = new Dictionary<long, List<double>>();
+
+        //    //break our communication up into 5 almost equal chunks (maybe a better number to select here)
+        //   var genomesChunks = genomeIDs.GroupBy(x => genomeIDs.IndexOf(x) % 7);
+                
+        //    foreach(var chunk in genomesChunks)
+        //    {
+        //        var genomes = serialCallCommunicatorWithIDs(chunk.ToList());
+        //        foreach (var gReturn in genomes)
+        //        {
+        //            genomeBs.Add(gReturn.Key, gReturn.Value);
+        //        }
+        //    }
+
+        //    while (genomeBs.Count == 0)
+        //    {
+        //        //send them back, we want the right ones no matter what!
+        //        genomeBs = serialCallCommunicatorWithIDs(genomeIDs);
+        //    }
+
+        //    try
+        //    {
+        //        int objCount = 3;
+        //        //assign genome behaviors to population objects!
+        //        foreach (IGenome genome in pop.GenomeList)
+        //        {
+        //            //calculate our progress in obj
+
+        //            double[] accumObjectives = new double[objCount];
+        //            for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
+
+        //            //our real fitness is measured by distance traveled
+        //            genome.RealFitness = fitnessDictionary[genome.GenomeId];
+        //            genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+
+        //            //set the behavior yo!
+        //            //objectives should be [ fitness, 0, 0 ] -- to be updated with novelty stuff
+        //            genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = genomeBs[genome.GenomeId].Key, behaviorList = genomeBs[genome.GenomeId].Value };
+
+        //            if (genomeSecondaryBehaviors.Count > 0)
+        //                genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = genomeBs[genome.GenomeId].Key, behaviorList = genomeSecondaryBehaviors[genome.GenomeId] };
+        //        }
+
+        //        //if (ea.NeatParameters.noveltySearch)
+        //        //{
+        //        //    if (ea.NeatParameters.noveltySearch && ea.noveltyInitialized)
+        //        //    {
+        //        //        ea.CalculateNovelty();
+        //        //    }
+        //        //}
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //check our last object
+        //        var parsedJson = JObject.Parse((string)lastReturnedObject.Args[0]);
+        //        //Console.WriteLine(parsedJson);
+        //        Console.WriteLine("Error: " + e.Message);
+        //        Console.WriteLine(e.StackTrace);
+
+        //        throw e;
+
+        //    }
+        //}
+
+        //Dictionary<long, KeyValuePair<double[], List<double>>> SerialEvaluateGenomes(List<long> genomeIds)
+        //{
+        //    return serialCallCommunicatorWithIDs(genomeIds);
+        //}
+        //dynamic lastReturnedObject;
+
+        //Dictionary<long, KeyValuePair<double[], List<double>>> serialCallCommunicatorWithIDs(List<long> genomeIDs)
+        //{
+            
+        //    waitingOnEvaluation = true;
+
+        //    callCommunicatorWithIDs(genomeIDs, (jsonString) =>
+        //    {
+        //        lastReturnedObject = jsonString;
+
+        //        //get our genome behaviors!
+        //        //genomeBehaviors = new Dictionary<long, KeyValuePair<double[], List<double>>>();//new Dictionary<long, List<double>>();
+
+        //        //fitnessDictionary = new Dictionary<long, double>();
+        //        genomeBehaviors = new Dictionary<long, KeyValuePair<double[], List<double>>>();//new Dictionary<long, List<double>>();
+
+
+        //        if (jsonString.Args.Length > 0)
+        //        {
+        //            //we try parsing our object into a dictionary like object
+        //            try
+        //            {
+        //                var parsedJson = JObject.Parse((string)jsonString.Args[0]);
+        //                int objCount = 3;
+                        
+        //                //for each genome, we need to build our double list
+        //                foreach (var gID in genomeIDs)
+        //                {
+        //                    if (genomeBehaviors.ContainsKey(gID))
+        //                        continue;
+
+        //                    List<double> doubleBehavior = new List<double>();
+                            
+        //                    double[] accumObjectives = new double[objCount];
+        //                    for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
+
+        //                        //LINQ way to do it
+        //                    //    parsedJson[gID.ToString()].SelectMany(
+        //                    //    xyBehavior => new List<double>(){ xyBehavior["x"].Value<double>(), xyBehavior["y"].Value<double>()}
+        //                    //).ToList<double>();
+
+        //                    var genomeEntry = parsedJson[gID.ToString()];
+
+        //                    double val;
+        //                    if (!double.TryParse(genomeEntry["fitness"].ToString(), out val))
+        //                        val = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+
+        //                    fitnessDictionary.Add(gID, Math.Max(EvolutionAlgorithm.MIN_GENOME_FITNESS, val));
+
+        //                  int ix=0;
+
+        //                    foreach (var objective in genomeEntry["objectives"])
+        //                    {
+        //                        if (double.TryParse(objective.ToString(), out val))
+        //                        {
+        //                            accumObjectives[ix] = val;
+        //                        }
+        //                        ix++;
+        //                    }
+
+                            
+
+        //                        foreach (var behavior in genomeEntry["behavior"])
+        //                        {
+
+        //                            if (double.TryParse(behavior.ToString(), out val))
+        //                            {
+        //                                doubleBehavior.Add(val);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                if (double.TryParse(behavior["x"].ToString(), out val))
+        //                                    doubleBehavior.Add(val);
+
+        //                                if (double.TryParse(behavior["y"].ToString(), out val))
+        //                                    doubleBehavior.Add(val);
+
+        //                            }
+        //                        }
+
+        //                        if (genomeEntry["secondBehavior"] != null)
+        //                        {
+
+        //                            List<double> secondBehavior = new List<double>();
+
+        //                            foreach (var behavior in genomeEntry["secondBehavior"])
+        //                            {
+
+
+        //                                if (double.TryParse(behavior.ToString(), out val))
+        //                                {
+        //                                    secondBehavior.Add(val);
+        //                                }
+        //                                else
+        //                                {
+
+        //                                    if (double.TryParse(behavior["x"].ToString(), out val))
+        //                                        secondBehavior.Add(val);
+
+        //                                    if (double.TryParse(behavior["y"].ToString(), out val))
+        //                                        secondBehavior.Add(val);
+
+        //                                }
+        //                            }
+
+        //                            genomeSecondaryBehaviors.Add(gID, secondBehavior);                            
+
+        //                        }
+
+                            
+                            
+        //                    //now we have our double behavior, add to our behavior dictionary
+        //                    //we assume no duplicated for simplicity
+        //                    genomeBehaviors.Add(gID, new KeyValuePair<double[], List<double>>(accumObjectives, doubleBehavior));
+
+        //                }
+
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                Console.WriteLine(e.Message);
+        //                Console.WriteLine(e.StackTrace);
+        //                throw e;
+        //            }
+
+        //        }
+                
+        //        //when finished, stop the eval procedure, error or not (which we don't yet check for -- or timeout!)
+        //        waitingOnEvaluation = false;
+
+        //    });
+
+        //    int timeout = 400000;
+        //    bool timedOut = false;
+        //    DateTime now = DateTime.Now;
+        //    //then we wait for a return
+        //    //this is very very very dangerous without error checking
+        //    while (!timedOut && waitingOnEvaluation){
+
+        //        if ((DateTime.Now - now).TotalMilliseconds > timeout)
+        //        {
+        //            timedOut = true;
+        //          simpleCom.printString("TIMED OUT EVALUATION, RETRYING");
+        //        }
+            
+        //    }
+
+        //    //skip over the rest, just send an empty object
+        //    if (timedOut)
+        //        return new Dictionary<long, KeyValuePair<double[], List<double>>>();
+
+        //    try
+        //    {
+        //        //we have some returned evaluation, go ahead and print that poop.
+        //        simpleCom.printString("Finished serial evaluation of: " + SimplePrinter.listToString<long>(genomeIDs));
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+
+        //    return genomeBehaviors;
+        //}
+
+
+        //void callCommunicatorWithIDs(List<long> genomeIDs, JSONDynamicEventHandler jsonEvent)
+        //{
+        //    simpleCom.callEventWithJSON("evaluateGenomes",  JArray.FromObject(genomeIDs).ToString() ,jsonEvent);
+        //}
 
         ulong evalCount = 0;
         public ulong EvaluationCount

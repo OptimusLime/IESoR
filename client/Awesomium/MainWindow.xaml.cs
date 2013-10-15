@@ -24,6 +24,8 @@ using SharpNeatLib.NeatGenome.Xml;
 using System.Xml;
 using Awesomium.Core;
 using Awesomium.sockets;
+using Awesomium.Windows.Controls;
+using Awesomium.Windows.Data;
 
 namespace NodeCommunicator
 {
@@ -33,34 +35,44 @@ namespace NodeCommunicator
     public partial class MainWindow : Window
     {
         SimpleCommunicator simpleCom;
-       
+
+        WebView headlessBrowser;
 
         public MainWindow()
         {
             InitializeComponent();
             //EventText.Text = "Your move, friend... \n";
             PingButton.IsEnabled = false;
+
+
             simpleCom = new SimpleCommunicator(socketOpened, socketClose, new SimplePrinter(null));
 
-
-            this.Dispatcher.BeginInvoke(new Action(delegate()
+            webControl.Loaded += new RoutedEventHandler(delegate(object sender, RoutedEventArgs e)
                 {
-
                     try
                     {
-                        //start the websocket server on port 4000 
-                        MasterSocketManager.LaunchWebsocketServer(4000);
-                        //MasterSocketManager.registerCallback("goofy", socketCall);
-                        simpleCom.Execute(false);
+
+                        //set up our headless browser
+                        headlessBrowser = WebCore.CreateWebView(1024, 768, webControl.WebSession, WebViewType.Offscreen);
+                        headlessBrowser.ConsoleMessage += headlessWebView_ConsoleMessage;
+                        headlessBrowser.Source = new Uri("asset://local/html/evolution/evaluate/SingleEvaluation.html");
+                        headlessBrowser.DocumentReady += new UrlEventHandler(delegate(object s, UrlEventArgs urlE)
+                        {
+                            //start the websocket server on port 4000 
+                            MasterSocketManager.LaunchWebsocketServer(4000);
+                            //MasterSocketManager.registerCallback("goofy", socketCall);
+                            simpleCom.Execute(false);
+                        });
 
                     }
-                    catch (Exception e)
+                    catch (Exception exc
+                        )
                     {
                         Console.WriteLine("Failed to launch socket server");
                     }
 
+                });
 
-                }));
 
            
 
@@ -69,6 +81,16 @@ namespace NodeCommunicator
             //loadSelectedGenomes("experiment");
             //buildBodyExamples();
             
+        }
+
+        void webControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void headlessBrowser_DocumentReady(object sender, UrlEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         JObject socketCall(JObject data)
@@ -81,6 +103,15 @@ namespace NodeCommunicator
 
 
         #region Awesomium Setup/Event Handling
+        private void headlessWebView_ConsoleMessage(object sender, ConsoleMessageEventArgs e)
+        {
+            Console.WriteLine(String.Format("eval>{0}", e.Message));
+            //.AppendText(String.Format(">{0}\n", e.Message));
+            //consoleBox.ScrollToEnd();
+        }
+
+
+
         private void webControl_ConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
             Console.WriteLine(String.Format(">{0}", e.Message));

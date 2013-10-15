@@ -139,7 +139,9 @@ namespace NodeCommunicator
 
                     //we have all of our bodies, we must send them back now!
                     //return information to our socket
-                    return JObject.FromObject(bodies);
+                    JObject rjo = new JObject();
+                    rjo.Add("bodies", JArray.FromObject(bodies));
+                    return rjo;
                 }
 
                 return null;
@@ -222,6 +224,13 @@ namespace NodeCommunicator
             MasterSocketManager.registerCallback("runFullPCA", new SocketFunctionCall(
                       (JObject functionParams) =>
                       {
+                          if (!simpleExperiment.isRunning)
+                          {
+                              JObject rjo = new JObject();
+                              rjo.Add("pcaData", JArray.FromObject(new List<PCAData2D>()));
+                              return rjo;
+                          }
+
                           var arguments = JArray.FromObject(functionParams["fArguments"]);
                           if (arguments.Count > 0)
                           {
@@ -285,7 +294,9 @@ namespace NodeCommunicator
 
                                   //we have all of our bodies, we must send them back now!
                                   //return information to our socket
-                                  return JObject.FromObject(uidAndPoints);
+                                  JObject rjo = new JObject();
+                                  rjo.Add("pcaData", JArray.FromObject(uidAndPoints));
+                                  return rjo;
                               }
                               catch (Exception e)
                               {
@@ -318,7 +329,9 @@ namespace NodeCommunicator
                       print.WriteLine("Sending pca analysis for IDs: " + JsonConvert.SerializeObject(uidAndPoints));
 
                       //now return information to our socket
-                      return JObject.FromObject(uidAndPoints);
+                      JObject rjo = new JObject();
+                      rjo.Add("pcaData", JArray.FromObject(uidAndPoints));
+                      return rjo;
                   }
                   catch (Exception e)
                   {
@@ -343,7 +356,9 @@ namespace NodeCommunicator
                   if (archiveIDs != null)
                   {
                       //we have all of our ids, we must send them back now!
-                      return JObject.FromObject(archiveIDs);
+                      JObject rjo = new JObject();
+                      rjo.Add("archiveIDs", JArray.FromObject(archiveIDs));
+                      return rjo;
                   }
 
                   return null;
@@ -360,7 +375,9 @@ namespace NodeCommunicator
                   if (currentIDs != null)
                   {
                       //we have all of our ids, we must send them back now!
-                      return JObject.FromObject(currentIDs);
+                      JObject rjo = new JObject();
+                      rjo.Add("archiveIDs", JArray.FromObject(currentIDs));
+                      return rjo;
                   }
 
                   //if we don't make it above...

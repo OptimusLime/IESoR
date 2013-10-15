@@ -38,7 +38,7 @@
     <file path="/README.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068778256" ignored="false" />
     <file path="/simpleapp.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376066508542" ignored="false" />
     <file path="/License.txt" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376068932567" ignored="false" />
-    <file path="/PCA.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1381782323371" ignored="false" />
+    <file path="/PCA.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1381798824574" ignored="false" />
     <file path="/d3PcaPrivate.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1376087872204" ignored="false" />
     <file path="$PROJECT_DIR$/../winjs/win-save/model/schemaLoading.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377104847246" ignored="false" />
     <file path="/schemaLoading.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377104811491" ignored="false" />
@@ -289,7 +289,7 @@
     <file path="$PROJECT_DIR$/../../../presentations/data/mPcaData.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628872995" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/mData.json" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377628872995" ignored="false" />
     <file path="$PROJECT_DIR$/../../../presentations/data/simpleserve.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1377632583062" ignored="false" />
-    <file path="/AjaxRequests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378576343112" ignored="false" />
+    <file path="/AjaxRequests.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1381805010324" ignored="false" />
     <file path="/PotentialUI.html" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689078462" ignored="false" />
     <file path="/d3WindowGraph.js" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1378689494160" ignored="false" />
     <file path="/iecBasic.css" changelist="1d6d750e-d66b-4bd4-aa82-aaa817b48aa5" time="1379272795912" ignored="false" />
@@ -316,6 +316,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="AjaxRequests.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/AjaxRequests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="175" column="1" selection-start="4883" selection-end="4883" vertical-scroll-proportion="1.2565012">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simpleapp.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="138" column="59" selection-start="4368" selection-end="4399" vertical-scroll-proportion="-16.72">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="d3.v2.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/d3.v2.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -328,25 +346,16 @@
       <file leaf-file-name="PCA.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/Awesomium/html/display/PCA.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="479" column="30" selection-start="15826" selection-end="15826" vertical-scroll-proportion="-9.745098">
+            <state line="545" column="13" selection-start="17753" selection-end="17753" vertical-scroll-proportion="-19.686274">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="websocketClient.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="websocketClient.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/websocketClient.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="6" selection-start="1168" selection-end="1168" vertical-scroll-proportion="0.37352246">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simpleapp.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="57" column="0" selection-start="1169" selection-end="1169" vertical-scroll-proportion="-13.32">
               <folding />
             </state>
           </provider>
@@ -355,16 +364,7 @@
       <file leaf-file-name="d3PCA.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/d3/d3PCA.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="42" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AjaxRequests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/AjaxRequests.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="157" column="9" selection-start="4084" selection-end="4084" vertical-scroll-proportion="0.0">
+            <state line="60" column="11" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -373,7 +373,7 @@
       <file leaf-file-name="SingleEvaluation.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/Awesomium/html/evolution/evaluate/SingleEvaluation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="314" column="54" selection-start="11985" selection-end="11985" vertical-scroll-proportion="-16.961538">
+            <state line="96" column="0" selection-start="3632" selection-end="3632" vertical-scroll-proportion="-8.274509">
               <folding />
             </state>
           </provider>
@@ -397,7 +397,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/License.txt" />
         <option value="$PROJECT_DIR$/html/utilities/d3/d3PcaPrivate.js" />
@@ -411,8 +410,9 @@
         <option value="$PROJECT_DIR$/html/evolution/potential/PotentialUI.html" />
         <option value="$PROJECT_DIR$/client/Awesomium/html/utilities/d3/d3PCA.js" />
         <option value="$PROJECT_DIR$/client/Awesomium/html/evolution/evaluate/SingleEvaluation.html" />
-        <option value="$PROJECT_DIR$/client/Awesomium/html/display/PCA.html" />
         <option value="$PROJECT_DIR$/client/Awesomium/html/utilities/websocketClient.js" />
+        <option value="$PROJECT_DIR$/client/Awesomium/html/display/PCA.html" />
+        <option value="$PROJECT_DIR$/client/Awesomium/html/utilities/AjaxRequests.js" />
       </list>
     </option>
   </component>
@@ -828,44 +828,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/AjaxRequests.js">
+    <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/websocketClient.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="9" selection-start="4084" selection-end="4084" vertical-scroll-proportion="0.0">
+        <state line="57" column="0" selection-start="1169" selection-end="1169" vertical-scroll-proportion="-13.32">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/d3/d3PCA.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="42" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0">
+        <state line="60" column="11" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/NodejsCommunicator/simpleapp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="138" column="59" selection-start="4368" selection-end="4399" vertical-scroll-proportion="-16.72">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/Awesomium/html/evolution/evaluate/SingleEvaluation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="314" column="54" selection-start="11985" selection-end="11985" vertical-scroll-proportion="-16.961538">
+        <state line="96" column="0" selection-start="3632" selection-end="3632" vertical-scroll-proportion="-8.274509">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/Awesomium/html/display/PCA.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="479" column="30" selection-start="15826" selection-end="15826" vertical-scroll-proportion="-9.745098">
+        <state line="545" column="13" selection-start="17753" selection-end="17753" vertical-scroll-proportion="-19.686274">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/websocketClient.js">
+    <entry file="file://$PROJECT_DIR$/client/Awesomium/html/utilities/AjaxRequests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="6" selection-start="1168" selection-end="1168" vertical-scroll-proportion="0.37352246">
+        <state line="175" column="1" selection-start="4883" selection-end="4883" vertical-scroll-proportion="1.2565012">
           <folding />
         </state>
       </provider>

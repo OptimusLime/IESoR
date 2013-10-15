@@ -11,6 +11,7 @@
         Width="1024"
         >
     <Window.Resources>
+        
         <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
             <awe:WebSessionProvider.DataSources>
                 <data:ResourceDataSourceProvider x:Key="local" Type="Packed" />
@@ -25,7 +26,6 @@
             <RowDefinition Height="95"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
         <Viewbox VerticalAlignment="Top">
             <Label Name="labal" Content="C# WIN Communicator" />
         </Viewbox>

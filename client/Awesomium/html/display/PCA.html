@@ -466,6 +466,9 @@
                isOpen = true;
 //               wsClient.sendMessage(JSON.stringify({ event: "socketInfo", data: { socketType: "display"}}));
 
+               //set all our iesor calls plz thanx
+               iesorGlobalSocket(wsClient);
+
                console.log('Opened client!');
 
                var goofy = {butt:function()
