@@ -62,10 +62,32 @@ namespace NodeCommunicator.Evolution
         {
 
             Dictionary<long, string> evaluateObjects = new Dictionary<long,string>();
+            int objCount = 3;
+            int behaviorCount = 5;
+            int secondBehaviorCount = 9;
+            List<double> emptyBehavior = new List<double>();
+            List<double> emptySecondBehavior = new List<double>();
+            for (var i = 0; i < behaviorCount; i++) emptyBehavior.Add(0);
+            for (var i = 0; i < secondBehaviorCount; i++) emptySecondBehavior.Add(0);
 
+            List<long> seenGenomes = new List<long>();
+            
+            Dictionary<long, IGenome> genomeDict = new Dictionary<long, IGenome>();
+            pop.GenomeList.ForEach(x =>
+                {
+                    if(!genomeDict.ContainsKey(x.GenomeId))
+                        genomeDict.Add(x.GenomeId, x);
+                });
+            
+
+
+            int maxGroupCount = 10;
+            List<Dictionary<long, string>> evaluateGroups = new List<Dictionary<long, string>>();
+            
             foreach (var genome in pop.GenomeList)
             {
-
+                //if (maxCount-- <= 0)
+                //    break;
                 //each genome needs evaluation
 
                 //first, convert each body
@@ -76,79 +98,114 @@ namespace NodeCommunicator.Evolution
                 //do something really quick if empty!
                 string body = simpleCom.simpleExperiment.genomeIntoBodyJSON(genome, out isEmpty);
 
-                if(isEmpty)
+                if (isEmpty)
                 {
                     //assign generic stuff here
+                    genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+                    genome.RealFitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+                    //empty behavior list -- 
+                    genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = new double[objCount], behaviorList = new List<double>(emptyBehavior) };
+
+                    if (secondBehaviorCount > 0)
+                        genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = new double[objCount], behaviorList = new List<double>(emptySecondBehavior) };
+
                 }
                 else
                 {
-                    evaluateObjects.Add(genome.GenomeId, body);  
+                    if (!seenGenomes.Contains(genome.GenomeId))
+                    {
+                        evaluateObjects.Add(genome.GenomeId, body);
+                        seenGenomes.Add(genome.GenomeId);
+                    }
+                }
+
+                if (evaluateObjects.Count == maxGroupCount)
+                {
+                    evaluateGroups.Add(evaluateObjects);
+                    evaluateObjects = new Dictionary<long, string>();
                 }
             }
 
-            JArray args = new JArray();
-            args.Add(evaluateObjects);
-
-
-            //RestResponse<T> response = null;
-            //var executedCallBack = new AutoResetEvent(false);
-            //client.ExecuteAsync(request, (RestResponse<T> aSyncResponse) =>
-            //{
-            //    response = aSyncResponse;
-            //    executedCallBack.Set();
-            //});
-
-            //executedCallBack.WaitOne();
-            //continue execution synchronously
+            if (evaluateObjects.Count > 0)
+            {
+                evaluateGroups.Add(evaluateObjects);
+            }
 
             var executedCallBack = new AutoResetEvent(false);
+            int calculatedCount = pop.GenomeList.Count;
 
-            MasterSocketManager.callEvaluatorJS("headlessEvaluateGenomeBehaviors", args, "window",
-                (JObject finishedResults) =>
-                {
-                    //Evaluated all genome objects here
-                    //ready to proceed with evolution evaluation
+            foreach (var group in evaluateGroups)
+            {
 
-                    Dictionary<long, double> fitnessResults;
-                    Dictionary<long, List<double>> secondBehavior;
-                    var processedBehavior = processEvaluationResults(finishedResults, pop.GenomeList, out fitnessResults, out secondBehavior);
+                JArray args = new JArray();
+                args.Add(JObject.FromObject(group));
 
 
-                    int objCount = 3;
-                    //assign genome behaviors to population objects!
-                    foreach (IGenome genome in pop.GenomeList)
+
+                MasterSocketManager.callEvaluatorJS("headlessEvaluateGenomeBehaviors", args, "window",
+                    (JObject finishedResults) =>
                     {
-                        //calculate our progress in obj
+                        //Evaluated all genome objects here
+                        //ready to proceed with evolution evaluation
 
-                        double[] accumObjectives = new double[objCount];
-                        for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
+                      
 
-                        //our real fitness is measured by distance traveled
-                        genome.RealFitness = fitnessResults[genome.GenomeId];
-                        genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+                        Dictionary<long, double> fitnessResults;
+                        Dictionary<long, List<double>> secondBehavior;
+                        var processedBehavior = processEvaluationResults(finishedResults, out fitnessResults, out secondBehavior);
 
-                        //set the behavior yo!
-                        //objectives should be [ fitness, 0, 0 ] -- to be updated with novelty stuff
-                        genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = processedBehavior[genome.GenomeId].Value };
+                  
 
-                        if (secondBehavior.Count > 0)
-                            genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = secondBehavior[genome.GenomeId] };
-                    }
+                      
+                        //assign genome behaviors to population objects!
+                        foreach (var idKeyVal in finishedResults)
+                        {
+                            long gID;
+
+                            //any key that's not a long isn't of interest to us -- socket info, messageid ,etc
+                            if (!long.TryParse(idKeyVal.Key.ToString(), out gID))
+                                continue;
+
+                            //get our genome from the id to genome mapping
+                            var genome = genomeDict[gID];
+                            //calculate our progress in obj
+
+                            double[] accumObjectives = new double[objCount];
+                            for (int i = 0; i < objCount; i++) accumObjectives[i] = 0.0;
+
+                            //our real fitness is measured by distance traveled
+                            genome.RealFitness = fitnessResults[genome.GenomeId];
+                            genome.Fitness = EvolutionAlgorithm.MIN_GENOME_FITNESS;
+
+                            //set the behavior yo!
+                            //objectives should be [ fitness, 0, 0 ] -- to be updated with novelty stuff
+                            genome.Behavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = processedBehavior[genome.GenomeId].Value };
+
+                            if (secondBehavior.Count > 0)
+                                genome.SecondBehavior = new SharpNeatLib.BehaviorType() { objectives = processedBehavior[genome.GenomeId].Key, behaviorList = secondBehavior[genome.GenomeId] };
+
+                            calculatedCount--;
+                        }
 
 
-                    //continue onwards and upwards with newly acquired evaluation information
-                    executedCallBack.Set();
+                        //continue onwards and upwards with newly acquired evaluation information
+                        executedCallBack.Set();
 
-                    return null;
-                });
+                        return null;
+                    });
 
 
-            executedCallBack.WaitOne();
-            //continue execution synchronously
+                executedCallBack.WaitOne();
+                //continue execution synchronously
+
+                Console.WriteLine("Pop Chunk eval!");
+            }
+
+            Console.WriteLine("Finished pop eval 1 gen.");
 
         }
 
-        Dictionary<long, KeyValuePair<double[], List<double>>> processEvaluationResults(JObject jsonResults, GenomeList pop, 
+        Dictionary<long, KeyValuePair<double[], List<double>>> processEvaluationResults(JObject jsonResults, 
             out Dictionary<long, double> fitnessEvaluation, out Dictionary<long, List<double>> genomeSecondBehaviors)
         {
             //to return
@@ -160,13 +217,21 @@ namespace NodeCommunicator.Evolution
 
             try
             {
-                var parsedJson = jsonResults;
+
                 int objCount = 3;
 
-                //for each genome, we need to build our double list
-                foreach (var genome in pop)
+                foreach(var jsonKeyVal in jsonResults)
                 {
-                    var gID = genome.GenomeId;
+                    long gID;
+
+                    //any key that's not a long isn't of interest to us -- socket info, messageid ,etc
+                    if (!long.TryParse(jsonKeyVal.Key.ToString(), out gID))
+                        continue;
+
+                //for each genome, we need to build our double list
+                //foreach (var genome in pop)
+                //{
+                    //var gID = genome.GenomeId;
 
                     if (genomeBehaviorDict.ContainsKey(gID))
                         continue;
@@ -181,7 +246,7 @@ namespace NodeCommunicator.Evolution
                     //    xyBehavior => new List<double>(){ xyBehavior["x"].Value<double>(), xyBehavior["y"].Value<double>()}
                     //).ToList<double>();
 
-                    var genomeEntry = parsedJson[gID.ToString()];
+                    var genomeEntry = jsonKeyVal.Value;
 
                     double val;
                     if (!double.TryParse(genomeEntry["fitness"].ToString(), out val))

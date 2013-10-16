@@ -38,10 +38,11 @@ namespace NodeCommunicator
     /// </summary>
     public class SimpleCommunicator
     {
-        public SimpleCommunicator(EventHandler onOpen, EventHandler onClose, SimplePrinter printer)
+        //EventHandler onOpen, EventHandler onClose, 
+        public SimpleCommunicator(SimplePrinter printer)
         {
-            openSocket += onOpen;
-            closeSocket += onClose;
+            //openSocket += onOpen;
+            //closeSocket += onClose;
             print = printer;
             simpleExperiment = new SimpleExperiment();
             simpleExperiment.setCommunicator(this);
@@ -49,8 +50,8 @@ namespace NodeCommunicator
         }
         SimplePrinter print;
 
-        EventHandler openSocket;
-        EventHandler closeSocket;
+        //EventHandler openSocket;
+        //EventHandler closeSocket;
 
         public SimpleExperiment simpleExperiment;
 
@@ -102,10 +103,9 @@ namespace NodeCommunicator
                     Console.WriteLine("\r\nConnected event...\r\n");
                     Console.WriteLine("Connected To Socket Object");
 
-                    //begin our threaded novelty evaluations on connect
-                    if (startNovelty)
+                    //begin our threaded novelty evaluations on evaluation
+                    if (startNovelty && functionParams["socketType"].ToString() == MasterSocketManager.EvaluatorSocket)
                         simpleExperiment.StartNoveltyEvaluations();
-
 
                     return null;
                 }));
@@ -226,9 +226,7 @@ namespace NodeCommunicator
                       {
                           if (!simpleExperiment.isRunning)
                           {
-                              JObject rjo = new JObject();
-                              rjo.Add("pcaData", JArray.FromObject(new List<PCAData2D>()));
-                              return rjo;
+                              return null;
                           }
 
                           var arguments = JArray.FromObject(functionParams["fArguments"]);
@@ -292,6 +290,9 @@ namespace NodeCommunicator
                                   //we have all of our bodies, we must send them back now!
                                   print.WriteLine("Sending pca analysis for IDs: " + JsonConvert.SerializeObject(uidAndPoints));
 
+                                  if (uidAndPoints == null)
+                                      return null;
+
                                   //we have all of our bodies, we must send them back now!
                                   //return information to our socket
                                   JObject rjo = new JObject();
@@ -327,6 +328,9 @@ namespace NodeCommunicator
                   {
                       //we have all of our bodies, we must send them back now!
                       print.WriteLine("Sending pca analysis for IDs: " + JsonConvert.SerializeObject(uidAndPoints));
+
+                      if (uidAndPoints == null)
+                          return null;
 
                       //now return information to our socket
                       JObject rjo = new JObject();
@@ -911,20 +915,20 @@ namespace NodeCommunicator
         {
             print.WriteLine(line);
         }
-        void SocketError(object sender, ErrorEventArgs e)
-        {
+        //void SocketError(object sender, ErrorEventArgs e)
+        //{
 
-            print.WriteLine("socket client error:");
-            Console.WriteLine(e.Message);
-        }
+        //    print.WriteLine("socket client error:");
+        //    Console.WriteLine(e.Message);
+        //}
 
-        void SocketConnectionClosed(object sender, EventArgs e)
-        {
-            print.WriteLine("WebSocketConnection was terminated!");
+        //void SocketConnectionClosed(object sender, EventArgs e)
+        //{
+        //    print.WriteLine("WebSocketConnection was terminated!");
 
-            if (closeSocket != null)
-                closeSocket(this, e);
-        }
+        //    //if (closeSocket != null)
+        //    //    closeSocket(this, e);
+        //}
 
         void SocketMessage(object sender, MessageEventArgs e)
         {
@@ -936,27 +940,27 @@ namespace NodeCommunicator
             //    Console.WriteLine("Generic SocketMessage: {0} : {1}", e.Message.Event, e.Message.JsonEncodedMessage.ToJsonString());
         }
 
-        void SocketOpened(object sender, EventArgs e)
-        {
-            print.WriteLine("socket opened");
-            if (openSocket != null)
-                openSocket(this, e);
+        //void SocketOpened(object sender, EventArgs e)
+        //{
+        //    print.WriteLine("socket opened");
+        //    if (openSocket != null)
+        //        openSocket(this, e);
 
-        }
+        //}
 
-        public void Close()
-        {
-            if (this.socket != null)
-            {
-                socket.Opened -= SocketOpened;
-                socket.Message -= SocketMessage;
-                socket.SocketConnectionClosed -= SocketConnectionClosed;
-                socket.Error -= SocketError;
-                if (closeSocket != null)
-                    closeSocket(this, null);
-                this.socket.Dispose(); // close & dispose of socket client
-            }
-        }
+        //public void Close()
+        //{
+        //    if (this.socket != null)
+        //    {
+        //        socket.Opened -= SocketOpened;
+        //        socket.Message -= SocketMessage;
+        //        socket.SocketConnectionClosed -= SocketConnectionClosed;
+        //        socket.Error -= SocketError;
+        //        if (closeSocket != null)
+        //            closeSocket(this, null);
+        //        this.socket.Dispose(); // close & dispose of socket client
+        //    }
+        //}
 
         internal void testGenome()
         {

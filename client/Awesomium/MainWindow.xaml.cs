@@ -42,10 +42,10 @@ namespace NodeCommunicator
         {
             InitializeComponent();
             //EventText.Text = "Your move, friend... \n";
-            PingButton.IsEnabled = false;
+            //PingButton.IsEnabled = false;
 
 
-            simpleCom = new SimpleCommunicator(socketOpened, socketClose, new SimplePrinter(null));
+            simpleCom = new SimpleCommunicator(new SimplePrinter(null));
 
             webControl.Loaded += new RoutedEventHandler(delegate(object sender, RoutedEventArgs e)
                 {
@@ -61,7 +61,7 @@ namespace NodeCommunicator
                             //start the websocket server on port 4000 
                             MasterSocketManager.LaunchWebsocketServer(4000);
                             //MasterSocketManager.registerCallback("goofy", socketCall);
-                            simpleCom.Execute(false);
+                            simpleCom.Execute(true);
                         });
 
                     }
@@ -511,53 +511,53 @@ namespace NodeCommunicator
 
         bool connected = false;
 
-        private void ConnectButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!connected)
-                simpleCom.Execute();
-            else
-                simpleCom.Close();
-        }
+        //private void ConnectButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!connected)
+        //        simpleCom.Execute();
+        //    else
+        //        simpleCom.Close();
+        //}
 
-        void socketOpened(object sender, EventArgs e)
-        {
-            connected = true;
+        //void socketOpened(object sender, EventArgs e)
+        //{
+        //    connected = true;
 
-            this.Dispatcher.Invoke((Action)delegate() {
-                PingButton.IsEnabled = true;
-                //this.ConnectButton.Content = "Disconnect";
-                this.ConnectNoveltyButton.Content = "Disconnect Novelty";
-            });
+        //    this.Dispatcher.Invoke((Action)delegate() {
+        //        PingButton.IsEnabled = true;
+        //        //this.ConnectButton.Content = "Disconnect";
+        //        this.ConnectNoveltyButton.Content = "Disconnect Novelty";
+        //    });
 
           
-        }
-        void socketClose(object sender, EventArgs e)
-        {
-            this.Dispatcher.Invoke((Action)delegate()
-            {
-                connected = false;
-                PingButton.IsEnabled = false;
-                //this.ConnectButton.Content = "Connect";
-                this.ConnectNoveltyButton.Content = "Connect With Novelty";
-            });
+        //}
+        //void socketClose(object sender, EventArgs e)
+        //{
+        //    this.Dispatcher.Invoke((Action)delegate()
+        //    {
+        //        connected = false;
+        //        PingButton.IsEnabled = false;
+        //        //this.ConnectButton.Content = "Connect";
+        //        this.ConnectNoveltyButton.Content = "Connect With Novelty";
+        //    });
 
            
 
-        }
+        //}
 
-        private void PingButton_Click(object sender, RoutedEventArgs e)
-        {
-            //simpleCom.callNode();
-            simpleCom.testGenome();
-        }
+        //private void PingButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //simpleCom.callNode();
+        //    simpleCom.testGenome();
+        //}
 
-        private void ConnectNoveltyButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!connected)
-                simpleCom.Execute(true);
-            else
-                simpleCom.Close();
-        }
+        //private void ConnectNoveltyButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!connected)
+        //        simpleCom.Execute(true);
+        //    else
+        //        simpleCom.Close();
+        //}
 
     }
 }

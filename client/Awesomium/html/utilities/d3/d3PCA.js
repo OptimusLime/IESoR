@@ -47,6 +47,7 @@ var deleteSVG = function(svgElement)
 {
     //delete svgElement;
     //$('#d3').remove('.svg');
+    $('#mainSVG' + (setupCount-1)).remove();//append('<div id="pcaViewer"></div>');
     $('#pcaViewer').remove();//append('<div id="pcaViewer"></div>');
 };
 

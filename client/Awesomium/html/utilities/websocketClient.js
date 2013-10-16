@@ -136,7 +136,7 @@
         {
             //send our callback with the data plz if it exists
             if(messageCallbacks[jsonReturn.messageID])
-                messageCallbacks[jsonReturn.messageID](jsonReturn);
+                messageCallbacks[jsonReturn.messageID](jsonReturn.data);
         }
     };
 
@@ -150,6 +150,7 @@
         try
         {
             var jsonMessage;
+            console.log('Json incoming!');
             if(typeof evt.data === 'object')
             {
                 jsonMessage = evt.data;
@@ -160,6 +161,8 @@
             }
 
             var socketType = jsonMessage.event;
+
+            console.log('json message event: ' + socketType);
 
             switch(socketType)
             {
@@ -180,6 +183,7 @@
                 //C# has returned our information to us
                 case SocketEventTypes.functionReturn:
 
+                    console.log('handle funciton return!');
                     //we simply use the messageID to pass it on to the relevant target object
                     handleFunctionReturned(jsonMessage);
 
@@ -193,6 +197,7 @@
         catch(e)
         {
             console.log('Error parsing message, invalid json format!');
+            console.log(JSON.stringify(jsonMessage));
         }
 
 

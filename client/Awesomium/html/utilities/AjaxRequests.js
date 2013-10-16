@@ -131,7 +131,7 @@ function runFullPCA(firstBehavior, xBin, yBin, selector, percent, bodyCallback, 
         if(jsonData.error)
             errorCallback(jsonData);
         else
-            bodyCallback(jsonData["pcaData"]);
+            bodyCallback((jsonData ? jsonData["pcaData"] || {} : {}));
     });
 
 }
@@ -151,7 +151,8 @@ function runPCA(bodyCallback, errorCallback)
         if(jsonData.error)
             errorCallback(jsonData);
         else
-            bodyCallback(jsonData["pcaData"]);
+            bodyCallback((jsonData ? jsonData["pcaData"] || {} : {}));
+
     });
 }
 
@@ -170,7 +171,7 @@ function getLatestArchive(bodyCallback, errorCallback)
         if(jsonData.error)
             errorCallback(jsonData);
         else
-            bodyCallback(jsonData["archiveIDs"]);
+            bodyCallback(jsonData);
     });
 
 }

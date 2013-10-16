@@ -645,7 +645,7 @@ namespace NodeCommunicator.Evolution
                 Locality = ng.locality,
                 useLEO = useLeo
             };
-            Console.WriteLine(" Nodes: " + hiddenNeurons.Count + " Connections: " + connections.Count);
+            //Console.WriteLine(" Nodes: " + hiddenNeurons.Count + " Connections: " + connections.Count);
 
             return esbody;
 

@@ -85,84 +85,91 @@
     });
 
 
-        var headlessEvaluateGenomeBehaviors = function(genomeBodies, finishedFunction)
-        {
-            var worldSize = {width: 400, height: 400};//was 230 x 230
-            //we're going to build a behavior dictionary, indexed by the genomeID
-            var genomeBehaviorDict = {};
+    var headlessEvaluateGenomeBehaviors = function (genomeBodies) {
 
-            //here me must assess all of the genome bodies!
-            for(var genomeID in genomeBodies){
+        console.log('Starting eval bodies!');
+        var worldSize = { width: 400, height: 400 }; //was 230 x 230
+        //we're going to build a behavior dictionary, indexed by the genomeID
+        var genomeBehaviorDict = {};
 
-
-//                console.log('evaluating' + genomeID);
-
-                //sequentially go through and evaluate the body
-                //parse it from string form, and send it to our world! mwahahaha
-                var genomeObject = JSON.parse(genomeBodies[genomeID]);
+        //here me must assess all of the genome bodies!
+        for (var genomeID in genomeBodies) {
 
 
+            //                console.log('evaluating' + genomeID);
 
-//                console.log('parse complete: ' + genomeID);
-                //Now, we're going to want to insert that object into our container, if you know what i mean
-                //and make sure the world is in zombie mode
-                var smallWorld = addGenomeToSizedDiv(genomeObject, {containID: '#container', width: worldSize.width, height: worldSize.height, zombieMode:true});//addGenomeObjectDiv(genomeObject, '#container', true);
-
-                if(!genomeObject.HiddenLocations.length)
-                {
-                    //don't evaluate empty objects
-                    //get empty behavior and return
-                    var emptyBehavior = smallNS.SmallWorld.EmptyBehavior({}, smallWorld.behaviorType, smallWorld.behaviorTotalCount);
-
-                    //either it's empty or it has our second behavior
-                    var emptySecond = (smallWorld.secondBehavior ?  smallNS.SmallWorld.EmptyBehavior({}, smallWorld.secondBehaviorType, smallWorld.behaviorTotalCount) : {points:{}});
-
-                    //ideally, we wouldn't send empty objects, but for now this hack works enough
-                    genomeBehaviorDict[genomeID] = {behavior: emptyBehavior.points, objectives: emptyBehavior.objectives, fitness: emptyBehavior.fitness, secondBehavior: emptySecond.points};
-
-                    continue;
-                }
-//                console.log('Added genome div: ' + genomeID);
-                //Now we have our small world, grab the ID, so that we may remove it after completing our zombie evaluation
-                var smallWorldID = smallWorld.worldID;
+            //sequentially go through and evaluate the body
+            //parse it from string form, and send it to our world! mwahahaha
+            var genomeObject = JSON.parse(genomeBodies[genomeID]);
 
 
-//                console.log('begin behavior: ' + genomeID);
-                var behaviorObject =  setSmallWorldProperties(smallWorld, {startEval: true, visual: false,
-                    isVisible: false,
-                    drawBehavior: false,
-                    zombieMode: true, genomeID: genomeID});
 
+            //                console.log('parse complete: ' + genomeID);
+            //Now, we're going to want to insert that object into our container, if you know what i mean
+            //and make sure the world is in zombie mode
+            var smallWorld = addGenomeToSizedDiv(genomeObject, { containID: '#container', width: worldSize.width, height: worldSize.height, zombieMode: true }); //addGenomeObjectDiv(genomeObject, '#container', true);
 
-//                console.log('behavior grab complete: ' + genomeID);
+            if (!genomeObject.HiddenLocations.length) {
+                //don't evaluate empty objects
+                //get empty behavior and return
+                var emptyBehavior = smallNS.SmallWorld.EmptyBehavior({}, smallWorld.behaviorType, smallWorld.behaviorTotalCount);
 
-                //after evalution, kill the world
-                //then kill the div, so that zombiejs doesn't get so bloated.
-                smallWorld.stopLoop();
+                //either it's empty or it has our second behavior
+                var emptySecond = (smallWorld.secondBehavior ? smallNS.SmallWorld.EmptyBehavior({}, smallWorld.secondBehaviorType, smallWorld.behaviorTotalCount) : { points: {} });
 
-                delete smallWorld;
-                $('#' + divIDFromGenome(genomeObject.GenomeID, smallWorldID)).remove();
+                //ideally, we wouldn't send empty objects, but for now this hack works enough
+                genomeBehaviorDict[genomeID] = { behavior: emptyBehavior.points, objectives: emptyBehavior.objectives, fitness: emptyBehavior.fitness, secondBehavior: emptySecond.points };
 
-                var behavior = behaviorObject.behavior;
-                //if we don't have second behavior, just use empty with empty points
-                var secondBehavior = behaviorObject.secondBehavior || {points:{}};
-
-
-//                console.log('Evaluation of ' + genomeID + ' completed!');
-
-                //set our behavior, and be done here!
-                genomeBehaviorDict[genomeID] = {behavior: behavior.points, objectives: behavior.objectives, fitness: behavior.fitness, secondBehavior: secondBehavior.points};
-
-
-//                console.log('dict updated: ' + genomeID);
+                continue;
             }
+            //                console.log('Added genome div: ' + genomeID);
+            //Now we have our small world, grab the ID, so that we may remove it after completing our zombie evaluation
+            var smallWorldID = smallWorld.worldID;
 
 
-            console.log('Finished genome evals, returning now');
+            //                console.log('begin behavior: ' + genomeID);
+            var behaviorObject = setSmallWorldProperties(smallWorld, { startEval: true, visual: false,
+                isVisible: false,
+                drawBehavior: false,
+                zombieMode: true, genomeID: genomeID
+            });
 
-            //we're done, make our callback with ids and behaviors!
-            finishedFunction(null, genomeBehaviorDict);
-        };
+
+            //                console.log('behavior grab complete: ' + genomeID);
+
+            //after evalution, kill the world
+            //then kill the div, so that zombiejs doesn't get so bloated.
+            smallWorld.stopLoop();
+
+            delete smallWorld;
+            $('#' + divIDFromGenome(genomeObject.GenomeID, smallWorldID)).remove();
+
+            var behavior = behaviorObject.behavior;
+            //if we don't have second behavior, just use empty with empty points
+            var secondBehavior = behaviorObject.secondBehavior || { points: {} };
+
+
+            //                console.log('Evaluation of ' + genomeID + ' completed!');
+
+            //set our behavior, and be done here!
+            genomeBehaviorDict[genomeID] = { behavior: behavior.points, objectives: behavior.objectives, fitness: behavior.fitness, secondBehavior: secondBehavior.points };
+
+//            console.log('Setting genome behavior!');
+//            console.log(behavior.points.length);
+//            console.log(behavior.objectives.length);
+//            console.log(behavior.fitness);
+
+            //                console.log('dict updated: ' + genomeID);
+        }
+
+
+        console.log('Finished genome evals, returning now');
+
+        //we're done, make our callback with ids and behaviors!
+        //        finishedFunction(null, genomeBehaviorDict);
+
+        return genomeBehaviorDict;
+    };
 
         $('.positive-integer').numeric({ decimal: false, negative: false },  function() { alert("Positive integers only"); this.value = ""; this.focus(); });
 
@@ -312,33 +319,36 @@
 
             var isOpen = false;
 
-            $('#connectWebsocket').click(function () {
+//            $('#connectWebsocket').click(function () {
 
-                if (!wsClient)
-                    wsClient = new webSocketClient("evaluator");
+            if (!wsClient)
+                wsClient = new webSocketClient("evaluator");
 
-                wsClient.onOpen = function () {
+            wsClient.onOpen = function () {
 
-                    isOpen = true;
+                isOpen = true;
 
 //                    wsClient.sendMessage(JSON.stringify({ event: "socketInfo", data: { socketType: "evaluator"} }));
 
-                    console.log('Opened client!');
+                console.log('Opened client!');
 
-                    $('#connectWebsocket').html('Disconnect Websocket');
+                $('#connectWebsocket').html('Disconnect Websocket');
 
-                };
+                //when we connect, we start our novelty search request
+                wsClient.callNativeFunction("connect");
 
-                wsClient.onClose = function () {
-                    isOpen = false;
-                };
+            };
 
-                wsClient.onMessage = function (msg) {
+            wsClient.onClose = function () {
+                isOpen = false;
+            };
+
+            wsClient.onMessage = function (msg) {
 
 
-                };
+            };
 
-            });
+//            });
 
 
 

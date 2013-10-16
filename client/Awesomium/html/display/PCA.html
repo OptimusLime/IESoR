@@ -440,86 +440,79 @@
         svgPCA();
     };
 
-    var svgPCA = function()
-    {
+    var svgPCA = function () {
         console.log('Running svg pca');
 
-       if(debugMode)
-       {
+        if (debugMode) {
 
-           var params = {xBins: $('#xbins').val(), yBins: $('#ybins').val(), useXCom: true, selector: $('#selector').val(), percent: $('#percent').val()/100.0 };
+            var params = { xBins: $('#xbins').val(), yBins: $('#ybins').val(), useXCom: true, selector: $('#selector').val(), percent: $('#percent').val() / 100.0 };
 
-//           deleteSVG();
-//           setupSVG();
-           //enterDataD3,
-
-
-           var wsClient, isOpen;
+            //           deleteSVG();
+            //           setupSVG();
+            //enterDataD3,
 
 
-           //open a display type websocket
-           if (!wsClient)
-               wsClient = new webSocketClient("display");
-
-           wsClient.onOpen = function () {
-
-               isOpen = true;
-//               wsClient.sendMessage(JSON.stringify({ event: "socketInfo", data: { socketType: "display"}}));
-
-               //set all our iesor calls plz thanx
-               iesorGlobalSocket(wsClient);
-
-               console.log('Opened client!');
-
-               var goofy = {butt:function()
-               {
-                   console.log('Dis is a goofy butt');
-               }};
+            var wsClient, isOpen;
 
 
-               wsClient.registerStoredObject("goofy", goofy);
+            //open a display type websocket
+            if (!wsClient)
+                wsClient = new webSocketClient("display");
 
-               //when we connect, we start our pca request
-               wsClient.callNativeFunction("connect", function()
-               {
-                   console.log('Starting pca attempt after connection acknowledged');
-                   //perform our first pca request once connected
-                   doFullPCA(wsClient, errFunction, deleteSVG, setupSVG, enterDataD3, params);
-               });
-           };
 
-           wsClient.onClose = function () {
-               isOpen = false;
-           };
 
-           wsClient.onMessage = function (msg) {
 
-             console.log("Message received!");
 
-               try
-               {
-                   console.log(JSON.parse(msg));
-               }
-               catch(e)
-               {
-                   console.log('Improper message format.');
-               }
-           };
-       }
-        else
-       {
-           $.getJSON('../data/data.json',
-                   function(objects)
-                   {
+            wsClient.onOpen = function () {
+
+                isOpen = true;
+                //               wsClient.sendMessage(JSON.stringify({ event: "socketInfo", data: { socketType: "display"}}));
+
+                //set all our iesor calls plz thanx
+                iesorGlobalSocket(wsClient);
+
+                console.log('Opened client!');
+
+                //when we connect, we start our pca request
+                //                wsClient.callNativeFunction("connect", function () {
+                //                    console.log('Starting pca attempt after connection acknowledged');
+                //                    //perform our first pca request once connected
+                //                    doFullPCA(wsClient, errFunction, deleteSVG, setupSVG, enterDataD3, params);
+                //                });
+
+                window.startPCA = function () {
+
+                    console.log('Starting PCA!');
+                    doFullPCA(wsClient, errFunction, deleteSVG, setupSVG, enterDataD3, params);
+                }
+            };
+
+            wsClient.onClose = function () {
+                isOpen = false;
+            };
+
+            wsClient.onMessage = function (msg) {
+
+                //                console.log("Message received!");
+
+                //                try {
+                //                    console.log(JSON.parse(msg));
+                //                }
+                //                catch (e) {
+                //                    console.log('Improper message format.');
+                //                }
+            };
+        }
+        else {
+            $.getJSON('../data/data.json',
+                   function (objects) {
                        cachedObjects = objects;
 
-                       $.getJSON('../data/pcaData.json', function(data)
-                       {
+                       $.getJSON('../data/pcaData.json', function (data) {
                            var dataCopy = [];
 
-                           for(var i=0; i< data.length; i++)
-                           {
-                               if(data[i].absoluteFitness >= 200)//ui.values[0])
+                           for (var i = 0; i < data.length; i++) {
+                               if (data[i].absoluteFitness >= 200)//ui.values[0])
                                {
                                    dataCopy.push(data[i]);
                                }
@@ -531,11 +524,11 @@
 
                            //no more rescaling!
                            rescale = false;
-//                        enterDataD3(data);
+                           //                        enterDataD3(data);
                        });
 
                    });
-       }
+        }
 
 
     };

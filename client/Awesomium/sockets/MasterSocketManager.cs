@@ -28,11 +28,11 @@ namespace Awesomium.sockets
     {
         static WebSocketServer appServer;
 
-        static string EvaluatorSocket = "evaluator";
-        static string DisplaySocket = "display";
+        public static string EvaluatorSocket = "evaluator";
+        public static string DisplaySocket = "display";
 
         static Dictionary<string, List<int>> socketSessions = new Dictionary<string, List<int>>();
-        //static Dictionary<int, string> socketSessionTypes = new Dictionary<int,string>();
+        static Dictionary<int, string> socketSessionTypes = new Dictionary<int, string>();
 
         static Dictionary<WebSocketSession, int> sessionIdentifiers = new Dictionary<WebSocketSession, int>();
         static Dictionary<int, WebSocketSession> idToSessionDict = new Dictionary<int, WebSocketSession>();
@@ -197,6 +197,9 @@ namespace Awesomium.sockets
                  
 
                 var functionCallData = JObject.FromObject(jsonIncoming["data"]);
+                //tack on our sockettype to pass to the function
+                functionCallData.Add("socketType", socketSessionTypes[socketID]);
+
 
                 string fName = functionCallData["functionName"].ToString();
 
@@ -256,7 +259,7 @@ namespace Awesomium.sockets
             socketMessage.Add("data", returnValue);
             int socketID = (int)messageAndSocketID["socketID"];
 
-            Console.WriteLine("Sending: " + socketMessage.ToString());
+            //Console.WriteLine("Sending: " + socketMessage.ToString());
 
             idToSessionDict[socketID].Send(socketMessage.ToString());
         }
@@ -268,8 +271,8 @@ namespace Awesomium.sockets
         static void handleSocketReturnCall(int socketID, JObject jsonIncoming)
         {
             //we got a callback, can it be? how exciting
-            Console.WriteLine("Incomgin return call on: " + socketID);
-            Console.WriteLine(jsonIncoming.ToString());
+            //Console.WriteLine("Incomgin return call on: " + socketID);
+            //Console.WriteLine(jsonIncoming.ToString());
 
             //who is it for?
             int messageID = int.Parse(jsonIncoming["messageID"].ToString());
@@ -284,6 +287,10 @@ namespace Awesomium.sockets
 
             if (jsonIncoming.TryGetValue("data", out data))
                 passedData = JObject.FromObject(data);
+            else
+                passedData = new JObject();
+
+            passedData.Add("socketType", socketSessionTypes[socketID]);
 
             cb(passedData);
         }
@@ -356,6 +363,10 @@ namespace Awesomium.sockets
 
             if (!sessionObjects.Contains(socketID))
                 sessionObjects.Add(socketID);
+
+            if (!socketSessionTypes.ContainsKey(socketID))
+                socketSessionTypes.Add(socketID, type);
+
                 
         }
         #endregion

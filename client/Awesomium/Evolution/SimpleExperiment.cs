@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Threading;
 using SharpNeatLib.Novelty;
 using PointPair = System.Collections.Generic.KeyValuePair<System.Drawing.PointF, System.Drawing.PointF>;
+using Awesomium.sockets;
 
 namespace NodeCommunicator.Evolution
 {
@@ -65,6 +66,10 @@ namespace NodeCommunicator.Evolution
 
                         //run the generation
                         noveltyRun.PerformOneGeneration();
+
+                        //start on the second generation please!
+                        if ((noveltyRun.Generation +1) % 4 == 0)
+                            MasterSocketManager.callDisplayJS("startPCA", null, "window");
 
                         // Stop the stopwatch
                         sw.Stop();
@@ -182,7 +187,7 @@ namespace NodeCommunicator.Evolution
 
         public bool isRunning
         {
-            get { return novel != null; }
+            get { return (novel != null && novel.EA != null); }
         }
 
         public void StartNoveltyEvaluations()
@@ -651,7 +656,7 @@ namespace NodeCommunicator.Evolution
                 Locality = ng.locality,
                 useLEO = useLeo
             };
-            Console.WriteLine(" Nodes: " + hiddenNeurons.Count + " Connections: " + connections.Count);
+            //Console.WriteLine(" Nodes: " + hiddenNeurons.Count + " Connections: " + connections.Count);
 
             return esbody;
 
