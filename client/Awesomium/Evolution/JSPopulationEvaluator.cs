@@ -52,6 +52,16 @@ namespace NodeCommunicator.Evolution
     {
         SimpleCommunicator simpleCom;
 
+        static List<AutoResetEvent> openQueries = new List<AutoResetEvent>();
+
+        public static void forceThreadClose()
+        {
+            foreach (var are in openQueries)
+            {
+                are.Set();
+            }
+        }
+
         bool waitingOnEvaluation = false;
         //Dictionary<long, KeyValuePair<double[], List<double>>> genomeBehaviors;
         //Dictionary<long, List<double>> genomeSecondaryBehaviors;
@@ -132,6 +142,7 @@ namespace NodeCommunicator.Evolution
             }
 
             var executedCallBack = new AutoResetEvent(false);
+            openQueries.Add(executedCallBack);
             int calculatedCount = pop.GenomeList.Count;
 
             foreach (var group in evaluateGroups)
@@ -140,6 +151,13 @@ namespace NodeCommunicator.Evolution
                 JArray args = new JArray();
                 args.Add(JObject.FromObject(group));
 
+
+                if (MasterSocketManager.serverClosed)
+                {
+                    //hack to shut down other threads doing processing
+                    Thread.CurrentThread.Abort();
+                    return;
+                }
 
 
                 MasterSocketManager.callEvaluatorJS("headlessEvaluateGenomeBehaviors", args, "window",
@@ -194,14 +212,16 @@ namespace NodeCommunicator.Evolution
                         return null;
                     });
 
-
+               
                 executedCallBack.WaitOne();
                 //continue execution synchronously
 
                 Console.WriteLine("Pop Chunk eval!");
             }
-
+            //all done, this thread be done thanks
+            openQueries.Remove(executedCallBack);
             Console.WriteLine("Finished pop eval 1 gen.");
+
 
         }
 

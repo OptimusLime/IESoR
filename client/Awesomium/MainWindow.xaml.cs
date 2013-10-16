@@ -26,6 +26,7 @@ using Awesomium.Core;
 using Awesomium.sockets;
 using Awesomium.Windows.Controls;
 using Awesomium.Windows.Data;
+using NodeCommunicator.Evolution;
 
 namespace NodeCommunicator
 {
@@ -74,7 +75,8 @@ namespace NodeCommunicator
                 });
 
 
-           
+
+            this.Closing += new System.ComponentModel.CancelEventHandler(MainWindow_Closing);
 
             //simpleCom = new SimpleCommunicator(socketOpened, socketClose, new SimplePrinter(EventText));
             
@@ -82,6 +84,13 @@ namespace NodeCommunicator
             //buildBodyExamples();
             
         }
+
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MasterSocketManager.CloseServer();
+            JSPopulationEvaluator.forceThreadClose();
+        }
+
 
         void webControl_Loaded(object sender, RoutedEventArgs e)
         {

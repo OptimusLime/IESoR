@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SocketIOClient;
+//using SocketIOClient;
 using NodeCommunicator.Evolution;
 using Newtonsoft.Json;
 using SharpNeatLib.Masters;
@@ -55,12 +55,12 @@ namespace NodeCommunicator
 
         public SimpleExperiment simpleExperiment;
 
-        Client socket;
+        //Client socket;
 
-        string formattedSocketMessage(int? ackID, string jsonMessage)
-        {
-            return string.Format("{0}:::{1}+[{2}]", (int)SocketIOMessageTypes.ACK, ackID, jsonMessage);
-        }
+        //string formattedSocketMessage(int? ackID, string jsonMessage)
+        //{
+        //    return string.Format("{0}:::{1}+[{2}]", (int)SocketIOMessageTypes.ACK, ackID, jsonMessage);
+        //}
 
         public void Execute(bool startNovelty = false)
         {
@@ -887,30 +887,30 @@ namespace NodeCommunicator
             }).ToList();
 
         }
-        public void callNode()
-        {
-            if (socket != null)
-            {
-                print.WriteLine("Pinging node server");
+        //public void callNode()
+        //{
+        //    if (socket != null)
+        //    {
+        //        print.WriteLine("Pinging node server");
 
-                socket.Emit("pingServer", "hello", "", (fn) =>
-                {
-                    print.WriteLine("Server says - actually I don't know" + fn.ToString());
-                });
-            }
-        }
-        public void callEventWithJSON(string socketEventName, string jsonString, JSONDynamicEventHandler eventHandler)
-        {
-            if (socket != null)
-            {
-                print.WriteLine("Calling Event: " + socketEventName);
+        //        socket.Emit("pingServer", "hello", "", (fn) =>
+        //        {
+        //            print.WriteLine("Server says - actually I don't know" + fn.ToString());
+        //        });
+        //    }
+        //}
+        //public void callEventWithJSON(string socketEventName, string jsonString, JSONDynamicEventHandler eventHandler)
+        //{
+        //    if (socket != null)
+        //    {
+        //        print.WriteLine("Calling Event: " + socketEventName);
 
-                socket.Emit(socketEventName, jsonString, "", (fn) =>
-                {
-                    eventHandler(fn);
-                });
-            }
-        }
+        //        socket.Emit(socketEventName, jsonString, "", (fn) =>
+        //        {
+        //            eventHandler(fn);
+        //        });
+        //    }
+        //}
         public void printString(string line)
         {
             print.WriteLine(line);
@@ -930,15 +930,15 @@ namespace NodeCommunicator
         //    //    closeSocket(this, e);
         //}
 
-        void SocketMessage(object sender, MessageEventArgs e)
-        {
-            print.WriteLine("socket message:" + e.Message.MessageText);
-            // uncomment to show any non-registered messages
-            //if (string.IsNullOrEmpty(e.Message.Event))
-            //    Console.WriteLine("Generic SocketMessage: {0}", e.Message.MessageText);
-            //else
-            //    Console.WriteLine("Generic SocketMessage: {0} : {1}", e.Message.Event, e.Message.JsonEncodedMessage.ToJsonString());
-        }
+        //void SocketMessage(object sender, MessageEventArgs e)
+        //{
+        //    print.WriteLine("socket message:" + e.Message.MessageText);
+        //    // uncomment to show any non-registered messages
+        //    //if (string.IsNullOrEmpty(e.Message.Event))
+        //    //    Console.WriteLine("Generic SocketMessage: {0}", e.Message.MessageText);
+        //    //else
+        //    //    Console.WriteLine("Generic SocketMessage: {0} : {1}", e.Message.Event, e.Message.JsonEncodedMessage.ToJsonString());
+        //}
 
         //void SocketOpened(object sender, EventArgs e)
         //{

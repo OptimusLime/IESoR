@@ -28,6 +28,9 @@ namespace Awesomium.sockets
     {
         static WebSocketServer appServer;
 
+        
+        public static bool serverClosed = false;
+        
         public static string EvaluatorSocket = "evaluator";
         public static string DisplaySocket = "display";
 
@@ -78,6 +81,8 @@ namespace Awesomium.sockets
         {
             //Stop the appServer
             appServer.Stop();
+            appServer.Dispose();
+            serverClosed = true;
         }
 
         static void appServer_NewMessageReceived(WebSocketSession session, string message)

@@ -36,6 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accord.Math, Version=1.0.5034.31820, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Statistics, Version=1.0.5034.31821, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Accord.Statistics.dll</HintPath>
+    </Reference>
     <Reference Include="Awesomium.Core, Version=1.7.2.2, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Awesomium\Awesomium.Core.dll</HintPath>
@@ -43,12 +51,6 @@
     <Reference Include="Awesomium.Windows.Controls, Version=1.7.2.2, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Awesomium\Awesomium.Windows.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\ExperimentRunner\packages\log4net.2.0.2\lib\net40-client\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\ExperimentRunner\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.Common">
       <HintPath>Awesomium\SuperSocket.Common.dll</HintPath>
@@ -136,18 +138,6 @@
     <ProjectReference Include="..\ESHyperneat\SharpNeatLib\SharpNeatLib.csproj">
       <Project>{3A64602B-C5E0-4CB7-99B0-1FC6ABB4449A}</Project>
       <Name>SharpNeatLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExperimentRunner\SocketIO\SocketIOClient.csproj">
-      <Project>{352C9BC1-F74C-4741-A09D-7227BC60C057}</Project>
-      <Name>SocketIOClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\Accord.Math\Accord.Math.csproj">
-      <Project>{F718E9A8-DB62-4785-8C49-4333A60D256A}</Project>
-      <Name>Accord.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\Accord.Statistics\Accord.Statistics.csproj">
-      <Project>{FD8101DD-C95D-42D6-AD44-AE01C25F2811}</Project>
-      <Name>Accord.Statistics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
