@@ -71,6 +71,8 @@ namespace NodeCommunicator.Evolution
                         if ((noveltyRun.Generation +1) % 4 == 0)
                             MasterSocketManager.callDisplayJS("startPCA", null, "window");
 
+                        noveltyRun.multiobjective.nov.addPendingTournament();
+
                         // Stop the stopwatch
                         sw.Stop();
 
@@ -224,6 +226,16 @@ namespace NodeCommunicator.Evolution
             return novel.EA.noveltyFixed.archive.Select(genome => (long)genome.GenomeId).ToList();
         }
 
+        public List<IGenome> GetNoveltyGenomes()
+        {
+            return novel.EA.multiobjective.nov.archive;
+        }
+
+        public List<IGenome> CurrentPopulation()
+        {
+            return novel.EA.multiobjective.population;
+        }
+
 
 
         public List<long> GetMultiCurrentGeneration()
@@ -243,6 +255,10 @@ namespace NodeCommunicator.Evolution
             //turn each genome into a body, return the request time and the dictionary of objects. Communicator will know what to do!
             return new Pair<long, Dictionary<long, string>>(pairGenomes.First, fetchBodiesFromIDs(pairGenomes.Second.Select(x => x.GenomeId)));
         }
+        //public List<NeatGenome> getGenomeByID(long id)
+        //{
+        //    evolutionManager.getGenomeFromID(id);
+        //}
         public List<NeatGenome> fetchAllGenomes( long lastRequest = 0)
         {
             return novel.EA.genomeFilter.requestLatestGenomes(lastRequest).Second;

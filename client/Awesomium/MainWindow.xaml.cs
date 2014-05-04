@@ -27,6 +27,7 @@ using Awesomium.sockets;
 using Awesomium.Windows.Controls;
 using Awesomium.Windows.Data;
 using NodeCommunicator.Evolution;
+using System.Reflection;
 
 namespace NodeCommunicator
 {
@@ -38,6 +39,8 @@ namespace NodeCommunicator
         SimpleCommunicator simpleCom;
 
         WebView headlessBrowser;
+
+
 
         public MainWindow()
         {
@@ -60,7 +63,7 @@ namespace NodeCommunicator
                         headlessBrowser.DocumentReady += new UrlEventHandler(delegate(object s, UrlEventArgs urlE)
                         {
                             //start the websocket server on port 4000 
-                            MasterSocketManager.LaunchWebsocketServer(4000);
+                            MasterSocketManager.LaunchWebsocketServer(8080);
                             //MasterSocketManager.registerCallback("goofy", socketCall);
                             simpleCom.Execute(true);
                         });
@@ -84,6 +87,9 @@ namespace NodeCommunicator
             //buildBodyExamples();
             
         }
+
+      
+
 
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

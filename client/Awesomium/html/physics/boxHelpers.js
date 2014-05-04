@@ -45,6 +45,7 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 
     this.adaptive = adaptive;
     this.scale = scale;
+    this.ampMultiplier = 10.0;
 
     this.bodiesMap = {};
     this.bodiesList = [];
@@ -124,7 +125,8 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
             logEvents += '--Pre muscles';
             for(var i=0; i < this.muscles.length; i++){
                 var muscle = this.muscles[i];
-                muscle.SetLength(muscle.m_length + muscle.amplitude/this.scale*Math.cos(rad + muscle.phase*2*Math.PI));
+                //it's the originallength + muscle amplitude
+                muscle.SetLength(muscle.original_length + this.ampMultiplier*muscle.amplitude/this.scale*Math.cos(rad + muscle.phase*2*Math.PI));
             }
 
             //step the physics world
@@ -496,6 +498,7 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
 //        console.log('Phase: ' + params['phase'] + ' amp: ' + params['amplitude']);
         addedJoint.phase =  params['phase']|| 0;
         addedJoint.amplitude = params['amplitude'] || 1;
+        addedJoint.original_length = addedJoint.m_length;
         //we push our muscles onto our muscle list
         this.muscles.push(addedJoint);
         return addedJoint;

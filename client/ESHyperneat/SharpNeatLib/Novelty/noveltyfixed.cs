@@ -108,6 +108,9 @@ namespace SharpNeatLib.Novelty
                 List<Pair<double, NeatGenome.NeatGenome>> pairedList = new List<Pair<double, NeatGenome.NeatGenome>>();
                 foreach(IGenome pending in pending_addition)
                 {
+                    //don't double check any genomes in here
+                    if (genomesDistances.ContainsKey(pending))
+                        continue;
 
                     List<double> distances = new List<double>();
 

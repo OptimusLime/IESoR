@@ -15,6 +15,11 @@ using SharpNeatLib.NeatGenome;
 using SharpNeatLib.Evolution;
 using System.Diagnostics;
 using Awesomium.sockets;
+using System.IO;
+using System.Reflection;
+using SharpNeatLib.NeatGenome.Xml;
+using System.Xml;
+using SharpNeatLib.Xml;
 
 namespace NodeCommunicator
 {
@@ -47,7 +52,39 @@ namespace NodeCommunicator
             simpleExperiment = new SimpleExperiment();
             simpleExperiment.setCommunicator(this);
 
+            //create directories to save our objects inside
+            createExperimentalDirectories();
         }
+
+        #region Initialize Storage Directories
+
+        static string experimentFolder;
+        static string noveltyFolder;
+        public void createExperimentalDirectories()
+        {
+            string currentAssemblyDirectoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var now = DateTime.Now;
+            int cnt = 0;
+            string expName = "exp_" + now.Month + "_" + now.Day + "_" + now.Hour + "_" + now.Minute + "_" + cnt++;
+
+            experimentFolder = currentAssemblyDirectoryName + "/" + expName;
+
+            while (Directory.Exists(experimentFolder))
+            {
+                experimentFolder = experimentFolder.Substring(0, experimentFolder.LastIndexOf("_")) + "_" + cnt++;
+            }
+
+            //add the final touch
+            experimentFolder += "/";
+            noveltyFolder = experimentFolder + "novelty/";
+            Directory.CreateDirectory(experimentFolder);
+
+            //create novelty folder inside our experiment folder -- to store our archive
+            Directory.CreateDirectory(noveltyFolder);
+        }
+
+        #endregion
+
         SimplePrinter print;
 
         //EventHandler openSocket;
@@ -61,6 +98,161 @@ namespace NodeCommunicator
         //{
         //    return string.Format("{0}:::{1}+[{2}]", (int)SocketIOMessageTypes.ACK, ackID, jsonMessage);
         //}
+
+        static int saveCount = 0;
+        static HashSet<long> savedArchiveGenomes = new HashSet<long>();
+        static HashSet<long> savedGenomes = new HashSet<long>();
+
+
+        XmlElement GenomeListToXML(string elementName, XmlDocument doc, List<NeatGenome> genomesToSave, bool append)
+        {
+            XmlElement networkList = doc.CreateElement(elementName);
+
+            //loop through, see who we need to save all together
+            for (var i = 0; i < genomesToSave.Count; i++)
+            {
+                var g = genomesToSave[i];
+
+                //element to hold our genome
+                XmlNode ngElement = XmlUtilities.AddElement(networkList, "network");
+
+                //write this to the element
+                XmlGenomeWriterStatic.Write(ngElement, g);
+
+                //then add the element to the network list
+                networkList.AppendChild(ngElement);
+            }
+
+            if(append)
+                doc.AppendChild(networkList);
+
+            return networkList;
+        }
+        object saveLock = new object();
+
+
+        void writePCAToXML(XmlElement e, PCAData2D data)
+        {
+            XmlUtilities.AddAttribute(e, "uid", data.uid.ToString());
+            XmlUtilities.AddAttribute(e, "x", data.x.ToString());
+            XmlUtilities.AddAttribute(e, "y", data.y.ToString());
+            XmlUtilities.AddAttribute(e, "xBin", data.xBin.ToString());
+            XmlUtilities.AddAttribute(e, "yBin", data.yBin.ToString());
+        }
+        void saveArchiveAndPCAGenomes(List<PCAData2D> rawPCAToSave)
+        {
+            //lets lock this up so no issues with multiple threads saving at the same time
+            lock (saveLock)
+            {
+
+                EvolutionManager evoManager = EvolutionManager.SharedEvolutionManager;
+                List<NeatGenome> archiveToSave = new List<NeatGenome>();
+                List<NeatGenome> genomesToSave = new List<NeatGenome>();
+
+                //grab our list of potentials from the pca info
+                List<long> potentialIdentifiers = new List<long>();
+
+                for (var i = 0; i < rawPCAToSave.Count; i++)
+                {
+                    var pcaObject = JObject.FromObject(rawPCAToSave[i]);
+
+                    //this is our unique identifier
+                    var uuid = (long)pcaObject["uid"];
+
+                    if (!savedGenomes.Contains(uuid))
+                    {
+                        //add the genome for saving
+                        genomesToSave.Add((NeatGenome)evoManager.getGenomeFromID(uuid));
+                    }
+                }
+
+                var fullArchive = simpleExperiment.GetNoveltyGenomes();
+
+                for (int i = 0; i < fullArchive.Count; i++)
+                {
+                    IGenome g = fullArchive[i];
+                    if (!savedArchiveGenomes.Contains(g.GenomeId))
+                    {
+                        //add this guy for saving
+                        archiveToSave.Add((NeatGenome)g);
+                    }
+                }
+
+                //now we have all the genomes we want to save
+                //and all the archive objects we need to save
+
+
+                if (genomesToSave.Count > 0)
+                {
+                    XmlDocument doc = new XmlDocument();
+                    //create list and append to doc
+                    GenomeListToXML("Networks", doc, genomesToSave, true);
+
+                    //doc has all the genomes we need to save
+                    doc.Save(experimentFolder + "genomes_" + saveCount + "_count_" + genomesToSave.Count + ".xml");
+                }
+
+                if (archiveToSave.Count > 0)
+                {
+                    //now we do the archive
+                    XmlDocument noveltyDoc = new XmlDocument();
+
+                    //then add our archive objects
+                    //create list and append to doc
+                    GenomeListToXML("Archive", noveltyDoc, archiveToSave, true);
+
+                    //j = JObject.FromObject(noveltyDoc);
+
+                    //now save the novelty document
+                    noveltyDoc.Save(noveltyFolder + "archive_" + saveCount + "_count_" + archiveToSave.Count + ".xml");
+                }
+
+
+                //and finally, our current population
+                var pop = simpleExperiment.CurrentPopulation().Select(x => (NeatGenome)x).ToList<NeatGenome>();
+                if (pop.Count > 0)
+                {
+                    XmlDocument popDoc = new XmlDocument();
+                    //save the pop inside the popdoc
+                    GenomeListToXML("Networks", popDoc, pop, true);
+
+                    //doc has all the genomes we need to save -- just keep saving in the same place, we can't reconstruct anything but the last one anyways
+                    popDoc.Save(experimentFolder + "_multipopulation"  + "_" + saveCount + ".xml");
+                }
+
+                XmlDocument pcaDoc = new XmlDocument();
+                XmlElement pcaElements = pcaDoc.CreateElement("Points");
+                foreach (var pca in rawPCAToSave)
+                {
+                   //element to hold our genome
+                    XmlElement pEl = XmlUtilities.AddElement(pcaElements, "point");
+
+                    //convert pca to xml
+                    writePCAToXML(pEl, pca);
+
+                    //append!
+                    pcaElements.AppendChild(pEl);
+                }
+                //append to pca doc
+                pcaDoc.AppendChild(pcaElements);
+
+                //then save -- don't overwrite, just keep saving pca displays over time
+                pcaDoc.Save(experimentFolder + "pcaData_" + saveCount + ".xml");
+
+
+                //up the save count, we jsut saved a bunch
+                saveCount++;
+
+                //mark these objects as having been saved
+                foreach (var ng in genomesToSave)
+                    savedGenomes.Add(ng.GenomeId);
+
+                //mark the archive objects as having been saved
+                foreach (var ng in archiveToSave)
+                    savedArchiveGenomes.Add(ng.GenomeId);
+            }
+
+        }
 
         public void Execute(bool startNovelty = false)
         {
@@ -76,6 +268,21 @@ namespace NodeCommunicator
 
 
             //socket.Error += SocketError;
+
+            MasterSocketManager.registerCallback("savePCANatively", new SocketFunctionCall(
+                (JObject functionParams) => 
+                {
+                     var arguments = JArray.FromObject(functionParams["fArguments"]);
+
+
+
+                     return null;
+                }));
+
+
+            
+
+
 
             //An example of how to register a callback to our socket manager
             MasterSocketManager.registerCallback("empty", new SocketFunctionCall(
@@ -275,7 +482,7 @@ namespace NodeCommunicator
                               }
 
 
-                              EvolutionManager.SharedEvolutionManager.saveGenomes(allGenomes);
+                              //EvolutionManager.SharedEvolutionManager.saveGenomes(allGenomes);
 
 
                               // Begin timing
@@ -284,6 +491,10 @@ namespace NodeCommunicator
                               Console.WriteLine("Fetch Genomes: " + stopwatch.ElapsedMilliseconds);
 
                               var uidAndPoints = runPCA(allGenomes, firstBehavior, xBins, yBins);
+
+                              //save all genomes associated with the results of this pca, as well as the archive!
+                              saveArchiveAndPCAGenomes(uidAndPoints);
+
 
                               try
                               {

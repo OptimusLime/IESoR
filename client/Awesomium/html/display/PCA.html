@@ -15,6 +15,7 @@
 <h1>PCA Graph and Genomes</h1>
 
 <div id="base">
+    <button value="Save PCA" onclick="savePCANatively()">Save to File</button>
     <div id="slides">
         <div id="slider-value">
         </div>
@@ -134,21 +135,16 @@
                         '<h2 >Percent:</h2>' +
                         '<input type="number" id="percent" name="percent" min="0" max="100" value="25" class="number">' +
                         '<button value="Reset" onclick="svgPCA()">Re-Run PCA</button>' +
-                        '<button value="Sanitize" onclick="sanitizePCA()">Sanitize PCA</button>' +
-                        '  <form id="text-options">' +
-                            '<label>Filename: <input type="text" class="filename" id="text-filename" placeholder="a plain document"/>.txt</label>' +
-                            '<input id="save-button" type="submit" value="Save"/>' +
-                        ' </form>'
+                        '<button value="Sanitize" onclick="sanitizePCA()">Sanitize PCA</button>'
+                        // '  <form id="text-options">' +
+                        //     '<label>Filename: <input type="text" class="filename" id="text-filename" placeholder="a plain document"/>.txt</label>' +
+                        //     '<input id="save-button" type="submit" value="Save"/>' +
+                        // ' </form>'
         );
 
 
       //after pulling in the script, we setup the save ability
-        setupPCASave("text", "#text-options","#text-filename");
-
-
-
-
-
+        // setupPCASave("text", "#text-options","#text-filename");
     }
 
     var htmlID = '#container';
@@ -170,6 +166,52 @@
 
     var legend;
 
+
+    //create a websocket connection
+    $(function () {
+
+
+
+            var wsClient;
+
+            var isOpen = false;
+
+//            $('#connectWebsocket').click(function () {
+
+            if (!wsClient)
+                wsClient = new webSocketClient("display");
+
+            wsClient.onOpen = function () {
+
+                //when we connect, we start our novelty search request
+
+            };
+
+            wsClient.onClose = function () {
+                isOpen = false;
+            };
+
+            wsClient.onMessage = function (msg) {
+
+                //incoming message from native!
+                console.log(msg);
+            };
+
+            //call a native function with save objects
+            window.savePCANatively = function()
+            {
+                console.log("Attempted to save pca");
+                wsClient.callNativeFunction("savePCANatively", [dataObjects], function()
+                {
+                    console.log("PCA Saved!");
+                })
+            };
+
+//            });
+
+
+
+        });
 
     var setGenomeBodyInViewer = function(uid, absoluteFitness, prepend)
     {

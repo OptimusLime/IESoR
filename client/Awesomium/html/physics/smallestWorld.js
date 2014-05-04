@@ -12,7 +12,8 @@ smallNS.BehaviorTypes = {
     heatMap10x10 : 3,
     nodeMovements : 4,
     avgXYCenterOfMass: 5,
-    widthHeightMass: 6
+    widthHeightMass: 6,
+    widthHeightEfficiencyMass: 7
 }
 
 var desiredSmallRenderSpeed = 30;
@@ -47,7 +48,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
     this.canvasHeight = canvasHeight;
 
     //we say what kind of behavior we want, then create that object -- should be a function in the future
-    this.behaviorType = smallNS.BehaviorTypes.widthHeightMass;
+    this.behaviorType = smallNS.BehaviorTypes.widthHeightEfficiencyMass;
     this.behavior = {};
     this.behavior.frameCount = 0;
 
@@ -62,6 +63,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
         switch(behaviorType)
         {
             case smallNS.BehaviorTypes.widthHeightMass:
+            case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
             case smallNS.BehaviorTypes.xCenterOfMass:
             case smallNS.BehaviorTypes.yCenterOfMass:
             case smallNS.BehaviorTypes.xyCenterOfMass:
@@ -283,6 +285,7 @@ smallNS.SmallWorld.EmptyBehavior = function(behavior, behaviorType, desiredBehav
             //return empty behavior
             return behavior;
 
+        case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
         case smallNS.BehaviorTypes.widthHeightMass:
 
             behavior.points =  [];
@@ -337,6 +340,13 @@ smallNS.SmallWorld.AdjustBehavior = function(behavior, behaviorType)
         case smallNS.BehaviorTypes.xyCenterOfMass:
         case smallNS.BehaviorTypes.widthHeightMass:
             //no adjustments to make, all data should be in behavior.points
+           return behavior;
+        case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
+           
+           //fitness = distance traveled/mass == fitness/mass behavior == fitness/behavior.points[4] -- the last behavior
+           //add 1 just in case mass = 0
+           behavior.fitness = behavior.fitness/(behavior.points[4] + 1.0);
+
            return behavior;
 
         case smallNS.BehaviorTypes.avgXYCenterOfMass:
@@ -595,6 +605,8 @@ smallNS.SmallWorld.prototype.applyBehavior = function(behavior, behaviorType, co
 
             break;
 
+            //same for both
+        case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
         case smallNS.BehaviorTypes.widthHeightMass:
 
             //done!

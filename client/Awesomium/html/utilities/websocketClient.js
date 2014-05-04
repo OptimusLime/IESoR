@@ -1,7 +1,7 @@
 ﻿var webSocketClient = function (socketType) {
     var self = this;
 
-    var wsUri = "ws://localhost:4000";
+    var wsUri = "ws://localhost:8080";
     var websocket = new WebSocket(wsUri);
 
     var isOpen = false;
