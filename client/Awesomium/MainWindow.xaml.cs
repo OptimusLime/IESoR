@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Newtonsoft.Json.Linq;
 using SharpNeatLib.Evolution;
 using SharpNeatLib.NeatGenome;
@@ -28,6 +27,8 @@ using Awesomium.Windows.Controls;
 using Awesomium.Windows.Data;
 using NodeCommunicator.Evolution;
 using System.Reflection;
+using WinForms = System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace NodeCommunicator
 {
@@ -48,47 +49,23 @@ namespace NodeCommunicator
             //EventText.Text = "Your move, friend... \n";
             //PingButton.IsEnabled = false;
 
-
             simpleCom = new SimpleCommunicator(new SimplePrinter(null));
-
-            webControl.Loaded += new RoutedEventHandler(delegate(object sender, RoutedEventArgs e)
-                {
-                    try
-                    {
-
-                        //set up our headless browser
-                        headlessBrowser = WebCore.CreateWebView(1024, 768, webControl.WebSession, WebViewType.Offscreen);
-                        headlessBrowser.ConsoleMessage += headlessWebView_ConsoleMessage;
-                        headlessBrowser.Source = new Uri("asset://local/html/evolution/evaluate/SingleEvaluation.html");
-                        headlessBrowser.DocumentReady += new UrlEventHandler(delegate(object s, UrlEventArgs urlE)
-                        {
-                            //start the websocket server on port 4000 
-                            MasterSocketManager.LaunchWebsocketServer(8080);
-                            //MasterSocketManager.registerCallback("goofy", socketCall);
-                            simpleCom.Execute(true);
-                        });
-
-                    }
-                    catch (Exception exc
-                        )
-                    {
-                        Console.WriteLine("Failed to launch socket server");
-                    }
-
-                });
-
-
 
             this.Closing += new System.ComponentModel.CancelEventHandler(MainWindow_Closing);
 
+            //start our websocket server for all displays
+            MasterSocketManager.LaunchWebsocketServer(8080);
+
+            simpleCom.Execute(true);
+
             //simpleCom = new SimpleCommunicator(socketOpened, socketClose, new SimplePrinter(EventText));
-            
+
             //loadSelectedGenomes("experiment");
             //buildBodyExamples();
-            
+
         }
 
-      
+
 
 
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -110,7 +87,7 @@ namespace NodeCommunicator
 
         JObject socketCall(JObject data)
         {
-            var jReturn =  new JObject();
+            var jReturn = new JObject();
             jReturn.Add("butt", "pooper");
             return jReturn;
         }
@@ -126,6 +103,12 @@ namespace NodeCommunicator
         }
 
 
+        private void pcaLoading_ConsoleMessage(object sender, ConsoleMessageEventArgs e)
+        {
+            Console.WriteLine(String.Format("L>{0}", e.Message));
+            //.AppendText(String.Format(">{0}\n", e.Message));
+            //consoleBox.ScrollToEnd();
+        }
 
         private void webControl_ConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
@@ -133,6 +116,19 @@ namespace NodeCommunicator
             //.AppendText(String.Format(">{0}\n", e.Message));
             //consoleBox.ScrollToEnd();
         }
+
+        private void pcaLoading_NativeViewInitialized(object sender, WebViewEventArgs e)
+        {
+
+
+            // We demonstrate the creation of a child global object.
+            // Acquire the parent first.
+            JSObject external = pcaLoading.CreateGlobalJavascriptObject("external");
+
+            if (external == null)
+                return;
+        }
+
         private void webControl_NativeViewInitialized(object sender, WebViewEventArgs e)
         {
 
@@ -169,7 +165,7 @@ namespace NodeCommunicator
             //    }
             //}
         }
-        
+
         #endregion
 
 
@@ -205,10 +201,10 @@ namespace NodeCommunicator
             //This will trigger saving in the Neuron
 
             //Eventually, the saving will happen at the NeatGenome level, not the individual neuron and connection level!
-          
 
 
-         
+
+
             //Dictionary<long, bool> responseGenomes = new Dictionary<long, bool>();
 
 
@@ -245,7 +241,7 @@ namespace NodeCommunicator
 
 
                     //string genomeName = genomeFile.Substring(genomeFile.IndexOf("_"), genomeFile.IndexOf("."));
-                    
+
                     //bool selectedGenome = false;
                     //foreach (string id in genomeIDs)
                     //{
@@ -311,7 +307,7 @@ namespace NodeCommunicator
             NeatGenome seed = EvolutionManager.SharedEvolutionManager.getSeed();
 
             int tEmpty = 0;
-            int emptyCount = genomeCount/4;
+            int emptyCount = genomeCount / 4;
 
             for (int n = genomeArray.Count; n < genomeCount; n = genomeArray.Count)
             {
@@ -359,7 +355,7 @@ namespace NodeCommunicator
 
                 }
 
-                
+
             }
 
             //add our networks, and add our meta information
@@ -526,6 +522,247 @@ namespace NodeCommunicator
 
         bool connected = false;
 
+        bool created = false;
+        void createHeadlessAndStartEvolution()
+        {
+            //only do this once
+            if (created)
+                return;
+
+            created = true;
+
+            try
+            {
+
+                //set up our headless browser
+                headlessBrowser = WebCore.CreateWebView(1024, 768, webControl.WebSession, WebViewType.Offscreen);
+                headlessBrowser.ConsoleMessage += headlessWebView_ConsoleMessage;
+                headlessBrowser.Source = new Uri("asset://local/html/evolution/evaluate/SingleEvaluation.html");
+                headlessBrowser.DocumentReady += new UrlEventHandler(delegate(object s, UrlEventArgs urlE)
+                {
+                    //start the websocket server on port 4000 
+                   
+                    //MasterSocketManager.registerCallback("goofy", socketCall);
+                    //simpleCom.Execute(true);
+                });
+
+            }
+            catch (Exception exc
+                           )
+            {
+                Console.WriteLine("Failed to launch socket server");
+            }
+        }
+
+        bool triedStart = false;
+        private void StartEvolution_Click(object s, RoutedEventArgs ev)
+        {
+            //dont do this more than once
+            if (triedStart)
+                return;
+            triedStart = true;
+
+            if (webControl.IsLoaded)
+            {
+                createHeadlessAndStartEvolution();
+            }
+            else
+            {
+                //need to be loaded first
+                webControl.Loaded += new RoutedEventHandler(delegate(object sender, RoutedEventArgs e)
+                {
+                    createHeadlessAndStartEvolution();
+                });
+            }
+        }
+
+        #region Choose File Dialogue
+
+        string choosePopulationLoadLocation()
+        {
+            WinForms.FolderBrowserDialog oDialog = new WinForms.FolderBrowserDialog();
+            oDialog.SelectedPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //oDialog.AddExtension = true;
+            //oDialog.DefaultExt = "pop.xml";
+            //oDialog.Filter =  "(*.pop.xml)|*.pop.xml";
+            //oDialog.Title = "Save population";
+            //oDialog.RestoreDirectory = true;
+
+            try
+            {
+                // Show save file dialog box
+                var result = oDialog.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == WinForms.DialogResult.OK)
+                {
+                    // Return folder document
+                    return oDialog.SelectedPath;
+                }
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                //screw it, messed up somewhere
+                return null;
+            }
+        }
+
+        #endregion
+
+        private JObject loadedExperiment;
+
+        private void loadPCAFolder_Click(object sender, RoutedEventArgs e)
+        {
+            //need to load in a folder here!
+            string folder = choosePopulationLoadLocation();
+
+            if (folder != null)
+            {
+                //we have a folder, hoo-ray!
+                //we load in all the files, and all the folders
+
+                //we need to create all the bodies, and stuff
+                var files = Directory.GetFiles(folder);
+                var dirs = Directory.GetDirectories(folder);
+
+
+                //let's get our genomes
+                //must have novelty folder
+                if (!dirs.Any(x => x.Contains("novelty")))
+                    return;
+
+                //let's get all the files from novlety folder
+                var popFileNames = files.Where(x => x.Contains("genomes_")).ToList();//Directory.GetFiles(folder + "\\novelty");
+
+                List<NeatGenome> genomes = new List<NeatGenome>();
+                SortedDictionary<long, NeatGenome> genomeFiles = new SortedDictionary<long, NeatGenome>();
+                SortedDictionary<long, string> bodies = new SortedDictionary<long, string>();
+
+                foreach (var pFile in popFileNames)
+                {
+                    //we need to load the population from each xml file
+                    XmlDocument popDoc = new XmlDocument();
+                    popDoc.Load(pFile);
+
+                    var networks = popDoc.GetElementsByTagName("genome");
+
+                    for (int i = 0; i < networks.Count; i++)
+                    {
+                        var xmlNetwork = networks.Item(i);
+
+                        var ng = XmlNeatGenomeReaderStatic.Read(xmlNetwork as XmlElement);
+
+                        if (!genomeFiles.ContainsKey(ng.GenomeId))
+                        {
+                            genomeFiles.Add(ng.GenomeId, ng);
+                            genomes.Add(ng);
+                        }
+                    }
+                }
+
+                //now we need the lastest files with 
+                var filteredPCAFiles = files.Where(x => x.Contains("pcaData")).ToList();
+                var pcaNumbers = filteredPCAFiles.Select(x => int.Parse(x.Substring(x.LastIndexOf("_") + 1, x.LastIndexOf(".") - (x.LastIndexOf("_") + 1)))).ToList();
+                pcaNumbers.Sort();
+
+                var latestPCA = pcaNumbers.Last();
+
+                var fileName = filteredPCAFiles.First(x => x.Contains("pcaData_" + latestPCA));
+
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(fileName);
+
+                var nodes = doc.GetElementsByTagName("point");
+
+                HashSet<long> bodiesToCreate = new HashSet<long>();
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    var xmlNode = nodes.Item(i);
+                    var attr = xmlNode.Attributes["uid"].Value;
+
+                    var uid = long.Parse(attr);
+                    //only decode what we need to
+                    bodiesToCreate.Add(uid);
+                }
+
+                //now that we have all these genome files and know what to decode, let's calculate our bodies!
+                Parallel.For(0, genomes.Count, i =>
+                {
+                    //only decode bodies that we need for the pca display (much smaller than TOTAL genoems)
+                    if (bodiesToCreate.Contains(genomes[i].GenomeId))
+                    {
+                        bool isEmpty;
+                        string jsonBody = simpleCom.simpleExperiment.genomeIntoBodyJSON(genomes[i], out isEmpty);
+
+                        lock (bodies)
+                        {
+                            bodies.Add(genomes[i].GenomeId, jsonBody);
+                        }
+                    }
+                });
+
+
+                JArray pcaData = new JArray();
+
+                //these are all the points, but we need to add some fitness scores to them
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    //of the form: 
+                    //<point uid="39067" x="1.02568750759162" y="-1.35234261702214" xBin="26" yBin="6" />
+                    var xmlNode = nodes.Item(i);
+
+                    //build our json object now!
+                    JObject obj = new JObject();
+                    var uid = long.Parse(xmlNode.Attributes["uid"].Value);
+                    obj["uid"] = uid;
+                    obj["x"] = double.Parse(xmlNode.Attributes["x"].Value);
+                    obj["y"] = double.Parse(xmlNode.Attributes["y"].Value);
+                    obj["xBin"] = double.Parse(xmlNode.Attributes["xBin"].Value);
+                    obj["yBin"] = double.Parse(xmlNode.Attributes["yBin"].Value);
+
+                    //add our fitness scores
+                    obj["absoluteFitness"] = genomeFiles[uid].Fitness;
+
+                    pcaData.Add(obj);
+                }
+
+                //now we have our pca objects and bodies!
+                //let's prepare these objects
+                loadedExperiment = new JObject();
+                loadedExperiment["bodies"] = JObject.FromObject(bodies);
+                loadedExperiment["pca"] = pcaData;
+
+                simpleCom.loadedExperimentData = loadedExperiment;
+
+                using (FileStream fs = File.Open(folder + "\\experimentPCAData.json", FileMode.Create))
+                using (StreamWriter sw = new StreamWriter(fs))
+                using (JsonWriter jw = new JsonTextWriter(sw))
+                {
+                    jw.Formatting = Newtonsoft.Json.Formatting.None;
+
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(jw, pcaData);
+                }
+
+                using (FileStream fs = File.Open(folder + "\\experimentData.json", FileMode.Create))
+                using (StreamWriter sw = new StreamWriter(fs))
+                using (JsonWriter jw = new JsonTextWriter(sw))
+                {
+                    jw.Formatting = Newtonsoft.Json.Formatting.None;
+
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(jw, bodies);
+                }
+
+
+
+                MessageBox.Show("Finished loading experiment! Try refreshing PCA Display");
+            }
+        }
+
         //private void ConnectButton_Click(object sender, RoutedEventArgs e)
         //{
         //    if (!connected)
@@ -544,7 +781,7 @@ namespace NodeCommunicator
         //        this.ConnectNoveltyButton.Content = "Disconnect Novelty";
         //    });
 
-          
+
         //}
         //void socketClose(object sender, EventArgs e)
         //{
@@ -556,7 +793,7 @@ namespace NodeCommunicator
         //        this.ConnectNoveltyButton.Content = "Connect With Novelty";
         //    });
 
-           
+
 
         //}
 

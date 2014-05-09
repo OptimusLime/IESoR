@@ -114,8 +114,8 @@ namespace NodeCommunicator.Evolution
         public int BeforeNeuron;
         public int BeforeConnection;
 
-        public List<PointPair> AllBodyInputs = new List<PointPair>();
-        public List<List<float>> AllBodyOutputs = new List<List<float>>();
+        //public List<PointPair> AllBodyInputs = new List<PointPair>();
+        //public List<List<float>> AllBodyOutputs = new List<List<float>>();
         public Dictionary<int, int> indexToConnection = new Dictionary<int, int>();
 
         //eventually this will be replaced by body information -- this is just temporarily here so we don't
@@ -657,8 +657,8 @@ namespace NodeCommunicator.Evolution
             bool behaviorExists = (ng.Behavior != null);
 
             ESBodyInformation esbody = new ESBodyInformation() {
-                AllBodyOutputs = allBodyOutputs,
-                AllBodyInputs = allBodyInputs,
+                //AllBodyOutputs = allBodyOutputs,
+                //AllBodyInputs = allBodyInputs,
                 indexToConnection = indexToConnectionMap,
                 //PreHiddenLocations = hiddenCopy,
                 BeforeNeuron = beforeNeuron,

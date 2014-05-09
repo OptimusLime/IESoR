@@ -111,41 +111,18 @@
 //    var prevSmallWorld;
 //    var prevSmallID;
 
-    var debugMode = ( typeof saveAs == 'function' ? true : false);
+    var debugMode = true;//( typeof saveAs == 'function' ? true : false);
 
-    //if we've included save functionality, we'll pull in some additional scripts
-    //since we're not the PCA website on the demo
-    if(debugMode)
-    {
-
-        //doesn't work cross domain, maybe on eplex it will work?
-//        var s = document.createElement("script");
-//        s.type = "text/javascript";
-//        s.src = "../Helpers/d3PcaPrivate.js";
-//        $("head").append(s);
-
+   
         //set up some options for querying different types of PCA data
         $('#base').prepend(
-                        '<h2 > XBin Count: </h2>' +
-                        '<input type="number" id="xbins" name="xbins" min="10" max="50" value="40" class="number" >' +
-                        '<h2 >YBin Count:</h2>' +
-                        '<input type="number" id="ybins" name="ybins" min="10" max="50" value="40" class="number">' +
-                        '<h2 >Selector:</h2>' +
-                        '<input type="number" id="selector" name="selector" min="0" max="1" value="1" class="number">' +
-                        '<h2 >Percent:</h2>' +
-                        '<input type="number" id="percent" name="percent" min="0" max="100" value="25" class="number">' +
-                        '<button value="Reset" onclick="svgPCA()">Re-Run PCA</button>' +
+                        '<button value="Reset" onclick="requestPCAData()">Get PCA Data</button>' +
                         '<button value="Sanitize" onclick="sanitizePCA()">Sanitize PCA</button>'
                         // '  <form id="text-options">' +
                         //     '<label>Filename: <input type="text" class="filename" id="text-filename" placeholder="a plain document"/>.txt</label>' +
                         //     '<input id="save-button" type="submit" value="Save"/>' +
                         // ' </form>'
         );
-
-
-      //after pulling in the script, we setup the save ability
-        // setupPCASave("text", "#text-options","#text-filename");
-    }
 
     var htmlID = '#container';
     var archiveOnScreen = {};
@@ -198,25 +175,35 @@
             };
 
             //call a native function with save objects
-            window.savePCANatively = function()
+            window.requestPCAData = function()
             {
-                console.log("Attempted to save pca");
+                console.log("Attempted to request pca");
 
-                var params = { xBins: $('#xbins').val(), yBins: $('#ybins').val(), useXCom: true, selector: $('#selector').val(), percent: $('#percent').val() / 100.0 };
-                console.log(params);
-                // console.log("Sending: ", [params.useXCom, params.xBins, params.yBins, params.selector, params.percent]);
-
-                 wsClient.callNativeFunction("runFullPCA", [params.useXCom, params.xBins, params.yBins, params.selector, params.percent], function(jsonData)
+                 wsClient.callNativeFunction("requestPCAData", ["stuff"], function(jsonData)
                 {
-                    console.log('Return runFullPCA request');
 
-                    
+                    console.log('Return runFullPCA request: ', jsonData);
+
+                    //we need to break this down into the bodies we need, and the pca data we want to display
+                    var bodies = jsonData.bodies;
+                    for(var bd in bodies)
+                    {
+                    	//parse json bodies please
+                    	bodies[bd] = JSON.parse(bodies[bd]);
+                    }
+
+                    var pca = jsonData.pca;
+
+                    cachedObjects = bodies;
+                    dataObjects = pca;
+
+                  	 //this will trigger data to be entered!
+                   $("#slider").slider('value', 0);
+
+
                 });
 
-                // wsClient.callNativeFunction("savePCANatively", [dataObjects], function()
-                // {
-                //     console.log("PCA Saved!");
-                // })
+             
             };
 
         
@@ -227,7 +214,7 @@
 
         });
 
-    var setGenomeBodyInViewer = function(uid, absoluteFitness, prepend)
+    function setGenomeBodyInViewer(uid, absoluteFitness, prepend)
     {
         if(previousSizedWorld)
         {
@@ -325,7 +312,7 @@
 //                                    lastSmallGenome = d.uid;
     }
 
-    var enterDataD3 = function(data)
+    function enterDataD3(data)
     {
 
         if(shouldFetchCache)
@@ -489,14 +476,14 @@
     };
 
 
-    var errFunction = function(err)
+    function errFunction(err)
     {
         //just received an error when doing PCA, let's switch into local mode
         debugMode = false;
         svgPCA();
     };
 
-    var svgPCA = function () {
+    function svgPCA() {
         console.log('Running svg pca');
 
         if (debugMode) {

@@ -311,7 +311,7 @@ namespace Awesomium.sockets
             prepareJSFunction(DisplaySocket, functionName, args, objectID, callback);
         }
 
-        static void prepareJSFunction(string socketType, string functionName, JArray args = null, string objectID = null, SocketFunctionCall callback = null)
+        static void prepareJSFunction(string socketType, string functionName, JArray args = null, string objectID = null, SocketFunctionCall callback = null, int socketID = -1)
        {
             //let's build our object
             JObject formattedJSON = new JObject();
@@ -334,7 +334,7 @@ namespace Awesomium.sockets
             //attach data to json object
             formattedJSON.Add("data", data);
 
-            callJSWithReturn(socketType, formattedJSON, callback);
+            callJSWithReturn(socketType, formattedJSON, callback, socketID);
 
         }
 
@@ -388,7 +388,7 @@ namespace Awesomium.sockets
         //}
         static Dictionary<int, SocketFunctionCall> storedCallbacks = new Dictionary<int,SocketFunctionCall>();
 
-        static void callJSWithReturn(string socketType, JObject message, SocketFunctionCall callback = null)
+        static void callJSWithReturn(string socketType, JObject message, SocketFunctionCall callback = null, int socketID = -1)
         {           
             List<int> socketsToCall;
             
@@ -400,6 +400,10 @@ namespace Awesomium.sockets
                 for (int i = 0; i < socketsToCall.Count; i++)
                 {
                     var sid = socketsToCall[i];
+
+                    //only send to specified socket!
+                    if (socketID != -1 && sid != socketID)
+                        continue;
 
                     //if we have a callback, it needs to be stored for each message sent
                     if (callback != null)

@@ -35,14 +35,43 @@
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <awe:WebControl 
-            Name="webControl" 
-            Grid.Row="0" 
-            Margin="5"
-            WebSession="{Binding Source={StaticResource webSession}}" 
-            Source="asset://local/html/display/PCA.html" 
-            ConsoleMessage="webControl_ConsoleMessage" 
-            NativeViewInitialized="webControl_NativeViewInitialized" />
+            <TabControl>
+                <TabItem Header="Load PCA">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Name="loadPCAFolder" Click="loadPCAFolder_Click">Load PCA Experiment Folder</Button>
+                        <awe:WebControl 
+                        Name="pcaLoading" 
+                        Grid.Row="1" 
+                        Margin="5"
+                        WebSession="{Binding Source={StaticResource webSession}}" 
+                        Source="asset://local/html/display/PCAConvert.html" 
+                        NativeViewInitialized="pcaLoading_NativeViewInitialized" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Live PCA">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Name="StartEvolution" Click="StartEvolution_Click">Start IESoR Evolution</Button>
+                        <awe:WebControl 
+                        Name="webControl" 
+                        Grid.Row="1" 
+                        Margin="5"
+                        WebSession="{Binding Source={StaticResource webSession}}" 
+                        Source="asset://local/html/display/PCA.html" 
+                        ConsoleMessage="webControl_ConsoleMessage" 
+                        NativeViewInitialized="webControl_NativeViewInitialized" />
+                    </Grid>
+                   
+                </TabItem>
+            </TabControl>
+            
             
             <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <TextBox Name="EventText" Grid.Row="0" Text="STUFF WILL GO HERE" Margin="10"></TextBox>

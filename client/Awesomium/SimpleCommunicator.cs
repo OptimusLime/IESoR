@@ -53,7 +53,7 @@ namespace NodeCommunicator
             simpleExperiment.setCommunicator(this);
 
             //create directories to save our objects inside
-            createExperimentalDirectories();
+            //createExperimentalDirectories();
         }
 
         #region Initialize Storage Directories
@@ -62,6 +62,10 @@ namespace NodeCommunicator
         static string noveltyFolder;
         public void createExperimentalDirectories()
         {
+            //don't do this more than once
+            if (experimentFolder != null)
+                return;
+
             string currentAssemblyDirectoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var now = DateTime.Now;
             int cnt = 0;
@@ -91,7 +95,7 @@ namespace NodeCommunicator
         //EventHandler closeSocket;
 
         public SimpleExperiment simpleExperiment;
-
+        public JObject loadedExperimentData;
         //Client socket;
 
         //string formattedSocketMessage(int? ackID, string jsonMessage)
@@ -256,6 +260,10 @@ namespace NodeCommunicator
 
         public void Execute(bool startNovelty = false)
         {
+
+            //create directories to save our objects inside
+            createExperimentalDirectories();
+
             Console.WriteLine("Starting TestSocketIOClient Example...");
 
             //socket = new Client("http://localhost:3000/"); // url to the nodejs / socket.io instance
@@ -316,6 +324,13 @@ namespace NodeCommunicator
 
                     return null;
                 }));
+
+            MasterSocketManager.registerCallback("requestPCAData", new SocketFunctionCall(
+            (JObject functionParams) =>
+            {
+                return loadedExperimentData;
+            }));
+
 
 
 

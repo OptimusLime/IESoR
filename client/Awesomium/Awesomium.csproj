@@ -75,6 +75,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -203,7 +204,9 @@
   <ItemGroup>
     <Resource Include="html\utilities\websocketClient.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="html\display\PCAConvert.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy  "$(SolutionDir)..\data\" "$(TargetDir)";</PostBuildEvent>
