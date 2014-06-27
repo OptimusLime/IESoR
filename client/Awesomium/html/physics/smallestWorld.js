@@ -13,7 +13,8 @@ smallNS.BehaviorTypes = {
     nodeMovements : 4,
     avgXYCenterOfMass: 5,
     widthHeightMass: 6,
-    widthHeightEfficiencyMass: 7
+    widthHeightEfficiencyMass: 7,
+    widthHeightMassSaveHeighestJump: 8
 }
 
 var desiredSmallRenderSpeed = 30;
@@ -48,7 +49,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
     this.canvasHeight = canvasHeight;
 
     //we say what kind of behavior we want, then create that object -- should be a function in the future
-    this.behaviorType = smallNS.BehaviorTypes.widthHeightEfficiencyMass;
+    this.behaviorType = smallNS.BehaviorTypes.widthHeightMassSaveHeighestJump;
     this.behavior = {};
     this.behavior.frameCount = 0;
 
@@ -67,6 +68,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
             case smallNS.BehaviorTypes.xCenterOfMass:
             case smallNS.BehaviorTypes.yCenterOfMass:
             case smallNS.BehaviorTypes.xyCenterOfMass:
+            case smallNS.BehaviorTypes.widthHeightMassSaveHeighestJump:
             case smallNS.BehaviorTypes.avgXYCenterOfMass:
                 behavior.points = [];
 
@@ -131,7 +133,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
     this.behaviorSkipFrames = 5;
     this.beginEvaluation = true;
     //go for about a second?
-    this.waitToStartFrames = 75;
+    this.waitToStartFrames = 60;
 
     //30 frames/sec, skip 3 frames, = 10 frames a second
     //50 behaviors = 5 seconds
@@ -139,7 +141,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
     this.frameCount  = 0;
 
     this.initialSmallState = [
-        {id: "ground", x: canvasWidth / 2 / scale, y: canvasHeight / scale, halfHeight: 0.5, halfWidth: 8*canvasWidth / scale, color: 'black'}
+        {id: "ground", x: canvasWidth / 2 / scale, y: canvasHeight / scale, halfHeight: 0.5, halfWidth: 12*canvasWidth / scale, color: 'black'}
         //,
         // {id: "ball1", x: 9, y: 2, radius: 0.5},
         // {id: "ball2", x: 11, y: 4, radius: 0.5}
@@ -285,6 +287,7 @@ smallNS.SmallWorld.EmptyBehavior = function(behavior, behaviorType, desiredBehav
             //return empty behavior
             return behavior;
 
+        case smallNS.BehaviorTypes.widthHeightMassSaveHeighestJump:
         case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
         case smallNS.BehaviorTypes.widthHeightMass:
 
@@ -341,6 +344,22 @@ smallNS.SmallWorld.AdjustBehavior = function(behavior, behaviorType)
         case smallNS.BehaviorTypes.widthHeightMass:
             //no adjustments to make, all data should be in behavior.points
            return behavior;
+        case smallNS.BehaviorTypes.widthHeightMassSaveHeighestJump:
+
+            //if we never went up after falling down, zero out the fitness
+            if(behavior.maximumHeight == Number.MIN_VALUE || behavior.minimumHeight == Number.MAX_VALUE)
+                behavior.fitness = 0.0000001;
+            else {
+                behavior.fitness = Math.abs(behavior.maximumHeight - behavior.minimumHeight);
+
+                //a certain amount isn't counted
+                if(behavior.fitness < 0.4)
+                    behavior.fitness = 0.0000001;
+
+                console.log("Final Height Distance: " + behavior.maximumHeight + " , min: " + behavior.minimumHeight + ", dif: " + behavior.fitness);
+            }
+            
+            return behavior;
         case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
            
            //fitness = distance traveled/mass == fitness/mass behavior == fitness/behavior.points[4] -- the last behavior
@@ -608,6 +627,7 @@ smallNS.SmallWorld.prototype.applyBehavior = function(behavior, behaviorType, co
             //same for both
         case smallNS.BehaviorTypes.widthHeightEfficiencyMass:
         case smallNS.BehaviorTypes.widthHeightMass:
+        case smallNS.BehaviorTypes.widthHeightMassSaveHeighestJump:
 
             //done!
             if(behavior.initialMorphology)
@@ -820,16 +840,49 @@ smallNS.SmallWorld.prototype.calculateBehavior = function(stepsTaken)
     if(!this.behavior.startingCOM)
     {
         this.behavior.startingCOM = com;
+        this.behavior.minY = com.y;
+        this.behavior.maxY = com.y;
     }
     var startCom = this.behavior.startingCOM;
     var dist = {x: (startCom.x - com.x)*(startCom.x - com.x), y: (startCom.y - com.y)*(startCom.y - com.y)};
 
-    if(!this.behavior.largestCOMDistance)
+    //we fetch the current y of the lowest node to the ground -- 
+    //previously we measured centerof mass, but that meant really tall individuals could cheat!
+    var lowestNodeY = this.lowestNodeHeight(com);
+    var heighestNodeY = this.heighestNodeHeight(com);
+    // console.log("First node check lowest: " + lowestNodeY + " , heighest: " + heighestNodeY);
+    
+   
+
+    if(this.behavior.largestCOMDistance == undefined){
         this.behavior.largestCOMDistance = 0.000001;
+        this.behavior.minimumHeight = Number.MAX_VALUE;
+        this.behavior.maximumHeight = Number.MIN_VALUE;
+        this.firstUp = false;
+        this.lastLowestHeight = heighestNodeY;
+        // console.log("Body Count: " + com.bodyCount);
+        // console.log("First node check lowest: " + lowestNodeY + " , heighest: " + heighestNodeY);
+    }
+
+     if(!this.firstUp)
+        console.log("First up node check lowest: " + this.lastLowestHeight + " , heighest: " + heighestNodeY);
 
     //we check to see the largest distance accumulated so far from the start
     //we can use this in fitness or local competition calculates
     this.behavior.largestCOMDistance =  Math.sqrt(dist.x);//Math.max(this.behavior.largestCOMDistance, Math.sqrt(dist.x));
+
+    //if you start going up, then we start recording
+    this.firstUp = this.firstUp || (heighestNodeY - this.lastLowestHeight < 0);
+
+    if(this.firstUp)
+    {
+        this.behavior.minimumHeight =  Math.min(this.behavior.minimumHeight, heighestNodeY);//Math.max(this.behavior.largestCOMDistance, Math.sqrt(dist.x));
+        this.behavior.maximumHeight =  Math.max(this.behavior.maximumHeight, heighestNodeY);//Math.max(this.behavior.largestCOMDistance, Math.sqrt(dist.x));
+    }
+
+    this.lastLowestHeight = heighestNodeY; //lowestNodeY
+
+  
 
 //    console.log('Rec dist: ');
 //    console.log(this.behavior.largestCOMDistance);
@@ -960,6 +1013,38 @@ smallNS.SmallWorld.prototype.centerBody = function()
     var difference = {x: this.canvasWidth/2 - com.x, y:this.canvasHeight/2 - com.y};
 
 
+};
+
+smallNS.SmallWorld.prototype.lowestNodeHeight = function(com)
+{
+    //use the center of mass node location array
+    var nl = com.nodeLocations;
+
+    var lowestY = Number.MAX_VALUE;
+
+    for(var i=0; i < nl.length; i++)
+    {
+
+        lowestY = Math.min(nl[i].y, lowestY);
+    }
+
+    return lowestY;
+};
+
+smallNS.SmallWorld.prototype.heighestNodeHeight = function(com)
+{
+    //use the center of mass node location array
+    var nl = com.nodeLocations;
+
+    var heighestY = Number.MIN_VALUE;
+
+    for(var i=0; i < nl.length; i++)
+    {
+
+        heighestY = Math.max(nl[i].y, heighestY);
+    }
+
+    return heighestY;
 };
 
 

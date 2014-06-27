@@ -229,7 +229,7 @@ bHelpNS.ContainedWorld = function(intervalRate, adaptive, width, height, scale, 
         if(nodeBodyCount == 0)
             nodeBodyCount =1;
 
-        return {x: x/nodeBodyCount, y: y/nodeBodyCount, nodeLocations:nodeLocations};
+        return {x: x/nodeBodyCount, y: y/nodeBodyCount, nodeLocations:nodeLocations, bodyCount: nodeBodyCount};
     }
 
 
