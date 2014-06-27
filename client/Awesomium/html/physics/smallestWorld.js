@@ -133,7 +133,7 @@ smallNS.SmallWorld = function(sCanvasID, canvasWidth, canvasHeight, scale, zombi
     this.behaviorSkipFrames = 5;
     this.beginEvaluation = true;
     //go for about a second?
-    this.waitToStartFrames = 60;
+    this.waitToStartFrames = 54;
 
     //30 frames/sec, skip 3 frames, = 10 frames a second
     //50 behaviors = 5 seconds
@@ -858,7 +858,7 @@ smallNS.SmallWorld.prototype.calculateBehavior = function(stepsTaken)
         this.behavior.largestCOMDistance = 0.000001;
         this.behavior.minimumHeight = Number.MAX_VALUE;
         this.behavior.maximumHeight = Number.MIN_VALUE;
-        this.firstUp = false;
+        this.firstUp = true;
         this.lastLowestHeight = heighestNodeY;
         // console.log("Body Count: " + com.bodyCount);
         // console.log("First node check lowest: " + lowestNodeY + " , heighest: " + heighestNodeY);
