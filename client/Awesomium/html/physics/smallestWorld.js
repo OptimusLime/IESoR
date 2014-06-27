@@ -864,8 +864,8 @@ smallNS.SmallWorld.prototype.calculateBehavior = function(stepsTaken)
         // console.log("First node check lowest: " + lowestNodeY + " , heighest: " + heighestNodeY);
     }
 
-     if(!this.firstUp)
-        console.log("First up node check lowest: " + this.lastLowestHeight + " , heighest: " + heighestNodeY);
+     // if(!this.firstUp)
+        // console.log("First up node check lowest: " + this.lastLowestHeight + " , heighest: " + heighestNodeY);
 
     //we check to see the largest distance accumulated so far from the start
     //we can use this in fitness or local competition calculates
