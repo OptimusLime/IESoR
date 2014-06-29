@@ -144,6 +144,34 @@
     var legend;
 
 
+	function savePCANatively()
+	{
+		//for saving to a json file
+		var a = document.createElement('a');
+
+
+		var jsonBodies = JSON.stringify(cachedObjects || {});
+		var title = "data";
+
+		a.download = title + ".json";
+		a.type = 'text/json';
+		blob = new Blob([jsonBodies], {"type": "text/json"});
+		a.href = (window.URL || webkitURL).createObjectURL(blob);
+		a.click();
+
+		title = "pcaData";
+		var jsonData = JSON.stringify(dataObjects || {});
+
+		a.download = title + ".json";
+		a.type = 'text/json';
+		blob = new Blob([jsonData], {"type": "text/json"});
+		a.href = (window.URL || webkitURL).createObjectURL(blob);
+		a.click();
+
+
+	}
+	window.cutoff = 10;
+
     //create a websocket connection
     $(function () {
 
@@ -553,9 +581,9 @@
 
                        $.getJSON('../data/pcaData.json', function (data) {
                            var dataCopy = [];
-
+			
                            for (var i = 0; i < data.length; i++) {
-                               if (data[i].absoluteFitness >= 200)//ui.values[0])
+                               if (data[i].absoluteFitness >= window.cutoff )//ui.values[0])
                                {
                                    dataCopy.push(data[i]);
                                }
@@ -563,7 +591,7 @@
                            dataObjects = dataCopy;
 
                            //this will trigger data to be entered!
-                           $("#slider").slider('value', 200);
+                           $("#slider").slider('value', window.cutoff );
 
                            //no more rescaling!
                            rescale = false;
@@ -626,12 +654,13 @@
         }
 
     };
+	
 
     $(function() {
-        var startValue = (debugMode) ? 0 : 200;
+        var startValue = (debugMode) ? 0 : window.cutoff ;
         $( "#slider" ).slider({
             range: "min",
-            min: (debugMode ? 0 : 200),
+            min: (debugMode ? 0 : window.cutoff ),
             max: 500,
             value: startValue,
             slide: sliderMoved ,
