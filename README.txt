@@ -6,7 +6,9 @@ http://eplex.cs.ucf.edu
 Faculty Supervisor: Kenneth Stanley
 kstanley@eecs.ucf.edu
 
-Example individuals can be found here: http://eplex.cs.ucf.edu/ecal13/demo/ECAL_PCA.html
+Example walking individuals can be found here: http://eplex.cs.ucf.edu/iesor/live/walk/
+
+Example jumping individuals can be found here: http://eplex.cs.ucf.edu/iesor/live/jump/
 
 IESoR is built in part on the HyperSharpNEAT code
 By David D'Ambrosio, Joel Lehman, and Sebastian Risi (itself based on SharpNEAT)
